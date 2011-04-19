@@ -1,6 +1,8 @@
 ##软件名称：MEditor##
 ##软件用途：markdown格式文档编辑和预览。##
 MEditor is text editor with multiple windows. You can use it as markdown editor and preview. 
+##当前版本##:V0.5.0.0
+
 ##V0.5版的功能列表：##
 
 *    文件操作功能
