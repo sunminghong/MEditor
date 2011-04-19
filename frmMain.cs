@@ -484,6 +484,7 @@ namespace MEditor
 
             //webBrowser1.Navigate("about:blank");
             meditorManager.SetStyle(rtbHtml);
+            //webBrowser1.DocumentText = meditorManager.GetHTMLStyle("");
 
             string command = Environment.CommandLine;//获取进程命令行参数
             if (!string.IsNullOrEmpty(command))
@@ -510,41 +511,13 @@ namespace MEditor
             //this.timer1.Start();
         }
 
-        private void markdown语法介绍ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showSyntax("http://www.cnblogs.com/yihuiso/archive/2011/04/13/markdown.html");
-        }
-
-        private void markdown语法介绍精简版ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showSyntax("http://www.cnblogs.com/yihuiso/archive/2011/04/13/minimarkdown.html");
-        }
-
-        private void markdown语法介绍二ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showSyntax("https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md");
-        }
-
-        private void markdownSytnxToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showSyntax("http://daringfireball.net/projects/markdown/syntax");
-        }
-
-        private void 关于MEditorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/about.mark");
-        }
-        private void mEditor快捷键ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/shortcut.mark");
-        }
 
         private void 界面布局左右互换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SwithFlaout();
         }
 
-        private void 关联mark扩展名ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 关联md扩展名ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             regExtFile();
         }
@@ -614,10 +587,50 @@ namespace MEditor
             meditorManager.SetBlackWhiteStyle();
         }
 
-        private void 取消mark文件关联ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 取消md文件关联ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UnRegExtfile();
         }
+
+        #region MEditor links
+        private void markdown语法介绍ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("http://www.cnblogs.com/yihuiso/archive/2011/04/13/markdown.html");
+        }
+
+        private void markdown语法介绍精简版ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("http://www.cnblogs.com/yihuiso/archive/2011/04/13/minimarkdown.html");
+        }
+
+        private void markdown语法介绍二ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md");
+        }
+
+        private void markdownSytnxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("http://daringfireball.net/projects/markdown/syntax");
+        }
+
+        private void 关于MEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/about.md");
+        }
+        private void mEditor快捷键ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/shortcut.md");
+        }
+        private void mEditor网站ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/5d13cn/MEditor");
+        }
+
+        private void 检查最新版ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("https://github.com/5d13cn/MEditor/raw/master/lastver.html");
+        }
+        #endregion
 
     }
 }

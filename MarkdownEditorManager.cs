@@ -11,7 +11,7 @@ namespace MEditor
 {
     public class MarkdownEditorManager
     {
-        private static string _myExtName=".mark";
+        private static string _myExtName=".md";
         private string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
 
         private Form _thisForm;
@@ -53,7 +53,7 @@ namespace MEditor
         {
             if (string.IsNullOrEmpty(file))
             {
-                file =Application.StartupPath+"\\未命名" + (noName++).ToString() + ".mark";
+                file =Application.StartupPath+"\\未命名" + (noName++).ToString() + ".md";
             }
             else
             {

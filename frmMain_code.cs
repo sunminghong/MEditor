@@ -17,7 +17,7 @@ namespace MEditor
 {
     public partial class frmMain : Form, IMRUClient
     {
-        private static string _myExtName = ".mark";
+        private static string _myExtName = ".md";
         private string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
         private MarkdownEditorManager meditorManager=null;
 
@@ -69,8 +69,7 @@ namespace MEditor
                 return;
             meditor.GetTextBox().Focus();
             string html = "";
-            //if (refresh || markdown格式ToolStripMenuItem.Checked)
-            //{
+
                 Markdown mark = new Markdown();
 
                 string marktext = meditor.GetMarkdown();
@@ -79,20 +78,9 @@ namespace MEditor
                     html = mark.Transform(marktext);
                     rtbHtml.Text=html;
                 }
-            //}
-            //else
-            //{
-            //    html = meditor.GetHtml();
-            //}
-            
+
            webBrowser1.DocumentText =meditorManager.GetHTMLStyle(html);
-            //webBrowser1.Document.Write("<html><head></head><body>" + html + "</body></html>");
-            //this.toolStripStatusLabel1.Text = " 上次预览时间： " + System.DateTime.Now.ToLongTimeString();
-            this.toolStripStatusLabel1.Text = "当前文档：" + meditor.FileName;
-    //        if (webBrowser1.Document != null &&
-    //webBrowser1.Document.Body != null)
-    //            webBrowser1.Document.Body.Style =
-    //                string.Format("background-color: {0};color:{1};", "222", "#ececec");
+           this.toolStripStatusLabel1.Text = "当前文档：" + meditor.FileName;
 
             if (isLeft)
             {
@@ -136,6 +124,7 @@ namespace MEditor
 
         private void showSyntax(string url)
         {
+            toolStripStatusLabel1.Text ="正在打开" +url+"..." ;
             webBrowser1.Navigate(url);
             //webBrowser1.DocumentText = html;
            
