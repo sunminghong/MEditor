@@ -18,7 +18,7 @@ namespace MEditor
             set { alreadyUpdate = value; }
         }
 
-        private string _file = ""; 
+        private string _file = "";
 
         public string FileName
         {
@@ -28,7 +28,7 @@ namespace MEditor
         private Form _thisForm;
 
         private RichTextBox _markdownRtb;
-//        private RichTextBox _htmlRtb;
+        //        private RichTextBox _htmlRtb;
 
         private TabPage _markdownPage;
 
@@ -37,14 +37,14 @@ namespace MEditor
             get { return _markdownPage; }
             set { _markdownPage = value; }
         }
-        public MarkdownEditor(Form thisform ,TabPage page)
+        public MarkdownEditor(Form thisform, TabPage page)
         {
             this._markdownPage = page;
-            this._thisForm=thisform;
+            this._thisForm = thisform;
 
-            createRTB(ref _markdownRtb);            
-            _markdownRtb.TextChanged += new EventHandler(_markdownRtb_TextChanged);            
-            page.Controls.Add(_markdownRtb);            
+            createRTB(ref _markdownRtb);
+            _markdownRtb.TextChanged += new EventHandler(_markdownRtb_TextChanged);
+            page.Controls.Add(_markdownRtb);
         }
 
         private void createRTB(ref RichTextBox htmlRtb)
@@ -73,13 +73,13 @@ namespace MEditor
                 e.SuppressKeyPress = true;
             }
         }
-        
+
         public RichTextBox GetTextBox()
         {
             //if (_htmlRtb.Visible)
             //    return _htmlRtb;
             //else
-                return _markdownRtb;
+            return _markdownRtb;
         }
 
         void _markdownRtb_TextChanged(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace MEditor
             if (alreadyUpdate) return;
             alreadyUpdate = true;
 
-            _markdownPage.Text = "*"+_markdownPage.Text;
+            _markdownPage.Text = "*" + _markdownPage.Text;
         }
         //public void SwitchToHtml()
         //{
@@ -118,24 +118,28 @@ namespace MEditor
         //{
         //    _htmlRtb.Text = s;
         //}
- 
+
         public bool Openfile(string file)
         {
             if (string.IsNullOrEmpty(file))
             {
                 return true;
-            }            
-            
+            }
+
             _file = file;
             if (!File.Exists(file))
                 return true;
             try
             {
                 _isOpen = true;
-               this._markdownRtb.LoadFile(file, RichTextBoxStreamType.PlainText);
+                StreamReader sr = new StreamReader(file, Encoding.UTF8);
+                this._markdownRtb.Text = sr.ReadToEnd();
+                //this._markdownRtb.LoadFile(sr, RichTextBoxStreamType.PlainText);
+                sr.Close();
+                sr.Dispose();
                 _isOpen = false;
 
-               return true;
+                return true;
             }
             catch
             {
@@ -143,7 +147,7 @@ namespace MEditor
             }
         }
 
-        public  void Save(string file)
+        public void Save(string file)
         {
             this._file = file;
             Save();
@@ -154,7 +158,11 @@ namespace MEditor
             if (string.IsNullOrEmpty(_file))
                 return;
 
-            this._markdownRtb.SaveFile(_file, RichTextBoxStreamType.PlainText);
+            StreamWriter sw = new StreamWriter(_file,false, Encoding.UTF8);
+            sw.Write(this._markdownRtb.Text);
+            //this._markdownRtb.SaveFile(sw, RichTextBoxStreamType.PlainText);
+            sw.Close();
+            sw.Dispose();
             alreadyUpdate = false;
 
             FileInfo fileInfo = new FileInfo(FileName);
@@ -169,14 +177,15 @@ namespace MEditor
         public void Close()
         {
             _markdownPage.Dispose();
-           //_htmlRtb.Dispose();
+            //_htmlRtb.Dispose();
         }
 
-        public void SetStyle(Color bg, Color fore,Font font,bool wordWrap){
+        public void SetStyle(Color bg, Color fore, Font font, bool wordWrap)
+        {
             _isOpen = true;
-            RichTextBox rtb=GetTextBox();
+            RichTextBox rtb = GetTextBox();
 
-            if (rtb.BackColor!= bg)
+            if (rtb.BackColor != bg)
                 rtb.BackColor = bg;
             if (rtb.ForeColor != fore)
                 rtb.ForeColor = fore;
@@ -186,6 +195,5 @@ namespace MEditor
                 rtb.WordWrap = wordWrap;
             _isOpen = false;
         }
-
     }
 }
