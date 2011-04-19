@@ -725,7 +725,6 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 25);
             this.splitContainer1.Name = "splitContainer1";
@@ -753,7 +752,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.ShowToolTips = true;
-            this.tabControl1.Size = new System.Drawing.Size(937, 501);
+            this.tabControl1.Size = new System.Drawing.Size(939, 503);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -795,7 +794,7 @@
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(94, 98);
+            this.tabControl2.Size = new System.Drawing.Size(96, 100);
             this.tabControl2.TabIndex = 1;
             // 
             // tabBrowser
@@ -804,7 +803,7 @@
             this.tabBrowser.Location = new System.Drawing.Point(4, 22);
             this.tabBrowser.Name = "tabBrowser";
             this.tabBrowser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBrowser.Size = new System.Drawing.Size(86, 72);
+            this.tabBrowser.Size = new System.Drawing.Size(88, 74);
             this.tabBrowser.TabIndex = 0;
             this.tabBrowser.Text = "预览";
             this.tabBrowser.UseVisualStyleBackColor = true;
@@ -816,7 +815,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(3, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(80, 66);
+            this.webBrowser1.Size = new System.Drawing.Size(82, 68);
             this.webBrowser1.TabIndex = 0;
             // 
             // tabHtml
