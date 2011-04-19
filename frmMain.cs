@@ -627,7 +627,7 @@ namespace MEditor
 
         private void 检查最新版ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showSyntax("https://github.com/5d13cn/MEditor/raw/master/lastver.html");
+            showSyntax("https://github.com/5d13cn/MEditor/raw/master/lastver.txt");
         }
         #endregion
 

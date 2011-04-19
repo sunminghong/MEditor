@@ -7,7 +7,7 @@
 
 ##许可协议：full open source,随便修改##
 如果您愿意将您的修改提交，方便所有需要的人，请注意：
--修改lastver.html文件，请只改版本号；
+-修改lastver.txt文件，请只改版本号；
 -请修改一下本文档about.md
 -请修改一下README
 -如果有语法扩充请修改syntax.md

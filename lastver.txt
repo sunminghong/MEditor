@@ -1,0 +1,4 @@
+﻿the last version:[0.5.0.0]
+
+
+https://github.com/5d13cn/MEditor/raw/master/exeoutput/MEditor.exe
