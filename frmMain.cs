@@ -154,7 +154,6 @@ namespace MEditor
             meditorManager.GetTextBox().Text = meditorManager.GetTextBox().Text.Remove(meditorManager.GetTextBox().SelectionStart, meditorManager.GetTextBox().SelectionLength);
         }
 
-
         private void 时间日期F5ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             meditorManager.GetTextBox().Text = meditorManager.GetTextBox().Text.Insert(meditorManager.GetTextBox().Text.Length, System.DateTime.Now.ToString());
@@ -533,7 +532,11 @@ namespace MEditor
 
         private void 关于MEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/about.mark");
+        }
+        private void mEditor快捷键ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/shortcut.mark");
         }
 
         private void 界面布局左右互换ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -615,5 +618,6 @@ namespace MEditor
         {
             UnRegExtfile();
         }
+
     }
 }
