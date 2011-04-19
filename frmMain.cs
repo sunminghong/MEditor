@@ -612,7 +612,6 @@ namespace MEditor
         {
             showSyntax("http://daringfireball.net/projects/markdown/syntax");
         }
-
         private void 关于MEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showSyntax("https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/about.md");
