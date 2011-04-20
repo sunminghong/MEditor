@@ -150,7 +150,9 @@ namespace MEditor
             regExString = findbox.Text;
 
             if (useregex.Checked)
-                ;
+            {
+                
+            }
             // wild cards checkbox checked
             else if (usewild.Checked)
             {

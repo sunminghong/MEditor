@@ -96,7 +96,18 @@ namespace MEditor
 
         private void 粘贴PToolStripButton_Click(object sender, EventArgs e)
         {
-            meditorManager.GetTextBox().Paste();
+            //RichTextBox rtb = new RichTextBox();
+
+            //IDataObject idat = Clipboard.GetDataObject();
+            //if (idat.GetDataPresent(DataFormats.Text))
+            //{DataFormats.GetFormat ("Text
+            //    string PasteStr = (string)idat.GetData(DataFormats.Text);
+            //    int pasteid = rtb.SelectionStart;
+            //    rtb.Text = rtb.Text.Substring(0, pasteid) + PasteStr + rtb.Text.Substring(pasteid);
+            //    rtb.SelectionStart = pasteid + PasteStr.Length;
+            //}
+
+            meditorManager.GetTextBox().Paste(DataFormats.GetFormat("Text"));
         }
 
         private void 粘贴PToolStripMenuItem_Click(object sender, EventArgs e)
@@ -381,7 +392,12 @@ namespace MEditor
         {
             PreviewHtml();
 
-            //MarkdownEditor meditor = meditorManager.GetCurrEditor();
+            //MarkdownEditor meditor = meditorManager.GetCurrEditor();            
+            //int i = 0;
+            //while (!meditor.GetTextBox().CanFocus && (i++) < 5)
+            //{
+            //    System.Threading.Thread.Sleep(300);
+            //}
             //meditor.GetTextBox().Focus();
             
         }
@@ -640,6 +656,18 @@ namespace MEditor
         private void html预览样式设计ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             editCss();
+        }
+
+        private void 通用选项ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editCss();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool isCancel=!meditorManager.CloseAll();
+            if (isCancel)
+                e.Cancel = true;
         }
 
     }

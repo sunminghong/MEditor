@@ -25,7 +25,7 @@ namespace MEditor
             get { return _file; }
             set { _file = value; }
         }
-        private Form _thisForm;
+        private frmMain _thisForm;
 
         private RichTextBox _markdownRtb;
         //        private RichTextBox _htmlRtb;
@@ -37,7 +37,7 @@ namespace MEditor
             get { return _markdownPage; }
             set { _markdownPage = value; }
         }
-        public MarkdownEditor(Form thisform, TabPage page)
+        public MarkdownEditor(frmMain thisform, TabPage page)
         {
             this._markdownPage = page;
             this._thisForm = thisform;
@@ -62,11 +62,57 @@ namespace MEditor
             htmlRtb.DetectUrls = false;
 
             htmlRtb.ZoomFactor = 1.0f;
+
+            htmlRtb.EnableAutoDragDrop = false;
+            htmlRtb.HideSelection = true;
+
+            int lef = 60;// (int)getfontWeight(4, font);
+            htmlRtb.SelectionTabs = new int[] { lef, lef * 2, lef * 3, lef * 3, lef * 4 };
+
+            htmlRtb.AllowDrop = true;
             htmlRtb.KeyDown += new KeyEventHandler(htmlRtb_KeyDown);
+            htmlRtb.DragEnter += new DragEventHandler(htmlRtb_DragEnter);
+            htmlRtb.DragDrop += new DragEventHandler(htmlRtb_DragDrop);
+            
+
         }
 
+        void htmlRtb_DragDrop(object sender, DragEventArgs e)
+        {
+            Array arrayFileName = (Array)e.Data.GetData(DataFormats.FileDrop);
+
+            string strFileName = arrayFileName.GetValue(0).ToString();
+
+
+            string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
+            //MessageBox.Show(data[0]);
+            _thisForm.openfiles(data);//, RichTextBoxStreamType.PlainText);
+
+        }
+
+        void htmlRtb_DragEnter(object sender, DragEventArgs e)
+        {
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+
+        }
+        
         void htmlRtb_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                this._markdownRtb.Paste(DataFormats.GetFormat("Text"));
+                e.SuppressKeyPress = true;
+                return;
+            }
+
             if (e.KeyCode == Keys.Tab)
             {
                 ((RichTextBox)sender).SelectedText = "    ";
@@ -171,16 +217,7 @@ namespace MEditor
             _markdownPage.ToolTipText = FileName;
         }
 
-        /// <summary>
-        /// 清场
-        /// </summary>
-        public void Close()
-        {
-            _markdownPage.Dispose();
-            //_htmlRtb.Dispose();
-        }
-
-        public void SetStyle(Color bg, Color fore, Font font, bool wordWrap)
+        public void SetStyle(Color bg, Color fore, Font font, bool wordWrap,int tabWidth)
         {
             _isOpen = true;
             RichTextBox rtb = GetTextBox();
@@ -193,7 +230,15 @@ namespace MEditor
                 rtb.Font = font;
             if (rtb.WordWrap != wordWrap)
                 rtb.WordWrap = wordWrap;
+                        
             _isOpen = false;
+        }
+
+        private float getfontWeight(int width,Font font)
+        {
+            Graphics g = _thisForm.CreateGraphics();
+            SizeF sizeF = g.MeasureString("A",font );
+            return sizeF.Width * width;
         }
     }
 }

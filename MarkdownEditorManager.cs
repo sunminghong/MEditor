@@ -14,7 +14,7 @@ namespace MEditor
         private static string _myExtName=".md";
         private string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
 
-        private Form _thisForm;
+        private frmMain _thisForm;
         private TabControl _tabparent;
 
         private int _fileInd = 0;
@@ -232,10 +232,11 @@ th,td{padding:5px;border: 1px solid #CCC;}
 #endregion
 
         private bool _wordWrap = false;
+        private int _tabWidth = 4;
 
         private MRUManager mruManager;
 
-        public MarkdownEditorManager(Form thisform, TabControl tabparent,MRUManager mru)
+        public MarkdownEditorManager(frmMain thisform, TabControl tabparent, MRUManager mru)
         {
             this._tabparent = tabparent;
             this._thisForm = thisform;
@@ -270,7 +271,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             MarkdownEditor meditor = new MarkdownEditor(_thisForm, markPage);
             _editors.Add(_fileInd, meditor);
             _fileInd++;
-            meditor.SetStyle(_bgColor, _foreColor, _font, _wordWrap);
+            meditor.SetStyle(_bgColor, _foreColor, _font, _wordWrap,_tabWidth);
             bool rel = meditor.Openfile(file);
             if (rel)
             {
@@ -309,12 +310,17 @@ th,td{padding:5px;border: 1px solid #CCC;}
             }
         }
 
-        public void CloseAll()
+        public bool CloseAll()
         {
-            foreach (int ind in _editors.Keys)
+            foreach (int ind in new List<int>(_editors.Keys))
             {
-                close(_editors[ind]);
+                if (_editors.ContainsKey(ind))
+               {
+                   if (!close(_editors[ind]))
+                       return false;
+                }
             }
+            return true;
         }
         
         public void Save()
@@ -326,25 +332,26 @@ th,td{padding:5px;border: 1px solid #CCC;}
             save(meditor);
         }
 
-        private void save(MarkdownEditor meditor)
+        private bool save(MarkdownEditor meditor)
         {
             if (string.IsNullOrEmpty(meditor.FileName) || meditor.FileName.IndexOf("未命名")!=-1)
             {
-                saveas(meditor);
-                return;
+                return saveas(meditor);
+                
             }
             meditor.Save();
             mruManager.Add(meditor.FileName);          // when file is successfully opened
+            return true;
         }
-        public void SaveAs()
+        public bool SaveAs()
         {
             MarkdownEditor meditor = GetCurrEditor();
             if (meditor == null)
-                return;
-                saveas(meditor);
+                return true;
+               return  saveas(meditor);
         }
 
-        private void saveas(MarkdownEditor meditor)
+        private bool saveas(MarkdownEditor meditor)
         {
             SaveFileDialog fileone = new SaveFileDialog();
             fileone.Filter = myExtName;
@@ -355,12 +362,17 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 {
                     meditor.Save(fileone.FileName);
                     mruManager.Add(meditor.FileName);          // when file is successfully opened
-
+                    return true;
                 }
                 catch (ArgumentException)
                 {
                     MessageBox.Show("保存不成功");
+                    return false;
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -376,28 +388,33 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         }
         
-        public void Close()
+        public bool Close()
         {
             MarkdownEditor meditor = GetCurrEditor();
             if (meditor == null)
-                return;
+                return true;
 
-            close(meditor);
+            return  close(meditor);
         }
 
-        private void close(MarkdownEditor meditor)
+        private bool close(MarkdownEditor meditor)
         {
             if (meditor.AlreadyUpdate)
             {
-                if (MessageBox.Show("修改还没有保存，需要保存吗？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                DialogResult dr= MessageBox.Show("修改还没有保存，需要保存吗？", "提示", MessageBoxButtons.YesNoCancel) ;
+                 if(dr==DialogResult.Cancel) 
+                     return false;
+
+                if (dr== DialogResult.Yes)
                 {
-                    save(meditor);
+                    if (!save(meditor))
+                        return false;
                 }
             }
 
-            meditor.Close();
             _editors.Remove((int)meditor.MarkdownPage.Tag);
             _tabparent.TabPages.Remove(meditor.MarkdownPage);
+            return true;
         }
 
 
@@ -468,8 +485,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
             MarkdownEditor m = GetCurrEditor();
             if (m == null)
                 return null;
-            
-            m.SetStyle(_bgColor, _foreColor,_font,_wordWrap);
+
+            m.SetStyle(_bgColor, _foreColor, _font, _wordWrap, _tabWidth);
 
             return m;
         }

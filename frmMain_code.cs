@@ -221,13 +221,13 @@ border-collapse: separate;border-spacing: 0;
 th,td{padding:5px;border: 1px solid #CCC;}
 ";
         #endregion
-        private void ReadCss()
+        public void ReadCss()
         {
             _font = Settings.Default.font;
             _foreColor = Settings.Default.color;
             _bgColor = Settings.Default.bgcolor;
             _defcss = Settings.Default.css;
-
+            
             meditorManager.SetFont(_font);
             meditorManager.SetForeColor(_foreColor);
             meditorManager.SetBackColor(_bgColor );
@@ -239,7 +239,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             openfile(fileName);
         }
 
-        private void openfiles(string[] fileNames)
+        public void openfiles(string[] fileNames)
         {
             foreach (string s in fileNames)
                 openfile(s);
@@ -254,6 +254,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             else
                 mruManager.Remove(fileName);       // when Open File operation failed
         }
+
         private void openfile()
         {
             OpenFileDialog fileone = new OpenFileDialog();
@@ -280,7 +281,6 @@ th,td{padding:5px;border: 1px solid #CCC;}
             MarkdownEditor meditor = meditorManager.SetStyle();
             if (meditor == null)
                 return;
-            meditor.GetTextBox().Focus();
             string html = "";
 
             Markdown mark = new Markdown();
@@ -305,9 +305,12 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 if (!string.IsNullOrEmpty(html) && splitContainer1.Panel1Collapsed)
                     splitContainer1.Panel1Collapsed = false;
             }
+
+            //tabControl1.Focus();
+            meditor.GetTextBox().Focus();
         }
 
-        private void SelectForeColor()
+        public void SelectForeColor()
         {
             ColorDialog color = new ColorDialog();
             if (color.ShowDialog() == DialogResult.OK)
@@ -321,7 +324,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             }
         }
 
-        private void SelectBackColor()
+        public void SelectBackColor()
         {
             ColorDialog color = new ColorDialog();
             if (color.ShowDialog() == DialogResult.OK)
@@ -334,7 +337,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 Settings.Default.Save();
             }
         }
-        private void SelectFont()
+        public void SelectFont()
         {
             FontDialog font = new FontDialog();
             if (font.ShowDialog() == DialogResult.OK)
@@ -348,17 +351,19 @@ th,td{padding:5px;border: 1px solid #CCC;}
             }
         }
 
-        private void editCss()
+        public void SetCss(string css)
         {
-            frmCss fcss = new frmCss(_defcss);
-            fcss.ShowDialog();
-
-            _defcss =fcss.Css;
-
+            _defcss = css;
             meditorManager.SetCss(_defcss);
             PreviewHtml();
             Settings.Default.css = _defcss;
             Settings.Default.Save();
+        }
+
+        private void editCss()
+        {
+            frmCss fcss = new frmCss(_defcss,this);
+            fcss.ShowDialog();
         }
 
         private void showSyntax(string url)
