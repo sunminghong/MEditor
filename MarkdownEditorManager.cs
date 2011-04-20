@@ -265,10 +265,10 @@ namespace MEditor
             string htmlformat = "<html><head><style>body{background-color:"+convertColor(_bgColor)
                 +";color:"+convertColor(_foreColor)+";}"+
 @"@charset ""utf-8"";
+body,td,th {font-family:""微软雅黑"", Verdana, ""Bitstream Vera Sans"", sans-serif; }
 body {
 	margin-top: 0;
-	padding: 0;
-	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
+	padding: 0;	
 	line-height: 1.5em;
 	color: #{1};
 	background-color: #{0}; 
@@ -296,7 +296,7 @@ p {
 	}
 
 h1 {
-	font-family: ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Georgia, serif;
+	font-family: ""黑体"",""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Georgia, serif;
 	font-size: 1.55em; 
 	line-height: 1.5em;
 	text-align: left;
@@ -305,7 +305,7 @@ h1 {
 	}
 
 h2 {
-	font-family: ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-family:""黑体"", ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
 	font-size: 1.1em; /* 1 */
 	text-align: left;
 	font-weight:bold;
@@ -323,7 +323,7 @@ h2 + h3 {
 	}
 
 h3 {
-	font-family: ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-family: ""黑体"",Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
 	font-size: .91em;
 	text-align: left;
 	font-weight: normal;
@@ -355,20 +355,15 @@ h4, h5, h6 {
 	}
 
 strong {
-	font-weight: normal;
+	font-weight: bold;
 	font-size: .91em;
 	letter-spacing: .2em;
 	text-transform: uppercase;
 	}
 
-em em {
+em {
 	font-style: normal;
 	}
-
-strong strong {
-	font-weight: bold;
-	}
-
 blockquote {
 	font-size: 1em;
 	margin: 2em 2em 2em 1em;
@@ -423,15 +418,15 @@ ul {
 	}
 
 ul ul {
-	list-style-type: square;
+	list-style-type: disc;
 	}
 ul ul ul {
-	list-style-type: square;
+	list-style-type: circle;
 	}
 
 hr {
 	height: 1px;
-	margin: 2em 1em 4em 0;
+	margin: 1em 1em 1em 0;
 	text-align: center;
 	border-color: #777;
 	border-width: 0;
@@ -455,16 +450,8 @@ dd p {
 	margin: 0 0 1em 0;
 	}
 
-h2.dateline {
-	margin: 2em 0 0 0;
-	font-family: ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Georgia, serif;
-	}
-dl + h2.dateline {
-	margin: 5em 0 2em 0;
-	}
-
 table{
-    border:1px #ececec solid;    
+    border:1px #CCC solid;    
 border-collapse: separate;border-spacing: 0;
 }
 th,td{padding:5px;border: 1px solid #CCC;}
