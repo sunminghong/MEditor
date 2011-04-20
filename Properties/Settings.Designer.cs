@@ -22,5 +22,94 @@ namespace MEditor.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("微软雅黑, 10.5pt")]
+        public global::System.Drawing.Font font {
+            get {
+                return ((global::System.Drawing.Font)(this["font"]));
+            }
+            set {
+                this["font"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color color {
+            get {
+                return ((global::System.Drawing.Color)(this["color"]));
+            }
+            set {
+                this["color"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("74, 82, 90")]
+        public global::System.Drawing.Color bgcolor {
+            get {
+                return ((global::System.Drawing.Color)(this["bgcolor"]));
+            }
+            set {
+                this["bgcolor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("body,td,th {font-family:\"\"微软雅黑\"\", Verdana, \"\"Bitstream Vera Sans\"\", sans-serif; }" +
+            "\r\nbody {\r\n\tmargin-top: 0;\r\n\tpadding: 0;\t\r\n\tline-height: 1.5em;\r\n\tcolor: #{1};\r\n\t" +
+            "background-color: #{0}; \r\n\ttext-align: left;\r\n\t}\r\na em {\r\n\tpadding-bottom: 2px;\r" +
+            "\n\t}\r\n\r\n\r\nsup {\r\n\tline-height: 0px;\r\n\t}\r\nsup a:link {\r\n\tpadding: 3px;\r\n\t}\r\nsup a:" +
+            "visited {\r\n\tpadding: 3px;\r\n\t}\r\n\r\n\r\np {\r\n \tmargin: 0 0 1.6em 0;\r\n\tpadding: 0;\r\n\t}" +
+            "\r\n\r\nh1 {\r\n\tfont-family: \"\"黑体\"\",\"\"Gill Sans\"\", \"\"Gill Sans Std\"\", \"\"Gill Sans MT\"" +
+            "\", Georgia, serif;\r\n\tfont-size: 1.55em; \r\n\tline-height: 1.5em;\r\n\ttext-align: lef" +
+            "t;\r\n\tfont-weight: bold;\r\n\tmargin: 0em 0px 1.25em 0px;\r\n\t}\r\n\r\nh2 {\r\n\tfont-family:" +
+            "\"\"黑体\"\", \"\"Gill Sans\"\", \"\"Gill Sans Std\"\", \"\"Gill Sans MT\"\", Verdana, \"\"Bitstream" +
+            " Vera Sans\"\", sans-serif;\r\n\tfont-size: 1.1em; /* 1 */\r\n\ttext-align: left;\r\n\tfont" +
+            "-weight:bold;\r\n\tline-height: 1.8em;\r\n\tletter-spacing: .2em;\r\n\tmargin: 1em 0 1em " +
+            "0;\r\n\ttext-transform: uppercase;\r\n\t}\r\n\r\nh1 + h2 {\r\n\tmargin-top: 2em;\r\n\t}\r\nh2 + h3" +
+            " {\r\n\tmargin-top: 1.5em;\r\n\t}\r\n\r\nh3 {\r\n\tfont-family: \"\"黑体\"\",Gill Sans\"\", \"\"Gill Sa" +
+            "ns Std\"\", \"\"Gill Sans MT\"\", Verdana, \"\"Bitstream Vera Sans\"\", sans-serif;\r\n\tfont" +
+            "-size: .91em;\r\n\ttext-align: left;\r\n\tfont-weight: normal;\r\n\tline-height: 1.8em;\r\n" +
+            "\tletter-spacing: .2em;\r\n\tmargin-bottom: 0.4em;\r\n\tmargin-top: 0.5em;\r\n\ttext-trans" +
+            "form: uppercase;\r\n\t}\r\n\r\np + h3 {\r\n\tmargin-top: 4em;\r\n\t}\r\npre + h3 {\r\n\tmargin-top" +
+            ": 4em;\r\n\t}\r\n\r\nh6 + h2 {\r\n\tmargin-top: 2em;\r\n\t}\r\n\r\nh4, h5, h6 {\r\n\tfont-family: Ve" +
+            "rdana, \"\"Bitstream Vera Sans\"\", sans-serif;\r\n\tfont-size: 1em;\r\n\ttext-align: left" +
+            ";\r\n\tfont-weight: bold;\r\n\tline-height: 1.5em;\r\n\tmargin: 1em 0 0 0;\r\n\t}\r\n\r\nstrong " +
+            "{\r\n\tfont-weight: bold;\r\n\tfont-size: .91em;\r\n\tletter-spacing: .2em;\r\n\ttext-transf" +
+            "orm: uppercase;\r\n\t}\r\n\r\nem {\r\n\tfont-style: normal;\r\n\t}\r\nblockquote {\r\n\tfont-size:" +
+            " 1em;\r\n\tmargin: 2em 2em 2em 1em;\r\n\tpadding: 0 .75em 0 1.25em;\r\n\tborder-left: 1px" +
+            " solid #777;\r\n\tborder-right: 0px solid #777;\r\n\t}\r\n\r\nblockquote strong {\r\n\tfont-w" +
+            "eight: bold;\r\n\tfont-size: 1em;\r\n\tletter-spacing: normal;\r\n\ttext-transform: none;" +
+            "\r\n\t}\r\n\r\n\r\nimg {\r\n\tmargin-top: 5px;\r\n\t}\r\n\r\nthead {\r\n\tfont-weight: bold;\r\n\t}\r\n\r\n\r\n" +
+            "ul, ol {\r\n\tpadding-left: 1.25em;\r\n\tmargin: 0 0 2em 1em;\r\n\t}\r\n\r\n\r\npre {\r\n\tfont-fa" +
+            "mily: \"\"Bitstream Vera Sans Mono\"\", Courier, Monaco, ProFont, \"\"American Typewri" +
+            "ter\"\", \"\"Andale Mono\"\", monospace;\r\n\tline-height: 1.45em;\r\n\tcolor: #{1};\r\n\tbackg" +
+            "round-color: inherit;\r\n\tmargin: 0.5em 0 0.5em 0;\r\n\tpadding: 5px 0 5px 10px;\r\n\tbo" +
+            "rder-width: 1px 0 1px 0;\r\n\tborder-color: #6b6b6b;\r\n\tborder-style: dashed;\r\n\t}\r\n\r" +
+            "\ncode {\r\n\tfont-family: Monaco, ProFont, \"\"Bitstream Vera Sans Mono\"\", \"\"American" +
+            " Typewriter\"\", \"\"Andale Mono\"\", monospace;\r\n\tfont-size: 0.91em; /* 1.09em for Co" +
+            "urier */\r\n\t}\r\n\r\n\r\nul {\r\n\tlist-style-type: square;\r\n\t}\r\n\r\nul ul {\r\n\tlist-style-ty" +
+            "pe: disc;\r\n\t}\r\nul ul ul {\r\n\tlist-style-type: circle;\r\n\t}\r\n\r\nhr {\r\n\theight: 1px;\r" +
+            "\n\tmargin: 1em 1em 1em 0;\r\n\ttext-align: center;\r\n\tborder-color: #777;\r\n\tborder-wi" +
+            "dth: 0;\r\n\tborder-style: dotted;\r\n\t}\r\n\r\ndt {\r\n\tfont-family: Verdana, \"\"Bitstream " +
+            "Vera Sans\"\", sans-serif;\r\n\tfont-size: 1em;\r\n\ttext-align: left;\r\n\tfont-weight: no" +
+            "rmal;\r\n\tmargin: 0 0 .4em 0;\r\n\tletter-spacing: normal;\r\n\ttext-transform: none;\r\n\t" +
+            "}\r\ndd {\r\n\tmargin: auto auto 1.5em 1em;\r\n\t}\r\n\r\ndd p {\r\n\tmargin: 0 0 1em 0;\r\n\t}\r\n\r" +
+            "\ntable{\r\n    border:1px #CCC solid;    \r\nborder-collapse: separate;border-spacin" +
+            "g: 0;\r\n}\r\nth,td{padding:5px;border: 1px solid #CCC;}")]
+        public string css {
+            get {
+                return ((string)(this["css"]));
+            }
+            set {
+                this["css"] = value;
+            }
+        }
     }
 }

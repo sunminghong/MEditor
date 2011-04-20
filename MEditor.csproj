@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCss.Designer.cs">
+      <DependentUpon>frmCss.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,6 +114,10 @@
     <Content Include="icos\ico_preview.png" />
     <Content Include="icos\ico_saveall.png" />
     <Content Include="icos\logo.ico" />
+    <EmbeddedResource Include="frmCss.resx">
+      <DependentUpon>frmCss.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GoTo.resx">
       <DependentUpon>GoTo.cs</DependentUpon>
       <SubType>Designer</SubType>

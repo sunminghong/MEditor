@@ -8,3 +8,5 @@ E:\Workplaces\MEditor\obj\Release\MEditor.frmReplace.resources
 E:\Workplaces\MEditor\obj\Release\MEditor.csproj.GenerateResource.Cache
 E:\Workplaces\MEditor\obj\Release\MEditor.exe
 E:\Workplaces\MEditor\obj\Release\MEditor.pdb
+E:\Workplaces\MEditor\obj\Release\MEditor.frmCss.resources
+E:\Workplaces\MEditor\exeoutput\MEditor.exe.config

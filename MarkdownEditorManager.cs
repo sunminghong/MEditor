@@ -27,14 +27,209 @@ namespace MEditor
 
         private static Color BGColor = System.Drawing.SystemColors.Window;
         private static Color FOREColor = System.Drawing.SystemColors.WindowText;
-        private static Font FONT=new Font("",12);
+        private static Font FONT=new Font("微软雅黑",12);
 
         //private Color  _bgColor = Color.FromArgb(0x20,0x20,0x20);
         //private Color  _foreColor = Color.FromArgb(0xf2,0xf0,0xdf);         
 
-         private Color             _bgColor = Color.FromArgb(0x4a,0x52,0x5a);//20,0x20,0x20;
-         private Color     _foreColor = Color.FromArgb(0xff,0xff,0xff); //0xf2,0xf0,0xdf
+         private Color  _bgColor = Color.FromArgb(0x4a,0x52,0x5a);//20,0x20,0x20;
+         private Color  _foreColor = Color.FromArgb(0xff,0xff,0xff); //0xf2,0xf0,0xdf
         private Font _font = FONT;
+
+        #region defaultCss
+        private string _defcss = @"
+body,td,th {font-family:""微软雅黑"", Verdana, ""Bitstream Vera Sans"", sans-serif; }
+body {
+	margin-top: 0;
+	padding: 0;	
+	line-height: 1.5em;
+	color: #{1};
+	background-color: #{0}; 
+	text-align: left;
+	}
+a em {
+	padding-bottom: 2px;
+	}
+
+
+sup {
+	line-height: 0px;
+	}
+sup a:link {
+	padding: 3px;
+	}
+sup a:visited {
+	padding: 3px;
+	}
+
+
+p {
+ 	margin: 0 0 1.6em 0;
+	padding: 0;
+	}
+
+h1 {
+	font-family: ""黑体"",""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Georgia, serif;
+	font-size: 1.55em; 
+	line-height: 1.5em;
+	text-align: left;
+	font-weight: bold;
+	margin: 0em 0px 1.25em 0px;
+	}
+
+h2 {
+	font-family:""黑体"", ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-size: 1.1em; /* 1 */
+	text-align: left;
+	font-weight:bold;
+	line-height: 1.8em;
+	letter-spacing: .2em;
+	margin: 1em 0 1em 0;
+	text-transform: uppercase;
+	}
+
+h1 + h2 {
+	margin-top: 2em;
+	}
+h2 + h3 {
+	margin-top: 1.5em;
+	}
+
+h3 {
+	font-family: ""黑体"",Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-size: .91em;
+	text-align: left;
+	font-weight: normal;
+	line-height: 1.8em;
+	letter-spacing: .2em;
+	margin-bottom: 0.4em;
+	margin-top: 0.5em;
+	text-transform: uppercase;
+	}
+
+p + h3 {
+	margin-top: 4em;
+	}
+pre + h3 {
+	margin-top: 4em;
+	}
+
+h6 + h2 {
+	margin-top: 2em;
+	}
+
+h4, h5, h6 {
+	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-size: 1em;
+	text-align: left;
+	font-weight: bold;
+	line-height: 1.5em;
+	margin: 1em 0 0 0;
+	}
+
+strong {
+	font-weight: bold;
+	font-size: .91em;
+	letter-spacing: .2em;
+	text-transform: uppercase;
+	}
+
+em {
+	font-style: normal;
+	}
+blockquote {
+	font-size: 1em;
+	margin: 2em 2em 2em 1em;
+	padding: 0 .75em 0 1.25em;
+	border-left: 1px solid #777;
+	border-right: 0px solid #777;
+	}
+
+blockquote strong {
+	font-weight: bold;
+	font-size: 1em;
+	letter-spacing: normal;
+	text-transform: none;
+	}
+
+
+img {
+	margin-top: 5px;
+	}
+
+thead {
+	font-weight: bold;
+	}
+
+
+ul, ol {
+	padding-left: 1.25em;
+	margin: 0 0 2em 1em;
+	}
+
+
+pre {
+	font-family: ""Bitstream Vera Sans Mono"", Courier, Monaco, ProFont, ""American Typewriter"", ""Andale Mono"", monospace;
+	line-height: 1.45em;
+	color: #{1};
+	background-color: inherit;
+	margin: 0.5em 0 0.5em 0;
+	padding: 5px 0 5px 10px;
+	border-width: 1px 0 1px 0;
+	border-color: #6b6b6b;
+	border-style: dashed;
+	}
+
+code {
+	font-family: Monaco, ProFont, ""Bitstream Vera Sans Mono"", ""American Typewriter"", ""Andale Mono"", monospace;
+	font-size: 0.91em; /* 1.09em for Courier */
+	}
+
+
+ul {
+	list-style-type: square;
+	}
+
+ul ul {
+	list-style-type: disc;
+	}
+ul ul ul {
+	list-style-type: circle;
+	}
+
+hr {
+	height: 1px;
+	margin: 1em 1em 1em 0;
+	text-align: center;
+	border-color: #777;
+	border-width: 0;
+	border-style: dotted;
+	}
+
+dt {
+	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-size: 1em;
+	text-align: left;
+	font-weight: normal;
+	margin: 0 0 .4em 0;
+	letter-spacing: normal;
+	text-transform: none;
+	}
+dd {
+	margin: auto auto 1.5em 1em;
+	}
+
+dd p {
+	margin: 0 0 1em 0;
+	}
+
+table{
+    border:1px #CCC solid;    
+border-collapse: separate;border-spacing: 0;
+}
+th,td{padding:5px;border: 1px solid #CCC;}
+";
+#endregion
 
         private bool _wordWrap = false;
 
@@ -263,200 +458,7 @@ namespace MEditor
         public string GetHTMLStyle(string cont)
         {
             string htmlformat = "<html><head><style>body{background-color:"+convertColor(_bgColor)
-                +";color:"+convertColor(_foreColor)+";}"+
-@"@charset ""utf-8"";
-body,td,th {font-family:""微软雅黑"", Verdana, ""Bitstream Vera Sans"", sans-serif; }
-body {
-	margin-top: 0;
-	padding: 0;	
-	line-height: 1.5em;
-	color: #{1};
-	background-color: #{0}; 
-	text-align: left;
-	}
-a em {
-	padding-bottom: 2px;
-	}
-
-
-sup {
-	line-height: 0px;
-	}
-sup a:link {
-	padding: 3px;
-	}
-sup a:visited {
-	padding: 3px;
-	}
-
-
-p {
- 	margin: 0 0 1.6em 0;
-	padding: 0;
-	}
-
-h1 {
-	font-family: ""黑体"",""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Georgia, serif;
-	font-size: 1.55em; 
-	line-height: 1.5em;
-	text-align: left;
-	font-weight: bold;
-	margin: 0em 0px 1.25em 0px;
-	}
-
-h2 {
-	font-family:""黑体"", ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
-	font-size: 1.1em; /* 1 */
-	text-align: left;
-	font-weight:bold;
-	line-height: 1.8em;
-	letter-spacing: .2em;
-	margin: 1em 0 1em 0;
-	text-transform: uppercase;
-	}
-
-h1 + h2 {
-	margin-top: 2em;
-	}
-h2 + h3 {
-	margin-top: 1.5em;
-	}
-
-h3 {
-	font-family: ""黑体"",Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
-	font-size: .91em;
-	text-align: left;
-	font-weight: normal;
-	line-height: 1.8em;
-	letter-spacing: .2em;
-	margin-bottom: 0.4em;
-	margin-top: 0.5em;
-	text-transform: uppercase;
-	}
-
-p + h3 {
-	margin-top: 4em;
-	}
-pre + h3 {
-	margin-top: 4em;
-	}
-
-h6 + h2 {
-	margin-top: 2em;
-	}
-
-h4, h5, h6 {
-	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
-	font-size: 1em;
-	text-align: left;
-	font-weight: bold;
-	line-height: 1.5em;
-	margin: 1em 0 0 0;
-	}
-
-strong {
-	font-weight: bold;
-	font-size: .91em;
-	letter-spacing: .2em;
-	text-transform: uppercase;
-	}
-
-em {
-	font-style: normal;
-	}
-blockquote {
-	font-size: 1em;
-	margin: 2em 2em 2em 1em;
-	padding: 0 .75em 0 1.25em;
-	border-left: 1px solid #777;
-	border-right: 0px solid #777;
-	}
-
-blockquote strong {
-	font-weight: bold;
-	font-size: 1em;
-	letter-spacing: normal;
-	text-transform: none;
-	}
-
-
-img {
-	margin-top: 5px;
-	}
-
-thead {
-	font-weight: bold;
-	}
-
-
-ul, ol {
-	padding-left: 1.25em;
-	margin: 0 0 2em 1em;
-	}
-
-
-pre {
-	font-family: ""Bitstream Vera Sans Mono"", Courier, Monaco, ProFont, ""American Typewriter"", ""Andale Mono"", monospace;
-	line-height: 1.45em;
-	color: #{1};
-	background-color: inherit;
-	margin: 0.5em 0 0.5em 0;
-	padding: 5px 0 5px 10px;
-	border-width: 1px 0 1px 0;
-	border-color: #6b6b6b;
-	border-style: dashed;
-	}
-
-code {
-	font-family: Monaco, ProFont, ""Bitstream Vera Sans Mono"", ""American Typewriter"", ""Andale Mono"", monospace;
-	font-size: 0.91em; /* 1.09em for Courier */
-	}
-
-
-ul {
-	list-style-type: square;
-	}
-
-ul ul {
-	list-style-type: disc;
-	}
-ul ul ul {
-	list-style-type: circle;
-	}
-
-hr {
-	height: 1px;
-	margin: 1em 1em 1em 0;
-	text-align: center;
-	border-color: #777;
-	border-width: 0;
-	border-style: dotted;
-	}
-
-dt {
-	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
-	font-size: 1em;
-	text-align: left;
-	font-weight: normal;
-	margin: 0 0 .4em 0;
-	letter-spacing: normal;
-	text-transform: none;
-	}
-dd {
-	margin: auto auto 1.5em 1em;
-	}
-
-dd p {
-	margin: 0 0 1em 0;
-	}
-
-table{
-    border:1px #CCC solid;    
-border-collapse: separate;border-spacing: 0;
-}
-th,td{padding:5px;border: 1px solid #CCC;}
-"
-                + @"</style></head><body>"+cont+"</body></html>";
+                +";color:"+convertColor(_foreColor)+";}"+_defcss  + @"</style></head><body>"+cont+"</body></html>";
 
             return htmlformat;
         }
@@ -531,6 +533,10 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 return;
             _wordWrap = wordWarp;
             SetStyle();
+        }
+        public void SetCss(string css)
+        {
+            _defcss = css;
         }
     }
 }

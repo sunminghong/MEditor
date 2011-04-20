@@ -178,7 +178,7 @@ namespace MEditor
         private void 加粗toolStripButton7_Click(object sender, EventArgs e)
         {
             ProcesserFactory.Processe(meditorManager.GetTextBox(), EMark.bold);
-            PreivewHtml(true);
+            PreviewHtml();
         }
 
         private void 倾斜toolStripButton8_Click(object sender, EventArgs e)
@@ -300,7 +300,7 @@ namespace MEditor
 
         private void 打印预览VToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PreivewHtml(false);
+            PreviewHtml();
             ////页面设置对话框
             //PageSetupDialog psd = new PageSetupDialog();
 
@@ -362,7 +362,7 @@ namespace MEditor
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             //if (splitContainer1.Panel2Collapsed == false)
-                PreivewHtml(false);
+                PreviewHtml();
             //else
             //    splitContainer1.Panel2Collapsed = true;
         }
@@ -379,7 +379,7 @@ namespace MEditor
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            PreivewHtml(false);
+            PreviewHtml();
 
             //MarkdownEditor meditor = meditorManager.GetCurrEditor();
             //meditor.GetTextBox().Focus();
@@ -481,7 +481,7 @@ namespace MEditor
 
             //定义编辑管理器
             meditorManager = new MarkdownEditorManager(this, tabControl1, mruManager);
-
+            ReadCss();
             //webBrowser1.Navigate("about:blank");
             meditorManager.SetStyle(rtbHtml);
             //webBrowser1.DocumentText = meditorManager.GetHTMLStyle("");
@@ -509,6 +509,7 @@ namespace MEditor
             }
 
             //this.timer1.Start();
+
         }
 
 
@@ -630,6 +631,16 @@ namespace MEditor
             showSyntax("https://github.com/5d13cn/MEditor/raw/master/lastver.txt");
         }
         #endregion
+
+        private void 字体OToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectFont();
+        }
+
+        private void html预览样式设计ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            editCss();
+        }
 
     }
 }

@@ -71,8 +71,6 @@
             this.字体toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.加粗toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.markdown格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.html格式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.自动转行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.背景颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,6 +93,7 @@
             this.mEditor快捷键ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于MEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mEditor网站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.检查最新版ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -109,7 +108,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.检查最新版ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.html预览样式设计ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -126,14 +125,15 @@
             // 
             this.字体OToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("字体OToolStripMenuItem.Image")));
             this.字体OToolStripMenuItem.Name = "字体OToolStripMenuItem";
-            this.字体OToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.字体OToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.字体OToolStripMenuItem.Text = "字体(&F)";
+            this.字体OToolStripMenuItem.Click += new System.EventHandler(this.字体OToolStripMenuItem_Click);
             // 
             // 字体颜色ToolStripMenuItem
             // 
             this.字体颜色ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("字体颜色ToolStripMenuItem.Image")));
             this.字体颜色ToolStripMenuItem.Name = "字体颜色ToolStripMenuItem";
-            this.字体颜色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.字体颜色ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.字体颜色ToolStripMenuItem.Text = "颜色(&C)";
             this.字体颜色ToolStripMenuItem.Click += new System.EventHandler(this.字体颜色ToolStripMenuItem_Click);
             // 
@@ -512,8 +512,6 @@
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.markdown格式ToolStripMenuItem,
-            this.html格式ToolStripMenuItem,
             this.toolStripMenuItem1,
             this.自动转行ToolStripMenuItem,
             this.字体OToolStripMenuItem,
@@ -521,6 +519,7 @@
             this.背景颜色ToolStripMenuItem,
             this.还原系统原设置ToolStripMenuItem,
             this.经典黑底白字ToolStripMenuItem,
+            this.html预览样式设计ToolStripMenuItem,
             this.toolStripMenuItem4,
             this.界面布局左右互换ToolStripMenuItem,
             this.关联md扩展名ToolStripMenuItem,
@@ -532,69 +531,49 @@
             this.toolStripDropDownButton2.Text = "设置";
             this.toolStripDropDownButton2.ToolTipText = "设置";
             // 
-            // markdown格式ToolStripMenuItem
-            // 
-            this.markdown格式ToolStripMenuItem.Checked = true;
-            this.markdown格式ToolStripMenuItem.CheckOnClick = true;
-            this.markdown格式ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.markdown格式ToolStripMenuItem.Name = "markdown格式ToolStripMenuItem";
-            this.markdown格式ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.markdown格式ToolStripMenuItem.Tag = "markdown";
-            this.markdown格式ToolStripMenuItem.Text = "Markdown格式";
-            this.markdown格式ToolStripMenuItem.Visible = false;
-            // 
-            // html格式ToolStripMenuItem
-            // 
-            this.html格式ToolStripMenuItem.CheckOnClick = true;
-            this.html格式ToolStripMenuItem.Name = "html格式ToolStripMenuItem";
-            this.html格式ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.html格式ToolStripMenuItem.Tag = "html";
-            this.html格式ToolStripMenuItem.Text = "Html格式";
-            this.html格式ToolStripMenuItem.Visible = false;
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 6);
             // 
             // 自动转行ToolStripMenuItem
             // 
             this.自动转行ToolStripMenuItem.CheckOnClick = true;
             this.自动转行ToolStripMenuItem.Name = "自动转行ToolStripMenuItem";
-            this.自动转行ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.自动转行ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.自动转行ToolStripMenuItem.Text = "自动转行";
             this.自动转行ToolStripMenuItem.Click += new System.EventHandler(this.自动转行ToolStripMenuItem_Click);
             // 
             // 背景颜色ToolStripMenuItem
             // 
             this.背景颜色ToolStripMenuItem.Name = "背景颜色ToolStripMenuItem";
-            this.背景颜色ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.背景颜色ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.背景颜色ToolStripMenuItem.Text = "背景颜色";
             this.背景颜色ToolStripMenuItem.Click += new System.EventHandler(this.背景颜色ToolStripMenuItem_Click);
             // 
             // 还原系统原设置ToolStripMenuItem
             // 
             this.还原系统原设置ToolStripMenuItem.Name = "还原系统原设置ToolStripMenuItem";
-            this.还原系统原设置ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.还原系统原设置ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.还原系统原设置ToolStripMenuItem.Text = "经典白底黑字";
             this.还原系统原设置ToolStripMenuItem.Click += new System.EventHandler(this.还原系统原设置ToolStripMenuItem_Click);
             // 
             // 经典黑底白字ToolStripMenuItem
             // 
             this.经典黑底白字ToolStripMenuItem.Name = "经典黑底白字ToolStripMenuItem";
-            this.经典黑底白字ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.经典黑底白字ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.经典黑底白字ToolStripMenuItem.Text = "默认黑底白字";
             this.经典黑底白字ToolStripMenuItem.Click += new System.EventHandler(this.经典黑底白字ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(169, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(170, 6);
             // 
             // 界面布局左右互换ToolStripMenuItem
             // 
             this.界面布局左右互换ToolStripMenuItem.Name = "界面布局左右互换ToolStripMenuItem";
-            this.界面布局左右互换ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.界面布局左右互换ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.界面布局左右互换ToolStripMenuItem.Text = "界面布局左右互换";
             this.界面布局左右互换ToolStripMenuItem.ToolTipText = "将编辑器和html预览区左右交换";
             this.界面布局左右互换ToolStripMenuItem.Click += new System.EventHandler(this.界面布局左右互换ToolStripMenuItem_Click);
@@ -602,14 +581,14 @@
             // 关联md扩展名ToolStripMenuItem
             // 
             this.关联md扩展名ToolStripMenuItem.Name = "关联md扩展名ToolStripMenuItem";
-            this.关联md扩展名ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.关联md扩展名ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.关联md扩展名ToolStripMenuItem.Text = "关联.md扩展名";
             this.关联md扩展名ToolStripMenuItem.Click += new System.EventHandler(this.关联md扩展名ToolStripMenuItem_Click);
             // 
             // 取消md文件关联ToolStripMenuItem
             // 
             this.取消md文件关联ToolStripMenuItem.Name = "取消md文件关联ToolStripMenuItem";
-            this.取消md文件关联ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.取消md文件关联ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.取消md文件关联ToolStripMenuItem.Text = "取消.md文件关联";
             this.取消md文件关联ToolStripMenuItem.Click += new System.EventHandler(this.取消md文件关联ToolStripMenuItem_Click);
             // 
@@ -723,6 +702,13 @@
             this.mEditor网站ToolStripMenuItem.Text = "MEditor网站";
             this.mEditor网站ToolStripMenuItem.Click += new System.EventHandler(this.mEditor网站ToolStripMenuItem_Click);
             // 
+            // 检查最新版ToolStripMenuItem
+            // 
+            this.检查最新版ToolStripMenuItem.Name = "检查最新版ToolStripMenuItem";
+            this.检查最新版ToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.检查最新版ToolStripMenuItem.Text = "检查最新版";
+            this.检查最新版ToolStripMenuItem.Click += new System.EventHandler(this.检查最新版ToolStripMenuItem_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -824,7 +810,7 @@
             this.tabHtml.Location = new System.Drawing.Point(4, 22);
             this.tabHtml.Name = "tabHtml";
             this.tabHtml.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHtml.Size = new System.Drawing.Size(86, 72);
+            this.tabHtml.Size = new System.Drawing.Size(88, 74);
             this.tabHtml.TabIndex = 1;
             this.tabHtml.Text = "html源代码";
             this.tabHtml.UseVisualStyleBackColor = true;
@@ -834,7 +820,7 @@
             this.rtbHtml.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbHtml.Location = new System.Drawing.Point(3, 3);
             this.rtbHtml.Name = "rtbHtml";
-            this.rtbHtml.Size = new System.Drawing.Size(80, 66);
+            this.rtbHtml.Size = new System.Drawing.Size(82, 68);
             this.rtbHtml.TabIndex = 0;
             this.rtbHtml.Text = "";
             // 
@@ -859,12 +845,12 @@
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // 检查最新版ToolStripMenuItem
+            // html预览样式设计ToolStripMenuItem
             // 
-            this.检查最新版ToolStripMenuItem.Name = "检查最新版ToolStripMenuItem";
-            this.检查最新版ToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.检查最新版ToolStripMenuItem.Text = "检查最新版";
-            this.检查最新版ToolStripMenuItem.Click += new System.EventHandler(this.检查最新版ToolStripMenuItem_Click);
+            this.html预览样式设计ToolStripMenuItem.Name = "html预览样式设计ToolStripMenuItem";
+            this.html预览样式设计ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.html预览样式设计ToolStripMenuItem.Text = "html预览样式设计";
+            this.html预览样式设计ToolStripMenuItem.Click += new System.EventHandler(this.html预览样式设计ToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -951,8 +937,6 @@
         private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 打开所在文件夹ToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
-        private System.Windows.Forms.ToolStripMenuItem markdown格式ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem html格式ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 自动转行ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 背景颜色ToolStripMenuItem;
@@ -983,6 +967,7 @@
         private System.Windows.Forms.ToolStripMenuItem mEditor快捷键ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mEditor网站ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 检查最新版ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem html预览样式设计ToolStripMenuItem;
 
     }
 }
