@@ -103,21 +103,75 @@ namespace MEditor
             }
 
         }
-        
+
         void htmlRtb_KeyDown(object sender, KeyEventArgs e)
         {
+            RichTextBox rtb = ((RichTextBox)sender);
             if (e.Control && e.KeyCode == Keys.V)
             {
-                this._markdownRtb.Paste(DataFormats.GetFormat("Text"));
+                rtb.Paste(DataFormats.GetFormat("Text"));
                 e.SuppressKeyPress = true;
                 return;
             }
 
-            if (e.KeyCode == Keys.Tab)
+            if (e.KeyCode != Keys.Tab)
+                return;
+
+            if (e.Shift)
             {
-                ((RichTextBox)sender).SelectedText = "    ";
-                e.SuppressKeyPress = true;
+                //如果特择了多行，则每行前加入一个\t
+                string text = rtb.SelectedText;
+
+                int st = rtb.SelectionStart;
+                int st1 = rtb.Text.LastIndexOf("\n", st);
+                st1 = st1 > -1 ? st1 : 0;
+                int olen = rtb.SelectionLength;
+                int len = st - st1 + rtb.SelectionLength;
+                rtb.SelectionStart = st1;
+                rtb.SelectionLength = len;
+                text = rtb.SelectedText;
+
+                text = text.Replace("\n\t", "\n");
+
+                rtb.SelectedText = text;
+                rtb.SelectionStart = st + 1;
+                len=olen + text.Length - len - 1;
+                if(len>0)
+                    rtb.SelectionLength = len;
             }
+            else
+            {
+                //如果特择了多行，则每行前加入一个\t
+                string text = rtb.SelectedText;
+                if (text.IndexOf("\n") != -1)
+                {
+                    int st = rtb.SelectionStart;
+                    if (st > 0)
+                    {
+                        int st1 = rtb.Text.LastIndexOf("\n", st);
+                        st1 = st1 > -1 ? st1 : 0;
+                        int olen = rtb.SelectionLength;
+                        int len = st - st1 + rtb.SelectionLength;
+                        rtb.SelectionStart = st1;
+                        rtb.SelectionLength = len;
+                        text = rtb.SelectedText;
+                        //text = rtb.Text.Substring(st1, len );
+
+                        text = text.Replace("\n", "\n\t");
+                        rtb.SelectedText = text;
+                        rtb.SelectionStart = st + 1;
+                        rtb.SelectionLength = olen + text.Length - len - 1;
+                    }
+                
+                }
+                else
+                {
+                    //rtb.SelectedText = "    ";
+                    return;
+                }
+            }
+
+            e.SuppressKeyPress = true;
         }
 
         public RichTextBox GetTextBox()
