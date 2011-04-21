@@ -525,9 +525,38 @@ namespace MEditor
             }
 
             //this.timer1.Start();
+            rtbHtml.EnableAutoDragDrop = false;
+            rtbHtml.AllowDrop = true;
 
+            rtbHtml.KeyDown += new KeyEventHandler(rtbHtml_KeyDown);
+            rtbHtml.DragDrop += new DragEventHandler(frmMain_DragDrop);
+            rtbHtml.DragEnter += new DragEventHandler(rtbHtml_DragEnter);
+                        
         }
 
+        void rtbHtml_KeyDown(object sender, KeyEventArgs e)
+        {
+            RichTextBox rtb = ((RichTextBox)sender);
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                rtb.Paste(DataFormats.GetFormat("Text"));
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+
+        void rtbHtml_DragEnter(object sender, DragEventArgs e)
+        {
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
 
         private void 界面布局左右互换ToolStripMenuItem_Click(object sender, EventArgs e)
         {

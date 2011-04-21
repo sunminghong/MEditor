@@ -840,7 +840,10 @@
             // 
             // rtbHtml
             // 
+            this.rtbHtml.AutoWordSelection = true;
+            this.rtbHtml.DetectUrls = false;
             this.rtbHtml.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbHtml.EnableAutoDragDrop = true;
             this.rtbHtml.Location = new System.Drawing.Point(3, 3);
             this.rtbHtml.Name = "rtbHtml";
             this.rtbHtml.Size = new System.Drawing.Size(82, 68);
