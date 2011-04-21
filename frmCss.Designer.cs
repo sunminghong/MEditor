@@ -114,6 +114,7 @@
             this.txtTabWidth.Location = new System.Drawing.Point(470, 16);
             this.txtTabWidth.MaxLength = 8;
             this.txtTabWidth.Name = "txtTabWidth";
+            this.txtTabWidth.ReadOnly = true;
             this.txtTabWidth.Size = new System.Drawing.Size(38, 21);
             this.txtTabWidth.TabIndex = 7;
             this.txtTabWidth.Text = "4";
