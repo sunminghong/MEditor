@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MEditor</RootNamespace>
-    <AssemblyName>MEditor</AssemblyName>
+    <AssemblyName>MDEditor</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>MEditor.Program</StartupObject>
@@ -88,6 +88,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -106,6 +107,7 @@
     <Compile Include="frmReplace.Designer.cs">
       <DependentUpon>frmReplace.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabSelectRec.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icos\icon_mark.png" />

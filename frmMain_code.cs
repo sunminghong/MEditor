@@ -221,6 +221,7 @@ border-collapse: separate;border-spacing: 0;
 th,td{padding:5px;border: 1px solid #CCC;}
 ";
         #endregion
+
         public void ReadCss()
         {
             _font = Settings.Default.font;
@@ -326,7 +327,6 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 //Settings.Default.Save();
             }
         }
-
 
         public  void SetOldStyle()
         {

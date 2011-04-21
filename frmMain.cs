@@ -390,19 +390,11 @@ namespace MEditor
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
+            TabSelectRec.Rec(e.TabPageIndex);
+            SendKeys.Send("{tab}");
             PreviewHtml();
-
-            //MarkdownEditor meditor = meditorManager.GetCurrEditor();            
-            //int i = 0;
-            //while (!meditor.GetTextBox().CanFocus && (i++) < 5)
-            //{
-            //    System.Threading.Thread.Sleep(300);
-            //}
-            //meditor.GetTextBox().Focus();
-            
         }
-
-
+        
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             meditorManager.SaveAll();
@@ -531,7 +523,26 @@ namespace MEditor
             rtbHtml.KeyDown += new KeyEventHandler(rtbHtml_KeyDown);
             rtbHtml.DragDrop += new DragEventHandler(frmMain_DragDrop);
             rtbHtml.DragEnter += new DragEventHandler(rtbHtml_DragEnter);
-                        
+
+            tabControl1.MouseDown += new MouseEventHandler(tabControl1_MouseDown);
+            tabControl2.MouseDown+=new MouseEventHandler(tabControl1_MouseDown);
+        }
+
+        void tabControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                TabControl tabc = (TabControl)sender;
+
+                for (int i = 0; i < tabc.TabCount; i++)
+                {
+                    Rectangle recTab = tabc.GetTabRect(i);
+                    if (recTab.Contains(e.X, e.Y))
+                    {
+                        tabc.SelectedIndex = i;
+                    }
+                }
+            }
         }
 
         void rtbHtml_KeyDown(object sender, KeyEventArgs e)
@@ -698,6 +709,5 @@ namespace MEditor
             if (isCancel)
                 e.Cancel = true;
         }
-
     }
 }

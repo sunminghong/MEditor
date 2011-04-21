@@ -1,6 +1,3 @@
-E:\Workplaces\MEditor\exeoutput\MEditor.exe.config
-E:\Workplaces\MEditor\exeoutput\MEditor.exe
-E:\Workplaces\MEditor\exeoutput\MEditor.pdb
 E:\Workplaces\MEditor\obj\Release\ResolveAssemblyReference.cache
 E:\Workplaces\MEditor\obj\Release\MEditor.frmMain.resources
 E:\Workplaces\MEditor\obj\Release\MEditor.Properties.Resources.resources
@@ -8,5 +5,8 @@ E:\Workplaces\MEditor\obj\Release\MEditor.frmCss.resources
 E:\Workplaces\MEditor\obj\Release\MEditor.GoToLineDialog.resources
 E:\Workplaces\MEditor\obj\Release\MEditor.frmReplace.resources
 E:\Workplaces\MEditor\obj\Release\MDEditor.csproj.GenerateResource.Cache
-E:\Workplaces\MEditor\obj\Release\MEditor.exe
-E:\Workplaces\MEditor\obj\Release\MEditor.pdb
+E:\Workplaces\MEditor\exeoutput\MDEditor.exe.config
+E:\Workplaces\MEditor\exeoutput\MDEditor.exe
+E:\Workplaces\MEditor\exeoutput\MDEditor.pdb
+E:\Workplaces\MEditor\obj\Release\MDEditor.exe
+E:\Workplaces\MEditor\obj\Release\MDEditor.pdb

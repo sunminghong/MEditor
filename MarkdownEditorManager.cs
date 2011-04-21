@@ -230,7 +230,7 @@ border-collapse: separate;border-spacing: 0;
 th,td{padding:5px;border: 1px solid #CCC;}
 ";
 #endregion
-
+        
         private bool _wordWrap = false;
         private int _tabWidth = 4;
 
@@ -412,8 +412,14 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 }
             }
 
+            int ind=TabSelectRec.GetLast();
+            ind = TabSelectRec.GetLast();
+            if (ind > -1 && ind<_tabparent.TabCount)
+                _tabparent.SelectedIndex = ind;
+
             _editors.Remove((int)meditor.MarkdownPage.Tag);
             _tabparent.TabPages.Remove(meditor.MarkdownPage);
+
             return true;
         }
 
