@@ -652,6 +652,7 @@ namespace MEditor
         #region MEditor links
         private void markdown语法介绍ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/syntax.md");
             showSyntax("http://www.cnblogs.com/yihuiso/archive/2011/04/13/markdown.html");
         }
 
@@ -671,11 +672,11 @@ namespace MEditor
         }
         private void 关于MEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showSyntax("https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/about.md");
+            showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/about.md");
         }
         private void mEditor快捷键ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showSyntax("https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/shortcut.md");
+            showSyntax("https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/shortcut.md");
         }
         private void mEditor网站ToolStripMenuItem_Click(object sender, EventArgs e)
         {

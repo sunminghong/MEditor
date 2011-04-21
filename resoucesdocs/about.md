@@ -1,8 +1,10 @@
 ﻿#软件名称：MDEditor  V0.8.0.0#
 ##软件用途：markdown格式文档编辑和预览。##
 >MEditor is text editor with multiple windows. You can use it as markdown editor and preview. 
+
 - 可应用于写博客，可以写好后将html剪切发布即可；
 - 团队协作之间的文档编辑与阅读，纯文本格式，便于版本比较；html预览，便于阅读
+
 ##发起人：一挥，[新浪微博](http://weibo.com/5d13 "一挥间的新浪微博"),[博客](http://cnblogs.com/yihuiso "一挥间的博客")
 ##许可协议：full open source,随便修改##
 如果您愿意将您的修改提交，方便所有需要的人，请注意：
