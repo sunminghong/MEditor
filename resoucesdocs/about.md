@@ -1,4 +1,4 @@
-﻿##软件名称：MEditor##
+﻿	##软件名称：MEditor##
 ##软件用途：markdown格式文档编辑和预览。##
 >MEditor is text editor with multiple windows. You can use it as markdown editor and preview. 
 
@@ -18,6 +18,8 @@
 *	+修改配置所保存方式，现在如果改了样式，就会在同级目录下生成MDEditor.exe.config,只需要保存此文件再可同步你的样式设置了。
 *	+将还原经典白底黑字功能集成到 通用选项窗口
 *	+将还原经典黑底白字功能集成到 通用选项窗口
+*	\*增加tabpage选择顺序记录功能，当关闭当前编辑的文件时会将上一个页激活，提高体验
+*	+解决页面切换后的焦点bug。
 
 ##V0.6版本的新增修改功能列表
 *	+增加了选中多行时按{Tab}键时可以增加缩进
