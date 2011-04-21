@@ -232,6 +232,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
             meditorManager.SetForeColor(_foreColor);
             meditorManager.SetBackColor(_bgColor );
             meditorManager.SetCss(_defcss);
+
+            //MessageBox.Show(Settings.Default.appconfig.ToString());
         }
 
         public void OpenMRUFile(string fileName)
@@ -292,7 +294,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 rtbHtml.Text = html;
             }
 
-            webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html); 
+            webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
+            tabBrowser.Text = meditor.MarkdownPage.Text;
             this.toolStripStatusLabel1.Text = "当前文档：" + meditor.FileName;
 
             if (isLeft)
@@ -319,8 +322,59 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 meditorManager.SetForeColor(_foreColor);
                 meditorManager.SetStyle(rtbHtml);
 
-                Settings.Default.color = _foreColor;
-                Settings.Default.Save();
+                //Settings.Default.color = _foreColor;
+                //Settings.Default.Save();
+            }
+        }
+
+
+        public  void SetOldStyle()
+        {
+            _bgColor = Color.FromArgb(0xff, 0xff, 0xff);//20,0x20,0x20;
+            _foreColor = Color.FromArgb(0x00, 0x00, 0x00); //0xf2,0xf0,0xdf
+            _font = new Font("微软雅黑",12);
+
+            setstyle();
+            //SaveSettings();
+        }
+
+        public  void SetBlackWhiteStyle()
+        {
+            _bgColor = Color.FromArgb(0x4a, 0x52, 0x5a);//20,0x20,0x20;
+            _foreColor = Color.FromArgb(0xff, 0xff, 0xff); //0xf2,0xf0,0xdf
+            _font = new Font("微软雅黑", 12);
+            setstyle();
+            //SaveSettings();
+        }
+
+        private void setstyle()
+        {
+            meditorManager.SetFont(_font);
+            meditorManager.SetForeColor(_foreColor);
+            meditorManager.SetBackColor(_bgColor);
+
+            meditorManager.SetStyle(rtbHtml);
+        }
+
+        private string convertColor(Color co)
+        {
+            return  co.R.ToString() +","+ co.G.ToString() +","+ co.B.ToString();
+        }
+        public void SaveSettings()
+        {
+            string appconfig = Settings.Default.appconfig;
+
+            appconfig=appconfig.Replace("{font}", _font.ToString());
+            appconfig = appconfig.Replace("{color}", convertColor(_foreColor));
+            appconfig = appconfig.Replace("{bgcolor}", convertColor(_bgColor));
+            appconfig = appconfig.Replace("{css}", _defcss);
+
+            string conffile = Application.UserAppDataPath;
+            conffile = Application.ExecutablePath+".config";
+            using (StreamWriter sw = new StreamWriter(conffile, false, Encoding.UTF8))
+            {
+                sw.Write(appconfig);
+                sw.Close();
             }
         }
 
@@ -333,8 +387,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 meditorManager.SetBackColor(_bgColor);
                 meditorManager.SetStyle(rtbHtml);
 
-                Settings.Default.bgcolor = _bgColor;
-                Settings.Default.Save();
+                //Settings.Default.bgcolor = _bgColor;
+                //Settings.Default.Save();
             }
         }
         public void SelectFont()
@@ -346,8 +400,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 meditorManager.SetFont(_font);
                 meditorManager.SetStyle(rtbHtml);
 
-                Settings.Default.font =_font;
-                Settings.Default.Save();
+                //Settings.Default.font =_font;
+                //Settings.Default.Save();
             }
         }
 
@@ -356,8 +410,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
             _defcss = css;
             meditorManager.SetCss(_defcss);
             PreviewHtml();
-            Settings.Default.css = _defcss;
-            Settings.Default.Save();
+            //Settings.Default.css = _defcss;
+            //Settings.Default.Save();
         }
 
         private void editCss()
@@ -369,7 +423,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
         private void showSyntax(string url)
         {
             toolStripStatusLabel1.Text ="正在打开" +url+"..." ;
-            webBrowser1.Navigate(url);
+            System.Diagnostics.Process.Start(url);
+            //webBrowser1.Navigate(url);
             //webBrowser1.DocumentText = html;
            
             if (splitContainer1.Panel2Collapsed)

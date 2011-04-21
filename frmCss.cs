@@ -31,6 +31,8 @@ namespace MEditor
         {
             _fm.SetCss(txtTabWidth.Text);
             _fm.SetCss(txtCss.Text);
+            _fm.SaveSettings();
+
             Close();
          }
 
@@ -58,9 +60,19 @@ namespace MEditor
         private void button6_Click(object sender, EventArgs e)
         {
             Settings.Default.Reset();
-            _fm.ReadCss();
              _css = Settings.Default.css;
             txtCss.Text  = _css;
+            _fm.SetOldStyle();
+            //_fm.ReadCss();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Reset();
+             _css = Settings.Default.css;
+            txtCss.Text  = _css;
+            _fm.SetBlackWhiteStyle();
+            //_fm.ReadCss();
         }
 
     }

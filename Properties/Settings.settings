@@ -2,17 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MEditor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="font" Type="System.Drawing.Font" Scope="User">
+    <Setting Name="font" Type="System.Drawing.Font" Scope="Application">
       <Value Profile="(Default)">微软雅黑, 10.5pt</Value>
     </Setting>
-    <Setting Name="color" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="color" Type="System.Drawing.Color" Scope="Application">
       <Value Profile="(Default)">White</Value>
     </Setting>
-    <Setting Name="bgcolor" Type="System.Drawing.Color" Scope="User">
+    <Setting Name="bgcolor" Type="System.Drawing.Color" Scope="Application">
       <Value Profile="(Default)">74, 82, 90</Value>
     </Setting>
-    <Setting Name="css" Type="System.String" Scope="User">
-      <Value Profile="(Default)">body,td,th {font-family:""微软雅黑"", Verdana, ""Bitstream Vera Sans"", sans-serif; }
+    <Setting Name="css" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">body,td,th {font-family:"微软雅黑", Verdana, "Bitstream Vera Sans", sans-serif; }
 body {
 	margin-top: 0;
 	padding: 0;	
@@ -43,7 +43,7 @@ p {
 	}
 
 h1 {
-	font-family: ""黑体"",""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Georgia, serif;
+	font-family: "黑体","Gill Sans", "Gill Sans Std", "Gill Sans MT", Georgia, serif;
 	font-size: 1.55em; 
 	line-height: 1.5em;
 	text-align: left;
@@ -52,7 +52,7 @@ h1 {
 	}
 
 h2 {
-	font-family:""黑体"", ""Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-family:"黑体", "Gill Sans", "Gill Sans Std", "Gill Sans MT", Verdana, "Bitstream Vera Sans", sans-serif;
 	font-size: 1.1em; /* 1 */
 	text-align: left;
 	font-weight:bold;
@@ -70,7 +70,7 @@ h2 + h3 {
 	}
 
 h3 {
-	font-family: ""黑体"",Gill Sans"", ""Gill Sans Std"", ""Gill Sans MT"", Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-family: "黑体",Gill Sans", "Gill Sans Std", "Gill Sans MT", Verdana, "Bitstream Vera Sans", sans-serif;
 	font-size: .91em;
 	text-align: left;
 	font-weight: normal;
@@ -93,7 +93,7 @@ h6 + h2 {
 	}
 
 h4, h5, h6 {
-	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-family: Verdana, "Bitstream Vera Sans", sans-serif;
 	font-size: 1em;
 	text-align: left;
 	font-weight: bold;
@@ -143,7 +143,7 @@ ul, ol {
 
 
 pre {
-	font-family: ""Bitstream Vera Sans Mono"", Courier, Monaco, ProFont, ""American Typewriter"", ""Andale Mono"", monospace;
+	font-family: "Bitstream Vera Sans Mono", Courier, Monaco, ProFont, "American Typewriter", "Andale Mono", monospace;
 	line-height: 1.45em;
 	color: #{1};
 	background-color: inherit;
@@ -155,7 +155,7 @@ pre {
 	}
 
 code {
-	font-family: Monaco, ProFont, ""Bitstream Vera Sans Mono"", ""American Typewriter"", ""Andale Mono"", monospace;
+	font-family: Monaco, ProFont, "Bitstream Vera Sans Mono", "American Typewriter", "Andale Mono", monospace;
 	font-size: 0.91em; /* 1.09em for Courier */
 	}
 
@@ -181,7 +181,7 @@ hr {
 	}
 
 dt {
-	font-family: Verdana, ""Bitstream Vera Sans"", sans-serif;
+	font-family: Verdana, "Bitstream Vera Sans", sans-serif;
 	font-size: 1em;
 	text-align: left;
 	font-weight: normal;
@@ -202,6 +202,32 @@ table{
 border-collapse: separate;border-spacing: 0;
 }
 th,td{padding:5px;border: 1px solid #CCC;}</Value>
+    </Setting>
+    <Setting Name="appconfig" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+    &lt;configSections&gt;
+        &lt;sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" &gt;
+            &lt;section name="MEditor.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" /&gt;
+        &lt;/sectionGroup&gt;
+    &lt;/configSections&gt;
+    &lt;applicationSettings&gt;
+        &lt;MEditor.Properties.Settings&gt;
+            &lt;setting name="font" serializeAs="String"&gt;
+                &lt;value&gt;{font}&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name="color" serializeAs="String"&gt;
+                &lt;value&gt;{color}&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name="bgcolor" serializeAs="String"&gt;
+                &lt;value&gt;{bgcolor}&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name="css" serializeAs="String"&gt;
+                &lt;value&gt;{css}&lt;/value&gt;
+            &lt;/setting&gt;
+        &lt;/MEditor.Properties.Settings&gt;
+    &lt;/applicationSettings&gt;
+&lt;/configuration&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

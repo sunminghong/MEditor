@@ -38,14 +38,15 @@
             this.txtTabWidth = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(310, 327);
+            this.button1.Location = new System.Drawing.Point(259, 338);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 33);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "取消(&C)";
             this.button1.UseVisualStyleBackColor = true;
@@ -62,9 +63,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(179, 327);
+            this.button2.Location = new System.Drawing.Point(179, 337);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(116, 33);
+            this.button2.Size = new System.Drawing.Size(74, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "保存(&S)";
             this.button2.UseVisualStyleBackColor = true;
@@ -130,13 +131,23 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(433, 327);
+            this.button6.Location = new System.Drawing.Point(340, 337);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 31);
+            this.button6.Size = new System.Drawing.Size(99, 24);
             this.button6.TabIndex = 9;
-            this.button6.Text = "还原为默认设置";
+            this.button6.Text = "还原白底黑字";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(445, 336);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(99, 24);
+            this.button7.TabIndex = 10;
+            this.button7.Text = "还原黑底白字";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // frmCss
             // 
@@ -144,6 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button1;
             this.ClientSize = new System.Drawing.Size(587, 370);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTabWidth);
@@ -179,5 +191,6 @@
         private System.Windows.Forms.TextBox txtTabWidth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }

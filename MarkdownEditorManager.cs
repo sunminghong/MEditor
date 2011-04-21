@@ -34,7 +34,7 @@ namespace MEditor
 
          private Color  _bgColor = Color.FromArgb(0x4a,0x52,0x5a);//20,0x20,0x20;
          private Color  _foreColor = Color.FromArgb(0xff,0xff,0xff); //0xf2,0xf0,0xdf
-        private Font _font = FONT;
+         private Font _font = new Font("微软雅黑", 12);
 
         #region defaultCss
         private string _defcss = @"
@@ -501,22 +501,6 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 rtb.Font = _font;
             if (rtb.WordWrap != _wordWrap)
                 rtb.WordWrap = _wordWrap;
-        }
-
-        public void SetOldStyle()
-        {
-            _bgColor = BGColor;
-            _foreColor = FOREColor;
-            _font = FONT;
-            SetStyle();
-        }
-        
-        public void SetBlackWhiteStyle()
-        {
-            _bgColor = Color.FromArgb(0x4a,0x52,0x5a);//20,0x20,0x20;
-            _foreColor = Color.FromArgb(0xff,0xff,0xff); //0xf2,0xf0,0xdf
-            _font = FONT;
-            SetStyle();
         }
 
         public void SetBackColor(Color co)

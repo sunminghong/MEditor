@@ -480,8 +480,8 @@ namespace MEditor
 
         private void 还原系统原设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            meditorManager.SetOldStyle();
-            meditorManager.SetStyle(rtbHtml);
+            //meditorManager.SetOldStyle();
+            //meditorManager.SetStyle(rtbHtml);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -630,7 +630,7 @@ namespace MEditor
 
         private void 经典黑底白字ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            meditorManager.SetBlackWhiteStyle();
+            //meditorManager.SetBlackWhiteStyle();
         }
 
         private void 取消md文件关联ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -668,7 +668,7 @@ namespace MEditor
         }
         private void mEditor网站ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/5d13cn/MEditor");
+            showSyntax("https://github.com/5d13cn/MEditor");
         }
 
         private void 检查最新版ToolStripMenuItem_Click(object sender, EventArgs e)

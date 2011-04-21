@@ -564,6 +564,7 @@
             this.还原系统原设置ToolStripMenuItem.Name = "还原系统原设置ToolStripMenuItem";
             this.还原系统原设置ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.还原系统原设置ToolStripMenuItem.Text = "经典白底黑字";
+            this.还原系统原设置ToolStripMenuItem.Visible = false;
             this.还原系统原设置ToolStripMenuItem.Click += new System.EventHandler(this.还原系统原设置ToolStripMenuItem_Click);
             // 
             // 经典黑底白字ToolStripMenuItem
@@ -571,6 +572,7 @@
             this.经典黑底白字ToolStripMenuItem.Name = "经典黑底白字ToolStripMenuItem";
             this.经典黑底白字ToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.经典黑底白字ToolStripMenuItem.Text = "默认黑底白字";
+            this.经典黑底白字ToolStripMenuItem.Visible = false;
             this.经典黑底白字ToolStripMenuItem.Click += new System.EventHandler(this.经典黑底白字ToolStripMenuItem_Click);
             // 
             // html预览样式设计ToolStripMenuItem
@@ -756,7 +758,6 @@
             // 
             this.tabControl1.ContextMenuStrip = this.contextMenuStrip1;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -820,7 +821,6 @@
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser1.Location = new System.Drawing.Point(3, 3);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
