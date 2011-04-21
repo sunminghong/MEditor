@@ -1,4 +1,5 @@
 *.pdb
 *.suo
+*.vshost.*
 bin/
 obj/
