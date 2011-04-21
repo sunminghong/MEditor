@@ -13,6 +13,7 @@
 -请修改一下README
 -如果有语法扩充请修改syntax.md
 
+##下载地址: [执行档](https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe "码德编辑器下载")
 
 ##V0.8.0.0版本的新增修改功能列表
 *	+正式修改软件中文名称为：码德编辑器;可执行主文件名改为MDEditor.exe
