@@ -495,7 +495,8 @@ namespace MEditor
             //webBrowser1.Navigate("about:blank");
             meditorManager.SetStyle(rtbHtml);
             //webBrowser1.DocumentText = meditorManager.GetHTMLStyle("");
-
+            
+            _filemonitor = new FileMonitor(fsw_Changed);
             string command = Environment.CommandLine;//获取进程命令行参数
             if (!string.IsNullOrEmpty(command))
             {
@@ -530,8 +531,6 @@ namespace MEditor
             tabControl2.MouseDown+=new MouseEventHandler(tabControl1_MouseDown);
             //tabControl1.GotFocus += new EventHandler(tabControl1_GotFocus);
             
-
-            _filemonitor = new FileMonitor(fsw_Changed);
             }
 
 

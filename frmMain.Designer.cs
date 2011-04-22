@@ -277,7 +277,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(939, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(818, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolStrip1_MouseDown);
@@ -747,9 +747,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(939, 503);
-            this.splitContainer1.SplitterDistance = 487;
+            this.splitContainer1.Size = new System.Drawing.Size(818, 459);
+            this.splitContainer1.SplitterDistance = 479;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 4;
             this.splitContainer1.DoubleClick += new System.EventHandler(this.splitContainer1_DoubleClick);
@@ -762,7 +761,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.ShowToolTips = true;
-            this.tabControl1.Size = new System.Drawing.Size(939, 503);
+            this.tabControl1.Size = new System.Drawing.Size(479, 459);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -803,8 +802,9 @@
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
+            this.tabControl2.Padding = new System.Drawing.Point(0, 0);
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(96, 100);
+            this.tabControl2.Size = new System.Drawing.Size(331, 459);
             this.tabControl2.TabIndex = 1;
             // 
             // tabBrowser
@@ -812,8 +812,7 @@
             this.tabBrowser.Controls.Add(this.webBrowser1);
             this.tabBrowser.Location = new System.Drawing.Point(4, 22);
             this.tabBrowser.Name = "tabBrowser";
-            this.tabBrowser.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBrowser.Size = new System.Drawing.Size(88, 74);
+            this.tabBrowser.Size = new System.Drawing.Size(323, 433);
             this.tabBrowser.TabIndex = 0;
             this.tabBrowser.Text = "预览";
             this.tabBrowser.UseVisualStyleBackColor = true;
@@ -821,10 +820,10 @@
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 3);
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(82, 68);
+            this.webBrowser1.Size = new System.Drawing.Size(323, 433);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             // 
@@ -834,7 +833,7 @@
             this.tabHtml.Location = new System.Drawing.Point(4, 22);
             this.tabHtml.Name = "tabHtml";
             this.tabHtml.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHtml.Size = new System.Drawing.Size(88, 74);
+            this.tabHtml.Size = new System.Drawing.Size(436, 477);
             this.tabHtml.TabIndex = 1;
             this.tabHtml.Text = "源代码";
             this.tabHtml.UseVisualStyleBackColor = true;
@@ -847,7 +846,7 @@
             this.rtbHtml.EnableAutoDragDrop = true;
             this.rtbHtml.Location = new System.Drawing.Point(3, 3);
             this.rtbHtml.Name = "rtbHtml";
-            this.rtbHtml.Size = new System.Drawing.Size(82, 68);
+            this.rtbHtml.Size = new System.Drawing.Size(430, 471);
             this.rtbHtml.TabIndex = 0;
             this.rtbHtml.Text = "";
             // 
@@ -866,9 +865,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 528);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 484);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(939, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(818, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -878,7 +877,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(939, 550);
+            this.ClientSize = new System.Drawing.Size(818, 506);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);

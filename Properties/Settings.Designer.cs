@@ -52,48 +52,31 @@ namespace MEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("body,td,th {font-family:\"微软雅黑\", Verdana, \"Bitstream Vera Sans\", sans-serif; }\r\nbo" +
-            "dy {\r\n\tmargin-top: 0;\r\n\tpadding: 0;\t\r\n\tline-height: 1.5em;\r\n\tcolor: #{1};\r\n\tback" +
-            "ground-color: #{0}; \r\n\ttext-align: left;\r\n\t}\r\na em {\r\n\tpadding-bottom: 2px;\r\n\t}\r" +
-            "\n\r\n\r\nsup {\r\n\tline-height: 0px;\r\n\t}\r\nsup a:link {\r\n\tpadding: 3px;\r\n\t}\r\nsup a:visi" +
-            "ted {\r\n\tpadding: 3px;\r\n\t}\r\n\r\n\r\np {\r\n \tmargin: 0 0 1.6em 0;\r\n\tpadding: 0;\r\n\t}\r\n\r\n" +
-            "h1 {\r\n\tfont-family: \"黑体\",\"Gill Sans\", \"Gill Sans Std\", \"Gill Sans MT\", Georgia, " +
-            "serif;\r\n\tfont-size: 1.55em; \r\n\tline-height: 1.5em;\r\n\ttext-align: left;\r\n\tfont-we" +
-            "ight: bold;\r\n\tmargin: 0em 0px 1.25em 0px;\r\n\t}\r\n\r\nh2 {\r\n\tfont-family:\"黑体\", \"Gill " +
-            "Sans\", \"Gill Sans Std\", \"Gill Sans MT\", Verdana, \"Bitstream Vera Sans\", sans-ser" +
-            "if;\r\n\tfont-size: 1.1em; /* 1 */\r\n\ttext-align: left;\r\n\tfont-weight:bold;\r\n\tline-h" +
-            "eight: 1.8em;\r\n\tletter-spacing: .2em;\r\n\tmargin: 1em 0 1em 0;\r\n\ttext-transform: u" +
-            "ppercase;\r\n\t}\r\n\r\nh1 + h2 {\r\n\tmargin-top: 2em;\r\n\t}\r\nh2 + h3 {\r\n\tmargin-top: 1.5em" +
-            ";\r\n\t}\r\n\r\nh3 {\r\n\tfont-family: \"黑体\",Gill Sans\", \"Gill Sans Std\", \"Gill Sans MT\", V" +
-            "erdana, \"Bitstream Vera Sans\", sans-serif;\r\n\tfont-size: .91em;\r\n\ttext-align: lef" +
-            "t;\r\n\tfont-weight: normal;\r\n\tline-height: 1.8em;\r\n\tletter-spacing: .2em;\r\n\tmargin" +
-            "-bottom: 0.4em;\r\n\tmargin-top: 0.5em;\r\n\ttext-transform: uppercase;\r\n\t}\r\n\r\np + h3 " +
-            "{\r\n\tmargin-top: 4em;\r\n\t}\r\npre + h3 {\r\n\tmargin-top: 4em;\r\n\t}\r\n\r\nh6 + h2 {\r\n\tmargi" +
-            "n-top: 2em;\r\n\t}\r\n\r\nh4, h5, h6 {\r\n\tfont-family: Verdana, \"Bitstream Vera Sans\", s" +
-            "ans-serif;\r\n\tfont-size: 1em;\r\n\ttext-align: left;\r\n\tfont-weight: bold;\r\n\tline-hei" +
-            "ght: 1.5em;\r\n\tmargin: 1em 0 0 0;\r\n\t}\r\n\r\nstrong {\r\n\tfont-weight: bold;\r\n\tfont-siz" +
-            "e: .91em;\r\n\tletter-spacing: .2em;\r\n\ttext-transform: uppercase;\r\n\t}\r\n\r\nem {\r\n\tfon" +
-            "t-style: normal;\r\n\t}\r\nblockquote {\r\n\tfont-size: 1em;\r\n\tmargin: 2em 2em 2em 1em;\r" +
-            "\n\tpadding: 0 .75em 0 1.25em;\r\n\tborder-left: 1px solid #777;\r\n\tborder-right: 0px " +
-            "solid #777;\r\n\t}\r\n\r\nblockquote strong {\r\n\tfont-weight: bold;\r\n\tfont-size: 1em;\r\n\t" +
-            "letter-spacing: normal;\r\n\ttext-transform: none;\r\n\t}\r\n\r\n\r\nimg {\r\n\tmargin-top: 5px" +
-            ";\r\n\t}\r\n\r\nthead {\r\n\tfont-weight: bold;\r\n\t}\r\n\r\n\r\nul, ol {\r\n\tpadding-left: 1.25em;\r" +
-            "\n\tmargin: 0 0 2em 1em;\r\n\t}\r\n\r\n\r\npre {\r\n\tfont-family: \"Bitstream Vera Sans Mono\"," +
-            " Courier, Monaco, ProFont, \"American Typewriter\", \"Andale Mono\", monospace;\r\n\tli" +
-            "ne-height: 1.45em;\r\n\tcolor: #{1};\r\n\tbackground-color: inherit;\r\n\tmargin: 0.5em 0" +
-            " 0.5em 0;\r\n\tpadding: 5px 0 5px 10px;\r\n\tborder-width: 1px 0 1px 0;\r\n\tborder-color" +
-            ": #6b6b6b;\r\n\tborder-style: dashed;\r\n\t}\r\n\r\ncode {\r\n\tfont-family: Monaco, ProFont," +
-            " \"Bitstream Vera Sans Mono\", \"American Typewriter\", \"Andale Mono\", monospace;\r\n\t" +
-            "font-size: 0.91em; /* 1.09em for Courier */\r\n\t}\r\n\r\n\r\nul {\r\n\tlist-style-type: squ" +
-            "are;\r\n\t}\r\n\r\nul ul {\r\n\tlist-style-type: disc;\r\n\t}\r\nul ul ul {\r\n\tlist-style-type: " +
-            "circle;\r\n\t}\r\n\r\nhr {\r\n\theight: 1px;\r\n\tmargin: 1em 1em 1em 0;\r\n\ttext-align: center" +
-            ";\r\n\tborder-color: #777;\r\n\tborder-width: 0;\r\n\tborder-style: dotted;\r\n\t}\r\n\r\ndt {\r\n" +
-            "\tfont-family: Verdana, \"Bitstream Vera Sans\", sans-serif;\r\n\tfont-size: 1em;\r\n\tte" +
-            "xt-align: left;\r\n\tfont-weight: normal;\r\n\tmargin: 0 0 .4em 0;\r\n\tletter-spacing: n" +
-            "ormal;\r\n\ttext-transform: none;\r\n\t}\r\ndd {\r\n\tmargin: auto auto 1.5em 1em;\r\n\t}\r\n\r\nd" +
-            "d p {\r\n\tmargin: 0 0 1em 0;\r\n\t}\r\n\r\ntable{\r\n    border:1px #CCC solid;    \r\nborder" +
-            "-collapse: separate;border-spacing: 0;\r\n}\r\nth,td{padding:5px;border: 1px solid #" +
-            "CCC;}")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1 Tahoma,Helvetica,Arial,""\5b8b\4f53"",sans-serif;}h1{font-size:22px;}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:""Courier New"",Courier,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decoration:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}q:before,q:after{content:'';}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}hr{border:0;height:1px;*color:#fff;}
+
+body {
+	FONT: 14px/150% Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+	COLOR: #333333;
+	text-align: left;
+	background:#fff
+}
+.head{ height:40px; width:100%; background:#333}
+.content{margin:15px;}
+
+.markdown_table{ border:1px solid #333;}
+th,td{ line-height:27px; height:27px; padding:0 5px; border:1px solid #333}
+th{ background:#999;text-align:center;color:#000}
+
+p,li,table{font-family:""微软雅黑"";}
+
+p,h1,h2,h3{ margin:15px 0;}
+ul,ol{ padding-left:24px;}
+li{ line-height:29px;}
+li p{ margin:0}
+.foot{height:37px; width:100%; background:#eee;border-top:1px solid #ccc;}
+hr{ color:#a7a6aa; height:1px;}
+a{ color:#0064b1;text-decoration:underline}
+a:hover{color:#ff6700}")]
         public string css {
             get {
                 return ((string)(this["css"]));

@@ -530,8 +530,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
         }
         public string GetHTMLStyle(string cont)
         {
-            string htmlformat = "<html><head><style>body{background-color:"+convertColor(_bgColor)
-                +";color:"+convertColor(_foreColor)+";}"+_defcss  + @"</style></head><body>"+cont+"</body></html>";
+            string htmlformat = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><style>"+_defcss  + @"</style></head><body><div class=""head""></div><div class=""content"">"+cont+"</div><div class=\"foot\"></div></body></html>";
 
             return htmlformat;
         }
