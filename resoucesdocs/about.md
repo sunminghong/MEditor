@@ -11,9 +11,12 @@
 -修改lastver.txt文件，请只改版本号；
 -请修改一下本文档about.md
 -请修改一下README
--如果有语法扩充请修改syntax.md
+-如果有语法扩充请修改[语法文档](https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/syntax.md)
 
 ##下载地址: [执行档](https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe "码德编辑器下载")
+##v0.9版本的新增修改功能列表
+*	\*在html预览里的点击本地的.md 文件的链接则自动打开此.md文档；如果是外网的则转换成html格式预览
+
 
 ##V0.8.0.0版本的新增修改功能列表
 *	+正式修改软件中文名称为：码德编辑器;可执行主文件名改为MDEditor.exe

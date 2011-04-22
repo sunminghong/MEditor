@@ -826,6 +826,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(82, 68);
             this.webBrowser1.TabIndex = 0;
+            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             // 
             // tabHtml
             // 
@@ -835,7 +836,7 @@
             this.tabHtml.Padding = new System.Windows.Forms.Padding(3);
             this.tabHtml.Size = new System.Drawing.Size(88, 74);
             this.tabHtml.TabIndex = 1;
-            this.tabHtml.Text = "html源代码";
+            this.tabHtml.Text = "源代码";
             this.tabHtml.UseVisualStyleBackColor = true;
             // 
             // rtbHtml

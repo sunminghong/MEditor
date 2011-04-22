@@ -56,6 +56,7 @@ namespace MEditor
             htmlRtb.AllowDrop = false;
             htmlRtb.ScrollBars = RichTextBoxScrollBars.Both;
             htmlRtb.Dock = DockStyle.Fill;
+            htmlRtb.TabIndex = 0;
 
             htmlRtb.AcceptsTab = true;
             htmlRtb.BulletIndent = 4;

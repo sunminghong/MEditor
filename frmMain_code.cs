@@ -252,7 +252,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
         {
             if (meditorManager.Open(fileName))
             {
-                PreviewHtml();
+                //PreviewHtml();
             }
             else
                 mruManager.Remove(fileName);       // when Open File operation failed
