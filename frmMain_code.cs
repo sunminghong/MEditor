@@ -12,6 +12,7 @@ using MarkdownSharp;
 using MRU;
 using System.Reflection;
 using MEditor.Properties;
+using System.Text.RegularExpressions;
 
 
 namespace MEditor
@@ -21,11 +22,17 @@ namespace MEditor
         private static string _myExtName = ".md";
         private string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
         private MarkdownEditorManager meditorManager=null;
+        FileMonitor _filemonitor = null;
 
 
         private Color _bgColor = Color.FromArgb(0x4a, 0x52, 0x5a);//20,0x20,0x20;
         private Color _foreColor = Color.FromArgb(0xff, 0xff, 0xff); //0xf2,0xf0,0xdf
         private Font _font = new Font("微软雅黑",12);
+
+        private string _extfileother = "";
+        private Regex _regexExtMarkdowns = new Regex(@"\.md|\.markdown", RegexOptions.Compiled);
+        private Regex _regexExtOthertext = new Regex(@"\.txt|\.js|\.htm|\.xml|\.as|\.log|\.php|\.cs", RegexOptions.Compiled);
+        private Regex _regexExtHtml = new Regex(@"\.htm|\.xml", RegexOptions.Compiled);
 
         #region defaultCss
         private string _defcss = @"
@@ -228,6 +235,9 @@ th,td{padding:5px;border: 1px solid #CCC;}
             _foreColor = Settings.Default.color;
             _bgColor = Settings.Default.bgcolor;
             _defcss = Settings.Default.css;
+            _extfileother = Settings.Default.extfile;
+
+            _regexExtOthertext = new Regex(_regexExtOthertext.Replace(".", @"\."), RegexOptions.Compiled);
             
             meditorManager.SetFont(_font);
             meditorManager.SetForeColor(_foreColor);
@@ -252,10 +262,33 @@ th,td{padding:5px;border: 1px solid #CCC;}
         {
             if (meditorManager.Open(fileName))
             {
-                //PreviewHtml();
+                Add(fileName);
             }
             else
                 mruManager.Remove(fileName);       // when Open File operation failed
+        }
+
+        private SortedList<string, bool> _monitorList = new SortedList<string, bool>();
+        public void Add(string fullpath)
+        {
+            string dir = System.IO.Path.GetDirectoryName(fullpath);
+            if (_monitorList.ContainsKey(dir))
+            {
+                return;
+            }
+            _monitorList.Add(dir, true);
+           _filemonitor.Add(dir, "*.md");
+        }
+
+        delegate bool dirupdated(string filename);
+        void fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new dirupdated(meditorManager.RefrushOpen), e.Name);                
+                return;
+            }
+            meditorManager.RefrushOpen(e.Name);
         }
 
         private void openfile()
@@ -284,34 +317,59 @@ th,td{padding:5px;border: 1px solid #CCC;}
             MarkdownEditor meditor = meditorManager.SetStyle();
             if (meditor == null)
                 return;
-            string html = "";
+            bool bhtml = filetypeConvert(meditor);
 
-            Markdown mark = new Markdown();
-
-            string marktext = meditor.GetMarkdown();
-            if (!string.IsNullOrEmpty(marktext))
-            {
-                html = mark.Transform(marktext);
-                rtbHtml.Text = html;
-            }
-
-            webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
             tabBrowser.Text = meditor.MarkdownPage.Text;
             this.toolStripStatusLabel1.Text = "当前文档：" + meditor.FileName;
 
             if (isLeft)
             {
-                if (!string.IsNullOrEmpty(html) && splitContainer1.Panel2Collapsed)
+                if (bhtml && splitContainer1.Panel2Collapsed)
                     splitContainer1.Panel2Collapsed = false;
             }
             else
             {
-                if (!string.IsNullOrEmpty(html) && splitContainer1.Panel1Collapsed)
+                if (bhtml && splitContainer1.Panel1Collapsed)
                     splitContainer1.Panel1Collapsed = false;
             }
 
             //tabControl1.Focus();
             meditor.GetTextBox().Focus();
+        }
+
+        private bool filetypeConvert(MarkdownEditor meditor)
+        {
+                string marktext = meditor.GetMarkdown();
+                if (string.IsNullOrEmpty(marktext))
+                {
+                    return false ;
+                }
+
+            string ext = Path.GetExtension(meditor.FileName);
+            if (_regexExtMarkdowns.IsMatch(ext))
+            {
+            string html="";
+                Markdown mark = new Markdown();
+                html = mark.Transform(marktext);
+                rtbHtml.Text = html;
+                webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
+                return true;
+            }
+
+            if (_regexExtHtml.IsMatch(ext))
+            {
+                webBrowser1.DocumentText = marktext;
+                rtbHtml.Text = marktext;                
+                return true;
+            }
+
+            if (_regexExtOthertext.IsMatch(ext))
+            {
+                webBrowser1.DocumentText = meditorManager.GetHTMLStyle("<pre><code>"+marktext+"</code></pre>");
+                rtbHtml.Text = marktext;
+                return true;
+            }
+            return false;
         }
 
         public void SelectForeColor()
@@ -368,6 +426,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             appconfig = appconfig.Replace("{color}", convertColor(_foreColor));
             appconfig = appconfig.Replace("{bgcolor}", convertColor(_bgColor));
             appconfig = appconfig.Replace("{css}", _defcss);
+            appconfig = appconfig.Replace("{extfile}", _extfileother);
 
             string conffile = Application.UserAppDataPath;
             conffile = Application.ExecutablePath+".config";
@@ -412,6 +471,12 @@ th,td{padding:5px;border: 1px solid #CCC;}
             PreviewHtml();
             //Settings.Default.css = _defcss;
             //Settings.Default.Save();
+        }
+
+        public void SetExt(string ext)
+        {
+            _extfileother = ext;
+            _regexExtOthertext = new Regex(_extfileother.Replace(".", @"\."), RegexOptions.Compiled);
         }
 
         private void editCss()

@@ -529,8 +529,10 @@ namespace MEditor
             tabControl1.MouseDown += new MouseEventHandler(tabControl1_MouseDown);
             tabControl2.MouseDown+=new MouseEventHandler(tabControl1_MouseDown);
             //tabControl1.GotFocus += new EventHandler(tabControl1_GotFocus);
-            webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
-        }
+            
+
+            _filemonitor = new FileMonitor(fsw_Changed);
+            }
 
 
         void tabControl1_GotFocus(object sender, EventArgs e)
@@ -724,49 +726,55 @@ namespace MEditor
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             string url = e.Url.ToString();
+            if (url == "about:blank") return;
 
             if (url.StartsWith("http://") || url.StartsWith("https://"))
+            {                
                 return;
+            }
             
-            if (url.EndsWith(".md"))
-            {
+            //if (url.EndsWith(".md"))
+            //{            
                 url = url.Remove(0, 6);
                 MarkdownEditor me=meditorManager.GetCurrEditor();
                 if(me==null) return ;
                 url=Path.Combine(Path.GetDirectoryName(me.FileName),url);
 
-                e.Cancel=true;
-                openfile(url);
-                //webBrowser1.Navigate(url);
-            }
-        }
-
-        void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            string url = e.Url.ToString();
-
-            if (url.EndsWith(".md"))
-            {
-                string marktext = webBrowser1.DocumentText;
-
-                this.toolStripStatusLabel1.Text = " 正在转换" + url + "。。。。 ";
-
-                string html = "";
-
-                Markdown mark = new Markdown();
-
-                if (!string.IsNullOrEmpty(marktext))
+                if (_regexExtOthertext.IsMatch(url))
                 {
-                    html = mark.Transform(marktext);
-                    rtbHtml.Text = marktext;
+                    e.Cancel = true;
+                    openfile(url);
                 }
-
-                webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
-                tabBrowser.Text = url;
-                tabBrowser.ToolTipText = url;
-                this.toolStripStatusLabel1.Text = "当前文档：" + url + ".html";
-
-            }
+                //webBrowser1.Navigate(url);
+            //}
         }
+
+        //void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        //{
+        //    string url = e.Url.ToString();
+
+        //    if (url.EndsWith(".md"))
+        //    {
+        //        string marktext = webBrowser1.DocumentText;
+
+        //        this.toolStripStatusLabel1.Text = " 正在转换" + url + "。。。。 ";
+
+        //        string html = "";
+
+        //        Markdown mark = new Markdown();
+
+        //        if (!string.IsNullOrEmpty(marktext))
+        //        {
+        //            html = mark.Transform(marktext);
+        //            rtbHtml.Text = marktext;
+        //        }
+
+        //        webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
+        //        tabBrowser.Text = url;
+        //        tabBrowser.ToolTipText = url;
+        //        this.toolStripStatusLabel1.Text = "当前文档：" + url + ".html";
+
+        //    }
+        //}
     }
 }

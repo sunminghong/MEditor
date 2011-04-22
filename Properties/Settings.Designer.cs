@@ -123,6 +123,9 @@ namespace MEditor.Properties {
             <setting name=""css"" serializeAs=""String"">
                 <value>{css}</value>
             </setting>
+            <setting name=""extfile"" serializeAs=""String"">
+                <value>{extfile}</value>
+            </setting>
         </MEditor.Properties.Settings>
     </applicationSettings>
 </configuration>")]
@@ -132,6 +135,15 @@ namespace MEditor.Properties {
             }
             set {
                 this["appconfig"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".txt|.js|.htm|.xml|.as|.log|.php|.cs")]
+        public string extfile {
+            get {
+                return ((string)(this["extfile"]));
             }
         }
     }

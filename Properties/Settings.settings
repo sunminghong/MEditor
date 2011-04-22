@@ -225,9 +225,15 @@ th,td{padding:5px;border: 1px solid #CCC;}</Value>
             &lt;setting name="css" serializeAs="String"&gt;
                 &lt;value&gt;{css}&lt;/value&gt;
             &lt;/setting&gt;
+            &lt;setting name="extfile" serializeAs="String"&gt;
+                &lt;value&gt;{extfile}&lt;/value&gt;
+            &lt;/setting&gt;
         &lt;/MEditor.Properties.Settings&gt;
     &lt;/applicationSettings&gt;
 &lt;/configuration&gt;</Value>
+    </Setting>
+    <Setting Name="extfile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.txt|.js|.htm|.xml|.as|.log|.php|.cs</Value>
     </Setting>
   </Settings>
 </SettingsFile>

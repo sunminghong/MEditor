@@ -39,6 +39,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtExt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -54,11 +56,11 @@
             // 
             // txtCss
             // 
-            this.txtCss.Location = new System.Drawing.Point(8, 67);
+            this.txtCss.Location = new System.Drawing.Point(8, 95);
             this.txtCss.Multiline = true;
             this.txtCss.Name = "txtCss";
             this.txtCss.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtCss.Size = new System.Drawing.Size(570, 254);
+            this.txtCss.Size = new System.Drawing.Size(570, 226);
             this.txtCss.TabIndex = 1;
             // 
             // button2
@@ -123,7 +125,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 52);
+            this.label2.Location = new System.Drawing.Point(6, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 12);
             this.label2.TabIndex = 8;
@@ -149,12 +151,30 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 12);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "可编辑的文档格式：";
+            // 
+            // txtExt
+            // 
+            this.txtExt.Location = new System.Drawing.Point(116, 52);
+            this.txtExt.Name = "txtExt";
+            this.txtExt.Size = new System.Drawing.Size(459, 21);
+            this.txtExt.TabIndex = 12;
+            // 
             // frmCss
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button1;
             this.ClientSize = new System.Drawing.Size(587, 370);
+            this.Controls.Add(this.txtExt);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label2);
@@ -174,6 +194,7 @@
             this.ShowInTaskbar = false;
             this.Text = "选项";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmCss_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +213,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtExt;
     }
 }

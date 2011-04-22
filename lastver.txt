@@ -1,4 +1,4 @@
-﻿the last version:[0.9.0.0]
+﻿the last version:[0.9.1.0]
 
 
 https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe

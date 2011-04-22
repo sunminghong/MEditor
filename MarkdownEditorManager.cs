@@ -21,6 +21,7 @@ namespace MEditor
         private int noName = 0;
 
         SortedList<int, MarkdownEditor> _editors = new SortedList<int, MarkdownEditor>();
+        private SortedList<string, bool> _thisModify = new SortedList<string, bool>();
 
         private string _workSpace;
         //private int maxDisplayLength = 10;
@@ -254,15 +255,52 @@ th,td{padding:5px;border: 1px solid #CCC;}
             else
             {
                 foreach (MarkdownEditor me in _editors.Values)
-                {
+                {                    
                     if (me.FileName == file)
                     {
-                        _tabparent.SelectedTab = me.MarkdownPage;
+                        _tabparent.SelectedTab = me.MarkdownPage;                        
                         return true;
                     }
                 }
             }
 
+            return openfile_(file);
+        }
+
+        public bool RefrushOpen(string file)
+        {
+            if (_thisModify.ContainsKey(file))
+            {
+                _thisModify.Remove(file);
+                return false;
+            }
+            foreach (MarkdownEditor me in _editors.Values)
+            {
+                if (me.FileName == file)
+                {                    
+                    string noti = "";
+                    if (me.AlreadyUpdate) noti = "(重新打开，当前修改将丢失)";
+
+                    if (MessageBox.Show(file + "在被其他软件已经修改，你需要重新打开吗"+noti+"？", "警告", MessageBoxButtons.YesNo) == DialogResult.No)
+                        return false;
+
+                    bool rel = me.Openfile(file);
+                    if (rel)
+                    {
+                        _tabparent.SelectedTab = me.MarkdownPage;
+                    }
+
+                    return rel;
+
+                }
+            }
+
+            return false;
+        }
+
+
+        private bool openfile_(string file)
+        {
             TabPage markPage = new TabPage(GetDisplayName(file));
             markPage.ToolTipText = file;
             _tabparent.TabPages.Add(markPage);
@@ -271,7 +309,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             MarkdownEditor meditor = new MarkdownEditor(_thisForm, markPage);
             _editors.Add(_fileInd, meditor);
             _fileInd++;
-            meditor.SetStyle(_bgColor, _foreColor, _font, _wordWrap,_tabWidth);
+            meditor.SetStyle(_bgColor, _foreColor, _font, _wordWrap, _tabWidth);
             bool rel = meditor.Openfile(file);
             if (rel)
             {
@@ -340,6 +378,10 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 
             }
             meditor.Save();
+            if (!_thisModify.ContainsKey(meditor.FileName))
+            {
+                _thisModify.Add(meditor.FileName, true);
+            }
             mruManager.Add(meditor.FileName);          // when file is successfully opened
             return true;
         }
@@ -360,8 +402,16 @@ th,td{padding:5px;border: 1px solid #CCC;}
             {
                 try
                 {
+                    if (_thisModify.ContainsKey(meditor.FileName))
+                    {
+                        _thisModify.Remove(meditor.FileName);
+                    }
                     meditor.Save(fileone.FileName);
                     mruManager.Add(meditor.FileName);          // when file is successfully opened
+                    if (!_thisModify.ContainsKey(meditor.FileName))
+                    {
+                        _thisModify.Add(meditor.FileName, true);
+                    }
                     return true;
                 }
                 catch (ArgumentException)

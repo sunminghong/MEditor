@@ -31,8 +31,9 @@ namespace MEditor
         {
             _fm.SetCss(txtTabWidth.Text);
             _fm.SetCss(txtCss.Text);
+            _fm.SetExt(txtExt.Text);
             _fm.SaveSettings();
-
+            
             Close();
          }
 
@@ -73,6 +74,11 @@ namespace MEditor
             txtCss.Text  = _css;
             _fm.SetBlackWhiteStyle();
             //_fm.ReadCss();
+        }
+
+        private void frmCss_Load(object sender, EventArgs e)
+        {
+            txtExt.Text = Settings.Default.extfile;
         }
 
     }

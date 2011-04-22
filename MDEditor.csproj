@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileMonitor.cs" />
     <Compile Include="frmCss.cs">
       <SubType>Form</SubType>
     </Compile>
