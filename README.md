@@ -16,4 +16,4 @@
 
 ##下载地址: ["码德编辑器执行档](https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe "码德编辑器下载")
 
-[开发更新日志](https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/about.md)
+[开发更新日志](https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/about.md)
