@@ -1,4 +1,4 @@
-﻿#软件名称：MDEditor  V0.9.1.0#
+﻿#软件名称：MDEditor  V0.9.2.0#
 ##软件用途：markdown格式文档编辑和预览。##
 >MEditor is text editor with multiple windows. You can use it as markdown editor and preview. 
 
@@ -13,6 +13,11 @@
 -请修改一下README
 -如果有语法扩充请修改[语法文档](https://github.com/5d13cn/MEditor/raw/master/resoucesdocs/syntax.md)
 ##下载地址: [执行档](https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe "码德编辑器下载")
+
+##V0.9.2.0版本的新增修改功能列表
+*   \*增加取当前时间小功能，用于记录最后修改时间
+*   +完善预览样式（css）
+*   +修复不能自动打开本地的.md文件的bug
 
 ##v0.9.1.0版本的新增修改功能列表
 *	\*增加文件内容在外部发生改变时自动提醒。

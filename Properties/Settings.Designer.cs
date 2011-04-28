@@ -52,31 +52,44 @@ namespace MEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1 Tahoma,Helvetica,Arial,""\5b8b\4f53"",sans-serif;}h1{font-size:22px;}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:""Courier New"",Courier,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decoration:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}q:before,q:after{content:'';}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}hr{border:0;height:1px;*color:#fff;}
-
-body {
-	FONT: 14px/150% Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
-	COLOR: #333333;
-	text-align: left;
-	background:#fff
-}
-.head{ height:40px; width:100%; background:#333}
-.content{margin:15px;}
-
-.markdown_table{ border:1px solid #333;}
-th,td{ line-height:27px; height:27px; padding:0 5px; border:1px solid #333}
-th{ background:#999;text-align:center;color:#000}
-
-p,li,table{font-family:""微软雅黑"";}
-
-p,h1,h2,h3{ margin:15px 0;}
-ul,ol{ padding-left:24px;}
-li{ line-height:29px;}
-li p{ margin:0}
-.foot{height:37px; width:100%; background:#eee;border-top:1px solid #ccc;margin-top:50px;}
-hr{ color:#a7a6aa; height:1px;}
-a{ color:#0064b1;text-decoration:underline}
-a:hover{color:#ff6700}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend" +
+            ",button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textar" +
+            "ea{font:12px/1 Tahoma,Helvetica,Arial,\"\\5b8b\\4f53\",sans-serif;}h1{font-size:22px" +
+            ";}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,df" +
+            "n,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:\"Courier New\",Couri" +
+            "er,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decorat" +
+            "ion:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}" +
+            "q:before,q:after{content:\'\';}legend{color:#000;}fieldset,img{border:0;}button,in" +
+            "put,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacin" +
+            "g:0;}hr{border:0;height:1px;*color:#fff;}\r\nbody,h1,h2,h3,h4,h5,h6,hr,p,blockquot" +
+            "e,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:" +
+            "0;padding:0;}body,button,input,select,textarea{font:12px/1 Tahoma,Helvetica,Aria" +
+            "l,\"\\5b8b\\4f53\",sans-serif;}h1{font-size:22px;}h2{font-size:21px;}h3{font-size:20" +
+            "px;}h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd" +
+            ",pre,samp,tt{font-family:\"Courier New\",Courier,monospace;}small{font-size:12px;}" +
+            "a{text-decoration:none;}a:hover{text-decoration:underline;}abbr[title],acronym[t" +
+            "itle]{border-bottom:1px dotted;cursor:help;}q:before,q:after{content:\'\';}legend{" +
+            "color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}" +
+            "table{border-collapse:collapse;border-spacing:0;}hr{border:0;height:1px;*color:#" +
+            "fff;}\r\n\r\nbody {\r\n\tFONT: 14px/150% Helvetica, Arial, \'Liberation Sans\', FreeSans," +
+            " sans-serif;\r\n\tCOLOR: #ddd;\r\n\ttext-align: left;\r\n\tbackground:#333\r\n}\r\n.head{ hei" +
+            "ght:40px; width:100%; background:#000}\r\n.content{margin:15px;}\r\n\r\n.markdown_tabl" +
+            "e{ border:1px solid #666;}\r\nth,td{ line-height:27px; height:27px; padding:0 5px;" +
+            " border:1px solid #666}\r\nth{ background:#444;text-align:center;color:#fff}\r\n\r\np," +
+            "li,table{font-family:\"微软雅黑\";}\r\n\r\np,h1,h2,h3{ margin:15px 0;}\r\nul,ol{ padding-lef" +
+            "t:24px;}\r\nli{ line-height:29px;}\r\nli p{ margin:0}\r\n.foot{height:17px; width:100%" +
+            "; background:#333;border-top:0px solid #ccc;margin-top:10px;}\r\nhr{ color:#666; h" +
+            "eight:1px;}\r\na{ color:#cc6;text-decoration:underline}\r\na:hover{color:#cc6}body {" +
+            "\r\n\tFONT: 14px/150% Helvetica, Arial, \'Liberation Sans\', FreeSans, sans-serif;\r\n\t" +
+            "COLOR: #ccc;\r\n\ttext-align: left;\r\n\tbackground:#333\r\n}\r\n.head{ height:40px; width" +
+            ":100%; background:#000}\r\n.content{margin:15px;}\r\n\r\n.markdown_table{ border:1px s" +
+            "olid #666;}\r\nth,td{ line-height:27px; height:27px; padding:0 5px; border:1px sol" +
+            "id #666}\r\nth{ background:#444;text-align:center;color:#fff}\r\n\r\np,li,table{font-f" +
+            "amily:\"微软雅黑\";}\r\n\r\np,h1,h2,h3{ margin:15px 0;}\r\nul,ol{ padding-left:24px;}\r\nli{ l" +
+            "ine-height:29px;}\r\nli p{ margin:0}\r\n.foot{height:17px; width:100%; background:#3" +
+            "33;border-top:0px solid #ccc;margin-top:10px;}\r\nhr{ color:#666; height:1px;}\r\na{" +
+            " color:#cc6;text-decoration:underline}\r\na:hover{color:#cc6}\r\n\r\nblockquote{border" +
+            "-left:#555 3px solid; padding-left:10px;margin-left:20px;}")]
         public string css {
             get {
                 return ((string)(this["css"]));
@@ -127,6 +140,34 @@ a:hover{color:#ff6700}")]
         public string extfile {
             get {
                 return ((string)(this["extfile"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend" +
+            ",button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textar" +
+            "ea{font:12px/1 Tahoma,Helvetica,Arial,\"\\5b8b\\4f53\",sans-serif;}h1{font-size:22px" +
+            ";}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,df" +
+            "n,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:\"Courier New\",Couri" +
+            "er,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decorat" +
+            "ion:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}" +
+            "q:before,q:after{content:\'\';}legend{color:#000;}fieldset,img{border:0;}button,in" +
+            "put,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacin" +
+            "g:0;}hr{border:0;height:1px;*color:#fff;}\r\n\r\nbody {\r\n\tFONT: 14px/150% Helvetica," +
+            " Arial, \'Liberation Sans\', FreeSans, sans-serif;\r\n\tCOLOR: #333333;\r\n\ttext-align:" +
+            " left;\r\n\tbackground:#fff\r\n}\r\n.head{ height:40px; width:100%; background:#333}\r\n." +
+            "content{margin:15px;}\r\n\r\n.markdown_table{ border:1px solid #333;}\r\nth,td{ line-h" +
+            "eight:27px; height:27px; padding:0 5px; border:1px solid #333}\r\nth{ background:#" +
+            "999;text-align:center;color:#000}\r\n\r\np,li,table{font-family:\"微软雅黑\";}\r\n\r\np,h1,h2," +
+            "h3{ margin:15px 0;}\r\nul,ol{ padding-left:24px;}\r\nli{ line-height:29px;}\r\nli p{ m" +
+            "argin:0}\r\n.foot{height:37px; width:100%; background:#eee;border-top:1px solid #c" +
+            "cc;margin-top:50px;}\r\nhr{ color:#a7a6aa; height:1px;}\r\na{ color:#0064b1;text-dec" +
+            "oration:underline}\r\na:hover{color:#ff6700}\r\n\r\nblockquote{border-left:#555 3px so" +
+            "lid; padding-left:10px;margin-left:20px;}")]
+        public string cssWhite {
+            get {
+                return ((string)(this["cssWhite"]));
             }
         }
     }

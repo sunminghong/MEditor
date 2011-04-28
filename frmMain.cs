@@ -739,7 +739,7 @@ namespace MEditor
                 if(me==null) return ;
                 url=Path.Combine(Path.GetDirectoryName(me.FileName),url);
 
-                if (_regexExtOthertext.IsMatch(url))
+                if (_regexExtMarkdowns.IsMatch(url) || _regexExtOthertext.IsMatch(url))
                 {
                     e.Cancel = true;
                     openfile(url);

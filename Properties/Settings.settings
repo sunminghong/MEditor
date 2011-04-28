@@ -13,19 +13,20 @@
     </Setting>
     <Setting Name="css" Type="System.String" Scope="Application">
       <Value Profile="(Default)">body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;}h1{font-size:22px;}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:"Courier New",Courier,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decoration:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}q:before,q:after{content:'';}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}hr{border:0;height:1px;*color:#fff;}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;}h1{font-size:22px;}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:"Courier New",Courier,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decoration:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}q:before,q:after{content:'';}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}hr{border:0;height:1px;*color:#fff;}
 
 body {
 	FONT: 14px/150% Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
-	COLOR: #333333;
+	COLOR: #ddd;
 	text-align: left;
-	background:#fff
+	background:#333
 }
-.head{ height:40px; width:100%; background:#333}
+.head{ height:40px; width:100%; background:#000}
 .content{margin:15px;}
 
-.markdown_table{ border:1px solid #333;}
-th,td{ line-height:27px; height:27px; padding:0 5px; border:1px solid #333}
-th{ background:#999;text-align:center;color:#000}
+.markdown_table{ border:1px solid #666;}
+th,td{ line-height:27px; height:27px; padding:0 5px; border:1px solid #666}
+th{ background:#444;text-align:center;color:#fff}
 
 p,li,table{font-family:"微软雅黑";}
 
@@ -33,10 +34,34 @@ p,h1,h2,h3{ margin:15px 0;}
 ul,ol{ padding-left:24px;}
 li{ line-height:29px;}
 li p{ margin:0}
-.foot{height:37px; width:100%; background:#eee;border-top:1px solid #ccc;margin-top:50px;}
-hr{ color:#a7a6aa; height:1px;}
-a{ color:#0064b1;text-decoration:underline}
-a:hover{color:#ff6700}</Value>
+.foot{height:17px; width:100%; background:#333;border-top:0px solid #ccc;margin-top:10px;}
+hr{ color:#666; height:1px;}
+a{ color:#cc6;text-decoration:underline}
+a:hover{color:#cc6}body {
+	FONT: 14px/150% Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+	COLOR: #ccc;
+	text-align: left;
+	background:#333
+}
+.head{ height:40px; width:100%; background:#000}
+.content{margin:15px;}
+
+.markdown_table{ border:1px solid #666;}
+th,td{ line-height:27px; height:27px; padding:0 5px; border:1px solid #666}
+th{ background:#444;text-align:center;color:#fff}
+
+p,li,table{font-family:"微软雅黑";}
+
+p,h1,h2,h3{ margin:15px 0;}
+ul,ol{ padding-left:24px;}
+li{ line-height:29px;}
+li p{ margin:0}
+.foot{height:17px; width:100%; background:#333;border-top:0px solid #ccc;margin-top:10px;}
+hr{ color:#666; height:1px;}
+a{ color:#cc6;text-decoration:underline}
+a:hover{color:#cc6}
+
+blockquote{border-left:#555 3px solid; padding-left:10px;margin-left:20px;}</Value>
     </Setting>
     <Setting Name="appconfig" Type="System.String" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
@@ -69,6 +94,35 @@ a:hover{color:#ff6700}</Value>
     </Setting>
     <Setting Name="extfile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">.txt|.js|.htm|.xml|.as|.log|.php|.cs</Value>
+    </Setting>
+    <Setting Name="cssWhite" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}body,button,input,select,textarea{font:12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;}h1{font-size:22px;}h2{font-size:21px;}h3{font-size:20px;}h4,h5,h6{font-size:100%;}address,cite,dfn,em,var{font-style:normal;}code,kbd,pre,samp,tt{font-family:"Courier New",Courier,monospace;}small{font-size:12px;}a{text-decoration:none;}a:hover{text-decoration:underline;}abbr[title],acronym[title]{border-bottom:1px dotted;cursor:help;}q:before,q:after{content:'';}legend{color:#000;}fieldset,img{border:0;}button,input,select,textarea{font-size:100%;}table{border-collapse:collapse;border-spacing:0;}hr{border:0;height:1px;*color:#fff;}
+
+body {
+	FONT: 14px/150% Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
+	COLOR: #333333;
+	text-align: left;
+	background:#fff
+}
+.head{ height:40px; width:100%; background:#333}
+.content{margin:15px;}
+
+.markdown_table{ border:1px solid #333;}
+th,td{ line-height:27px; height:27px; padding:0 5px; border:1px solid #333}
+th{ background:#999;text-align:center;color:#000}
+
+p,li,table{font-family:"微软雅黑";}
+
+p,h1,h2,h3{ margin:15px 0;}
+ul,ol{ padding-left:24px;}
+li{ line-height:29px;}
+li p{ margin:0}
+.foot{height:37px; width:100%; background:#eee;border-top:1px solid #ccc;margin-top:50px;}
+hr{ color:#a7a6aa; height:1px;}
+a{ color:#0064b1;text-decoration:underline}
+a:hover{color:#ff6700}
+
+blockquote{border-left:#555 3px solid; padding-left:10px;margin-left:20px;}</Value>
     </Setting>
   </Settings>
 </SettingsFile>
