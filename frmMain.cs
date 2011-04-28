@@ -168,7 +168,11 @@ namespace MEditor
 
         private void 时间日期F5ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            meditorManager.GetTextBox().Text = meditorManager.GetTextBox().Text.Insert(meditorManager.GetTextBox().Text.Length, System.DateTime.Now.ToString());
+            RichTextBox rtb = meditorManager.GetTextBox();
+            int st = rtb.SelectionStart;
+            string dat=System.DateTime.Now.ToString();
+            rtb.Text = rtb.Text.Insert(st, dat);
+           rtb.SelectionStart = st + dat.Length;
         }
 
         private void 字体toolStripButton10_Click(object sender, EventArgs e)

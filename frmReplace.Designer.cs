@@ -40,6 +40,7 @@ namespace MEditor
             this.findlbl = new System.Windows.Forms.Label();
             this.repbox = new System.Windows.Forms.TextBox();
             this.findbox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // usewild
@@ -152,12 +153,27 @@ namespace MEditor
             this.findbox.TabIndex = 11;
             this.findbox.WordWrap = false;
             // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Location = new System.Drawing.Point(129, 343);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 21;
+            this.button1.TabStop = false;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmReplace
             // 
+            this.AcceptButton = this.repbtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(467, 271);
+            this.CancelButton = this.button1;
+            this.ClientSize = new System.Drawing.Size(469, 278);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.usewild);
             this.Controls.Add(this.useregex);
             this.Controls.Add(this.CaseSen);
@@ -196,6 +212,7 @@ namespace MEditor
         private Label findlbl;
         private TextBox repbox;
         private TextBox findbox;
+        private Button button1;
 
     }
 }

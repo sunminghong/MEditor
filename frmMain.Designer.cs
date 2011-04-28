@@ -110,6 +110,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.插入当前时间ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -390,7 +391,8 @@
             this.替换ToolStripMenuItem,
             this.转到行ToolStripMenuItem,
             this.转为大写ToolStripMenuItem,
-            this.转为小写ToolStripMenuItem});
+            this.转为小写ToolStripMenuItem,
+            this.插入当前时间ToolStripMenuItem});
             this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
             this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
@@ -833,7 +835,7 @@
             this.tabHtml.Location = new System.Drawing.Point(4, 22);
             this.tabHtml.Name = "tabHtml";
             this.tabHtml.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHtml.Size = new System.Drawing.Size(436, 477);
+            this.tabHtml.Size = new System.Drawing.Size(323, 433);
             this.tabHtml.TabIndex = 1;
             this.tabHtml.Text = "源代码";
             this.tabHtml.UseVisualStyleBackColor = true;
@@ -846,7 +848,7 @@
             this.rtbHtml.EnableAutoDragDrop = true;
             this.rtbHtml.Location = new System.Drawing.Point(3, 3);
             this.rtbHtml.Name = "rtbHtml";
-            this.rtbHtml.Size = new System.Drawing.Size(430, 471);
+            this.rtbHtml.Size = new System.Drawing.Size(317, 427);
             this.rtbHtml.TabIndex = 0;
             this.rtbHtml.Text = "";
             // 
@@ -870,6 +872,14 @@
             this.statusStrip1.Size = new System.Drawing.Size(818, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // 插入当前时间ToolStripMenuItem
+            // 
+            this.插入当前时间ToolStripMenuItem.Name = "插入当前时间ToolStripMenuItem";
+            this.插入当前时间ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.插入当前时间ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.插入当前时间ToolStripMenuItem.Text = "插入当前时间";
+            this.插入当前时间ToolStripMenuItem.Click += new System.EventHandler(this.时间日期F5ToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -989,6 +999,7 @@
         private System.Windows.Forms.ToolStripMenuItem 检查最新版ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem html预览样式设计ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 通用选项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 插入当前时间ToolStripMenuItem;
 
     }
 }
