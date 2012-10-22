@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using ICSharpCode.AvalonEdit;
+
 namespace MEditor.Processers
 {
     public interface IProcesser
@@ -17,6 +19,6 @@ namespace MEditor.Processers
         /// <param name="sourceText">待处理的文本</param>
         /// <param name="mark">标签类型</param>
         /// <returns>处理后的返回</returns>
-        void Process(System.Windows.Forms.RichTextBox rtb, EMark mark);
+        void Process(TextEditor rtb, EMark mark);
     }
 }

@@ -1,19 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Text;
 using System.IO;
-using System.Collections;
-using System.Windows.Forms;
-using MarkdownSharp;
-using MRU;
 using System.Reflection;
-using MEditor.Properties;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
+using MarkdownSharp;
+using MEditor.Properties;
+using MRU;
 
 namespace MEditor
 {

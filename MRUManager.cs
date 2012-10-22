@@ -1,12 +1,12 @@
 ﻿using System;
-
-using System.Windows.Forms;
-using System.Diagnostics;
 using System.Collections;
-using Microsoft.Win32;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Win32;
 
 // MRI list manager.
 //
@@ -78,12 +78,8 @@ public class frmMain : System.Windows.Forms.Form, IMRUClient
 // Owner form OpenMRUFile function is called when user selects file
 // from MRU list.
 
-
-
-
 namespace MRU
 {
-
     /// <summary>
     /// Interface which should be implemented by owner form
     /// to use MRUManager.
@@ -101,24 +97,17 @@ namespace MRU
     {
         #region Members
 
-        private Form ownerForm;                 // owner form
+        private const string regEntryName = "file"; // entry name to keep MRU (file0, file1...)
+        private readonly ArrayList mruList; // MRU list (file names)
+        private bool bmenuUpdate;
+        private string currentDirectory; // current directory
+        private int maxDisplayLength = 40; // maximum length of file name for display
+        private int maxNumberOfFiles = 10; // maximum number of files in MRU list
+        private ToolStripMenuItem menuItemMRU; // Recent Files menu item
+        private ToolStripMenuItem menuItemParent; // Recent Files menu item parent
+        private Form ownerForm; // owner form
 
-        private ToolStripMenuItem menuItemMRU;           // Recent Files menu item
-        private ToolStripDropDownButton menuItemParent;        // Recent Files menu item parent
-
-        private string registryPath;            // Registry path to keep MRU list
-
-        private int maxNumberOfFiles = 10;      // maximum number of files in MRU list
-
-        private int maxDisplayLength = 40;      // maximum length of file name for display
-
-        private string currentDirectory;        // current directory
-
-        private ArrayList mruList;              // MRU list (file names)
-        private bool bmenuUpdate=false;
-
-        private const string regEntryName = "file";  // entry name to keep MRU (file0, file1...)
-
+        private string registryPath; // Registry path to keep MRU list
 
         #endregion
 
@@ -166,10 +155,7 @@ namespace MRU
                     maxDisplayLength = 10;
             }
 
-            get
-            {
-                return maxDisplayLength;
-            }
+            get { return maxDisplayLength; }
         }
 
         /// <summary>
@@ -189,10 +175,7 @@ namespace MRU
                 if (mruList.Count > maxNumberOfFiles)
                     mruList.RemoveRange(maxNumberOfFiles - 1, mruList.Count - maxNumberOfFiles);
             }
-            get
-            {
-                return maxNumberOfFiles;
-            }
+            get { return maxNumberOfFiles; }
         }
 
         /// <summary>
@@ -206,15 +189,9 @@ namespace MRU
         /// </summary>
         public string CurrentDir
         {
-            set
-            {
-                currentDirectory = value;
-            }
+            set { currentDirectory = value; }
 
-            get
-            {
-                return currentDirectory;
-            }
+            get { return currentDirectory; }
         }
 
         #endregion
@@ -227,7 +204,7 @@ namespace MRU
         /// <param name="owner">Owner form</param>
         /// <param name="mruItem">Recent Files menu item</param>
         /// <param name="regPath">Registry Path to keep MRU list</param>
-        public void Initialize(Form owner,ToolStripDropDownButton mruPar, ToolStripMenuItem mruItem, string regPath)
+        public void Initialize(Form owner, ToolStripMenuItem mruPar, ToolStripMenuItem mruItem, string regPath)
         {
             // keep reference to owner form
             ownerForm = owner;
@@ -241,7 +218,7 @@ namespace MRU
 
             // keep reference to MRU menu item
             menuItemMRU = mruItem;
-            menuItemParent = mruPar;
+              menuItemParent = mruPar;
 
             // keep Registry path adding MRU key to it
             registryPath = regPath;
@@ -252,13 +229,13 @@ namespace MRU
 
 
             // keep current directory in the time of initialization
-            currentDirectory = Directory.GetCurrentDirectory(); 
+            currentDirectory = Directory.GetCurrentDirectory();
 
             // subscribe to MRU parent Popup event
-            menuItemParent.DropDownOpened+=new EventHandler(this.OnMRUParentPopup);
+            menuItemParent.DropDownOpened += OnMRUParentPopup;
 
             // subscribe to owner form Closing event
-            ownerForm.Closing+=new System.ComponentModel.CancelEventHandler(OnOwnerClosing);
+            ownerForm.Closing += OnOwnerClosing;
 
             // load MRU list from Registry
             LoadMRU();
@@ -280,7 +257,7 @@ namespace MRU
 
             // add new file name to the start of array
             mruList.Insert(0, file);
-            bmenuUpdate=true;
+            bmenuUpdate = true;
         }
 
         /// <summary>
@@ -296,7 +273,7 @@ namespace MRU
 
             while (myEnumerator.MoveNext())
             {
-                if ((string)myEnumerator.Current == file)
+                if ((string) myEnumerator.Current == file)
                 {
                     mruList.RemoveAt(i);
                     return;
@@ -304,7 +281,7 @@ namespace MRU
 
                 i++;
             }
-            bmenuUpdate=true;
+            bmenuUpdate = true;
         }
 
         #endregion
@@ -330,20 +307,20 @@ namespace MRU
                 return;
             }
             // enable menu item and add child items
-            menuItemMRU.Enabled = true;            
+            menuItemMRU.Enabled = true;
 
             IEnumerator myEnumerator = mruList.GetEnumerator();
             int i = 0;
             while (myEnumerator.MoveNext())
             {
-                ToolStripMenuItem item= new ToolStripMenuItem(GetDisplayName((string)myEnumerator.Current));
+                var item = new ToolStripMenuItem(GetDisplayName((string) myEnumerator.Current));
                 item.Tag = i;
                 // subscribe to item's Click event
-                item.Click += new EventHandler(this.OnMRUClicked);
+                item.Click += OnMRUClicked;
                 menuItemMRU.DropDownItems.Add(item);
                 i++;
-            }  
-            bmenuUpdate=false;         
+            }
+            bmenuUpdate = false;
         }
 
         /// <summary>
@@ -357,13 +334,13 @@ namespace MRU
             try
             {
                 // cast sender object to MenuItem
-                ToolStripMenuItem item = (ToolStripMenuItem)sender;
+                var item = (ToolStripMenuItem) sender;
                 if (item != null)
                 {
-                    s = (string)mruList[(int)item.Tag];
+                    s = (string) mruList[(int) item.Tag];
                     if (s.Length > 0)
                     {
-                        ((IMRUClient)ownerForm).OpenMRUFile(s);
+                        ((IMRUClient) ownerForm).OpenMRUFile(s);
                     }
                 }
             }
@@ -378,7 +355,7 @@ namespace MRU
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnOwnerClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OnOwnerClosing(object sender, CancelEventArgs e)
         {
             int i, n;
 
@@ -400,14 +377,12 @@ namespace MRU
                         key.SetValue(regEntryName + i.ToString(), mruList[i]);
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 Trace.WriteLine("Saving MRU to Registry failed: " + ex.Message);
             }
         }
-
 
         #endregion
 
@@ -433,15 +408,15 @@ namespace MRU
                     {
                         sKey = regEntryName + i.ToString();
 
-                        s = (string)key.GetValue(sKey, "");
+                        s = (string) key.GetValue(sKey, "");
 
                         if (s.Length == 0)
                             break;
 
                         mruList.Add(s);
                     }
-                    if(mruList.Count>0)
-                        bmenuUpdate=true;
+                    if (mruList.Count > 0)
+                        bmenuUpdate = true;
                 }
             }
             catch (Exception ex)
@@ -458,7 +433,7 @@ namespace MRU
         private string GetDisplayName(string fullName)
         {
             // if file is in current directory, show only file name
-            FileInfo fileInfo = new FileInfo(fullName);
+            var fileInfo = new FileInfo(fullName);
 
             if (fileInfo.DirectoryName == currentDirectory)
                 return GetShortDisplayName(fileInfo.Name, maxDisplayLength);
@@ -479,7 +454,7 @@ namespace MRU
         /// <returns>Truncated file name</returns>
         private string GetShortDisplayName(string longName, int maxLen)
         {
-            StringBuilder pszOut = new StringBuilder(maxLen + maxLen + 2);  // for safety
+            var pszOut = new StringBuilder(maxLen + maxLen + 2); // for safety
 
             if (PathCompactPathEx(pszOut, longName, maxLen, 0))
             {
@@ -492,6 +467,5 @@ namespace MRU
         }
 
         #endregion
-
     }
 }

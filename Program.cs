@@ -14,7 +14,7 @@ namespace MEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+         //   Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             Application.Run(new frmMain());
         }
 

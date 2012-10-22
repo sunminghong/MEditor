@@ -10,3 +10,15 @@ E:\Workplaces\MEditor\exeoutput\MDEditor.exe
 E:\Workplaces\MEditor\exeoutput\MDEditor.pdb
 E:\Workplaces\MEditor\obj\Release\MDEditor.exe
 E:\Workplaces\MEditor\obj\Release\MDEditor.pdb
+D:\project\Csharp\dodola-MEditor-dc33bce\exeoutput\MDEditor.exe.config
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MDEditor.exe
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MDEditor.pdb
+D:\project\Csharp\dodola-MEditor-dc33bce\exeoutput\MDEditor.exe
+D:\project\Csharp\dodola-MEditor-dc33bce\exeoutput\MDEditor.pdb
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MDEditor.csprojResolveAssemblyReference.cache
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MEditor.frmMain.resources
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MEditor.Properties.Resources.resources
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MEditor.frmCss.resources
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MEditor.GoToLineDialog.resources
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MEditor.frmReplace.resources
+D:\project\Csharp\dodola-MEditor-dc33bce\obj\Release\MDEditor.csproj.GenerateResource.Cache
