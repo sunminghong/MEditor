@@ -3,3 +3,4 @@
 *.vshost.*
 bin/
 obj/
+_Resharper*
