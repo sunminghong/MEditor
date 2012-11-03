@@ -1,6 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.2.1.8805
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDEditor", "MDEditor.csproj", "{8210A400-6151-45D5-B344-57934E4292F9}"
 EndProject
 Global

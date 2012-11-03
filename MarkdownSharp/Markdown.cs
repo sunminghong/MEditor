@@ -318,7 +318,7 @@ namespace MarkdownSharp
 
             string backslashPattern = "";
 
-            foreach (char c in @"\`*_{}[]()>#+-.!|")
+            foreach (char c in @"\`*_{}[]()>#+-.!")
             {
                 string key = c.ToString();
                 string hash = GetHashKey(key);
@@ -361,8 +361,6 @@ namespace MarkdownSharp
             text = HashHTMLBlocks(text);
             text = StripLinkDefinitions(text);
             text = RunBlockGamut(text);
-
-            text = ReplaceTable(text);
             text = Unescape(text);
 
             Cleanup();
@@ -559,7 +557,7 @@ namespace MarkdownSharp
 
 
         /// <summary>
-        /// derived pretty much verbatim from PHP Markdowndhf
+        /// derived pretty much verbatim from PHP Markdown
         /// </summary>
         private static string GetBlockPattern()
         {
@@ -1518,7 +1516,7 @@ namespace MarkdownSharp
             return sb.ToString();
         }
 
-        private static Regex _codeEncoder = new Regex(@"&|<|>|\\|\*|_|\{|\}|\[|\]|\|", RegexOptions.Compiled);
+        private static Regex _codeEncoder = new Regex(@"&|<|>|\\|\*|_|\{|\}|\[|\]", RegexOptions.Compiled);
 
         /// <summary>
         /// Encode/escape certain Markdown characters inside code blocks and spans where they are literals
@@ -1722,65 +1720,6 @@ namespace MarkdownSharp
                 sb.Append(text);
             return sb.ToString();
         }
-
-        #region table  extend  by yihui's mail : allen.fantasy@gmail.com
-        private static Regex _regTable1=new Regex(@"(\|\|\s*(.*)\s*)+\|\|", RegexOptions.Compiled);
-        private static Regex _regTable2 = new Regex(@"\|\| *$", RegexOptions.Compiled | RegexOptions.Multiline);
-        private static Regex _regTable3 = new Regex(@" ^ *", RegexOptions.Compiled | RegexOptions.Multiline);
-        private static Regex _regTableTR = new Regex(@"^\s*(?:\|\| *(.*) *)+\|\|\s*$", RegexOptions.Compiled | RegexOptions.Multiline);
-        private static Regex _regTableTD = new Regex(@"\| +([^\|]*) +\|", RegexOptions.Compiled);
-        public  static string ReplaceTable(string text)
-        {
-            //MatchCollection mc = _regTable1.Matchs(text);
-            text=_regTable1.Replace(text, new MatchEvaluator(matchTable));
-            
-            return text;            
-        }
-        //use Regex  processer table block
-        private static string matchTable(Match mts){
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<table class=\"markdown_table\">");
-
-            string table = mts.Value;
-           table= _regTable2.Replace(table, "||\r\n");
-           //table = _regTable3.Replace(table, " ");
-
-           MatchCollection mc = _regTableTR.Matches(table);
-           string tdtag="th";
-           foreach (Match mt in mc)
-           {
-               string tr = mt.Value;
-               MatchCollection mctd = _regTableTD.Matches(tr);
-               sb.Append("<tr>");
-               foreach (Match mtd in mctd)
-               {
-                   sb.Append("<" + tdtag + ">");
-                   string tdval = mtd.Groups[1].Value;
-                   sb.Append(tdval);
-                   sb.Append("</ " + tdtag + ">");
-               }
-               sb.Append("</ tr>");
-               tdtag = "td";
-           }
-           sb.Append("</table>");
-
-           return sb.ToString();
-        }
-
-        //            string marktext=@" || *Year* || <b>Temperature (low)</b> || *Temperature (high)* ||
-        //
-        //  || 1900 ||  || 25 ||
-        // || 1910 || -15 || 30 ||
-        //    || 1920 || -10 || 32 ||
-        //   || 1930 || _N/A_ || _N/A_ ||
-        //   ||  1940 || -2 || 40 ||
-        //";
-        //            string html = MarkdownSharp.Markdown.ReplaceTable(marktext);
-
-        //            string html2 = html;
-        //            return;
-
-        #endregion
 
     }
 }
