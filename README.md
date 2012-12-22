@@ -16,4 +16,3 @@ i##软件用途：markdown格式文档编辑和预览。##
 +	如果有语法扩充请修改about.md
 
 ##下载地址: ["码德编辑器执行档](https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe "码德编辑器下载")
-
