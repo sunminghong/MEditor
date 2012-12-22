@@ -1,5 +1,6 @@
 ﻿#软件名称：MDEditor#
-##软件用途：markdown格式文档编辑和预览。##
+ii
+i##软件用途：markdown格式文档编辑和预览。##
 >MEditor is text editor with multiple windows. You can use it as markdown editor and preview. 
 
 - 可应用于写博客，可以写好后将html剪切发布即可；
@@ -16,4 +17,3 @@
 
 ##下载地址: ["码德编辑器执行档](https://github.com/5d13cn/MEditor/raw/master/exeoutput/MDEditor.exe "码德编辑器下载")
 
-[开发更新日志](https://github.com/5d13cn/MEditor/blob/master/resoucesdocs/about.md)
