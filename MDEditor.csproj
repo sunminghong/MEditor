@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit, Version=4.2.1.8805, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
@@ -98,8 +99,6 @@
     </Compile>
     <Compile Include="MarkdownEditor.cs" />
     <Compile Include="MarkdownEditorManager.cs" />
-    <Compile Include="MarkdownSharp\Escapes.cs" />
-    <Compile Include="MarkdownSharp\Markdown.cs" />
     <Compile Include="MRUManager.cs" />
     <Compile Include="Processers\EMark.cs" />
     <Compile Include="Processers\IProcesser.cs" />
@@ -111,6 +110,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Sundownlib\Sundown.cs" />
+    <Compile Include="TestForm\TestSundown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm\TestSundown.Designer.cs">
+      <DependentUpon>TestSundown.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="frmMain.resx">
@@ -127,6 +133,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TestForm\TestSundown.resx">
+      <DependentUpon>TestSundown.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <Compile Include="FileTypeRegister.cs" />
     <Compile Include="frmReplace.cs">
@@ -149,6 +158,9 @@
     <Content Include="icos\ico_saveall.png" />
     <Content Include="icos\logo.ico" />
     <Content Include="libs\ICSharpCode.AvalonEdit.dll" />
+    <Content Include="libs\SundownLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="frmCss.resx">
       <DependentUpon>frmCss.cs</DependentUpon>
       <SubType>Designer</SubType>

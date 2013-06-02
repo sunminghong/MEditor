@@ -81,8 +81,8 @@ public class frmMain : System.Windows.Forms.Form, IMRUClient
 namespace MRU
 {
     /// <summary>
-    /// Interface which should be implemented by owner form
-    /// to use MRUManager.
+    ///     Interface which should be implemented by owner form
+    ///     to use MRUManager.
     /// </summary>
     public interface IMRUClient
     {
@@ -90,8 +90,8 @@ namespace MRU
     }
 
     /// <summary>
-    /// MRU manager - manages Most Recently Used Files list
-    /// for Windows Form application.
+    ///     MRU manager - manages Most Recently Used Files list
+    ///     for Windows Form application.
     /// </summary>
     public class MRUManager
     {
@@ -141,9 +141,8 @@ namespace MRU
         #region Public Properties
 
         /// <summary>
-        /// Maximum length of displayed file name in menu (default is 40).
-        /// 
-        /// Set this property to change default value (optional).
+        ///     Maximum length of displayed file name in menu (default is 40).
+        ///     Set this property to change default value (optional).
         /// </summary>
         public int MaxDisplayNameLength
         {
@@ -159,9 +158,8 @@ namespace MRU
         }
 
         /// <summary>
-        /// Maximum length of MRU list (default is 10).
-        /// 
-        /// Set this property to change default value (optional).
+        ///     Maximum length of MRU list (default is 10).
+        ///     Set this property to change default value (optional).
         /// </summary>
         public int MaxMRULength
         {
@@ -179,13 +177,11 @@ namespace MRU
         }
 
         /// <summary>
-        /// Set current directory.
-        /// 
-        /// Default value is program current directory which is set when
-        /// Initialize function is called.
-        /// 
-        /// Set this property to change default value (optional)
-        /// after call to Initialize.
+        ///     Set current directory.
+        ///     Default value is program current directory which is set when
+        ///     Initialize function is called.
+        ///     Set this property to change default value (optional)
+        ///     after call to Initialize.
         /// </summary>
         public string CurrentDir
         {
@@ -199,7 +195,7 @@ namespace MRU
         #region Public Functions
 
         /// <summary>
-        /// Initialization. Call this function in form Load handler.
+        ///     Initialization. Call this function in form Load handler.
         /// </summary>
         /// <param name="owner">Owner form</param>
         /// <param name="mruItem">Recent Files menu item</param>
@@ -218,7 +214,7 @@ namespace MRU
 
             // keep reference to MRU menu item
             menuItemMRU = mruItem;
-              menuItemParent = mruPar;
+            menuItemParent = mruPar;
 
             // keep Registry path adding MRU key to it
             registryPath = regPath;
@@ -242,9 +238,9 @@ namespace MRU
         }
 
         /// <summary>
-        /// Add file name to MRU list.
-        /// Call this function when file is opened successfully.
-        /// If file already exists in the list, it is moved to the first place.
+        ///     Add file name to MRU list.
+        ///     Call this function when file is opened successfully.
+        ///     If file already exists in the list, it is moved to the first place.
         /// </summary>
         /// <param name="file">File Name</param>
         public void Add(string file)
@@ -261,8 +257,8 @@ namespace MRU
         }
 
         /// <summary>
-        /// Remove file name from MRU list.
-        /// Call this function when File - Open operation failed.
+        ///     Remove file name from MRU list.
+        ///     Call this function when File - Open operation failed.
         /// </summary>
         /// <param name="file">File Name</param>
         public void Remove(string file)
@@ -289,7 +285,7 @@ namespace MRU
         #region Event Handlers
 
         /// <summary>
-        /// Update MRU list when MRU menu item parent is opened
+        ///     Update MRU list when MRU menu item parent is opened
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -324,7 +320,7 @@ namespace MRU
         }
 
         /// <summary>
-        /// MRU menu item is clicked - call owner's OpenMRUFile function
+        ///     MRU menu item is clicked - call owner's OpenMRUFile function
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -351,7 +347,7 @@ namespace MRU
         }
 
         /// <summary>
-        /// Save MRU list in Registry when owner form is closing
+        ///     Save MRU list in Registry when owner form is closing
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -389,8 +385,8 @@ namespace MRU
         #region Private Functions
 
         /// <summary>
-        /// Load MRU list from Registry.
-        /// Called from Initialize.
+        ///     Load MRU list from Registry.
+        ///     Called from Initialize.
         /// </summary>
         private void LoadMRU()
         {
@@ -426,7 +422,7 @@ namespace MRU
         }
 
         /// <summary>
-        /// Get display file name from full name.
+        ///     Get display file name from full name.
         /// </summary>
         /// <param name="fullName">Full file name</param>
         /// <returns>Short display name</returns>
@@ -442,12 +438,10 @@ namespace MRU
         }
 
         /// <summary>
-        /// Truncate a path to fit within a certain number of characters 
-        /// by replacing path components with ellipses.
-        /// 
-        /// This solution is provided by CodeProject and GotDotNet C# expert
-        /// Richard Deeming.
-        /// 
+        ///     Truncate a path to fit within a certain number of characters
+        ///     by replacing path components with ellipses.
+        ///     This solution is provided by CodeProject and GotDotNet C# expert
+        ///     Richard Deeming.
         /// </summary>
         /// <param name="longName">Long file name</param>
         /// <param name="maxLen">Maximum length</param>

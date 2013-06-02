@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace MEditor
 {
-    [System.ComponentModel.DesignerCategory("form")]
-    public partial class frmReplace :  Form
+    [DesignerCategory("form")]
+    public partial class frmReplace : Form
     {
+        private readonly bool _isFind;
+        private readonly RichTextBox dab;
         public string result;
-        RichTextBox dab;
-        private bool _isFind=false;
-        public frmReplace(RichTextBox  da, string txt,bool isFind)
+
+        public frmReplace(RichTextBox da, string txt, bool isFind)
         {
             InitializeComponent();
             result = da.Rtf;
@@ -26,21 +22,20 @@ namespace MEditor
             _isFind = isFind;
         }
 
-        bool CheckEmp()
-		{
+        private bool CheckEmp()
+        {
             //If there's no text
             if (findbox.Text == "")
             {
                 //MessageBox.Show("请输入需要查找的字符串.", "Empty TextBox", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            //Otherwise, success!
+                //Otherwise, success!
             else return true;
-		
-		}
+        }
 
         /// <summary>
-        /// Replace all cases
+        ///     Replace all cases
         /// </summary>
         private void ReplaceAll(object sender, EventArgs e)
         {
@@ -67,24 +62,24 @@ namespace MEditor
                     // then replace it
                     dab.Text = replacedString;
                     MessageBox.Show("替换所有完成. ", Application.ProductName,
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // restore the SelectionStart
                     dab.SelectionStart = selectedPos;
                 }
-                //If no matches found...
-                else 
+                    //If no matches found...
+                else
                 {
                     MessageBox.Show(String.Format("不能找到 '{0}'.   ",
-                    findbox.Text),
-                    Application.ProductName, MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                                                  findbox.Text),
+                                    Application.ProductName, MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
                 }
 
                 dab.Focus();
             }
         }
-        
+
         private void Replace(object sender, EventArgs e)
         {
             //Replace one instance
@@ -99,9 +94,9 @@ namespace MEditor
                     if (matchTemp.Value == dab.SelectedText)
                         dab.SelectedText = repbox.Text;
                 }
-
             }
         }
+
         private void find()
         {
             //Replace one instance
@@ -135,7 +130,6 @@ namespace MEditor
                 }
                 catch
                 {
-
                 }
             }
         }
@@ -151,9 +145,8 @@ namespace MEditor
 
             if (useregex.Checked)
             {
-                
             }
-            // wild cards checkbox checked
+                // wild cards checkbox checked
             else if (usewild.Checked)
             {
                 // multiple characters wildcard (*)
@@ -194,8 +187,7 @@ namespace MEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
-
     }
 }

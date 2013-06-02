@@ -1,19 +1,40 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 4.2.1.8805
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDEditor", "MDEditor.csproj", "{8210A400-6151-45D5-B344-57934E4292F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SundownLib", "..\SundownLib\SundownLib.vcxproj", "{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8210A400-6151-45D5-B344-57934E4292F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8210A400-6151-45D5-B344-57934E4292F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8210A400-6151-45D5-B344-57934E4292F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8210A400-6151-45D5-B344-57934E4292F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8210A400-6151-45D5-B344-57934E4292F9}.Debug|Win32.ActiveCfg = Debug|Any CPU
 		{8210A400-6151-45D5-B344-57934E4292F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8210A400-6151-45D5-B344-57934E4292F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8210A400-6151-45D5-B344-57934E4292F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8210A400-6151-45D5-B344-57934E4292F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8210A400-6151-45D5-B344-57934E4292F9}.Release|Win32.ActiveCfg = Release|Any CPU
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Debug|Win32.Build.0 = Debug|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Release|Any CPU.ActiveCfg = Release|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Release|Win32.ActiveCfg = Release|Win32
+		{4D5727E1-BC75-4B7A-B6B7-3D7BC2F7A12A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
