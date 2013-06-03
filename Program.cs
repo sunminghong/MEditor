@@ -1,26 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
+using MEditor.TestForm;
 
 namespace MEditor
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        ///     应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-         //   Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-            Application.Run(new frmMain());
+            //   Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            Application.Run(new FrmMain());
+            //Application.Run(new TestSundown());
         }
 
-        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            MessageBox.Show("Sorry,出现了一个错误！如果严重的影响了您的工作，请将它发给我allen.fantasy@gmail.com"+e.Exception.StackTrace);
+            MessageBox.Show("Sorry,出现了一个错误！如果严重的影响了您的工作，请将它发给我allen.fantasy@gmail.com" + e.Exception.StackTrace);
         }
     }
 }

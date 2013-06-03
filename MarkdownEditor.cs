@@ -1,317 +1,206 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using System.Windows.Input;
-
+using Awesomium.Core;
+using Awesomium.Windows.Forms;
 using ICSharpCode.AvalonEdit;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.DragEventArgs;
 
 namespace MEditor
 {
-	public class MarkdownEditor
-	{
-		
-		private WebBrowser _previewBrowser;
-		
+    public class MarkdownEditor
+    {
+        private readonly TextEditor _markdownRtb;
+        private readonly WebControl _previewBrowser;
 
-		private bool alreadyUpdate = false;
-		private bool _isOpen = false;
+        private readonly FrmMain _thisForm;
+        private string _file = "";
 
-		public bool AlreadyUpdate
-		{
-			get { return alreadyUpdate; }
-			set { alreadyUpdate = value; }
-		}
+        private JSObject window;
+        private bool _isOpen;
+        private TabPage _markdownPage;
+        private bool alreadyUpdate;
 
-		private string _file = "";
+        public MarkdownEditor(FrmMain thisform, TabPage page, WebControl preview)
+        {
+            _markdownPage = page;
+            _thisForm = thisform;
+            _previewBrowser = preview;
 
-		public string FileName
-		{
-			get { return _file; }
-			set { _file = value; }
-		}
-		private frmMain _thisForm;
+            createRTB(ref _markdownRtb);
+            _markdownRtb.TextChanged += _markdownRtb_TextChanged;
+            var elementHost = new ElementHost();
+            elementHost.Child = _markdownRtb;
+            elementHost.Dock = DockStyle.Fill;
+            page.Controls.Add(elementHost);
 
-		private TextEditor _markdownRtb;
-		//        private RichTextBox _htmlRtb;
+        }
 
-		private TabPage _markdownPage;
+        public bool AlreadyUpdate
+        {
+            get { return alreadyUpdate; }
+            set { alreadyUpdate = value; }
+        }
 
-		public TabPage MarkdownPage
-		{
-			get { return _markdownPage; }
-			set { _markdownPage = value; }
-		}
-		public MarkdownEditor(frmMain thisform, TabPage page,WebBrowser preview)
-		{
-			this._markdownPage = page;
-			this._thisForm = thisform;
-			this._previewBrowser=preview;
+        public string FileName
+        {
+            get { return _file; }
+            set { _file = value; }
+        }
 
-			createRTB(ref _markdownRtb);
-			_markdownRtb.TextChanged += new EventHandler(_markdownRtb_TextChanged);
-			ElementHost elementHost = new ElementHost();
-			elementHost.Child=_markdownRtb;
-			elementHost.Dock=DockStyle.Fill;
-			page.Controls.Add(elementHost);
-			
-	
-		}
+        public TabPage MarkdownPage
+        {
+            get { return _markdownPage; }
+            set { _markdownPage = value; }
+        }
 
-		private void createRTB(ref TextEditor htmlRtb)
-		{
-			htmlRtb = new TextEditor();
-			//_htmlRtb.BackColor = bg ;
-			//_htmlRtb.ForeColor =fore;
-//			htmlRtb.WordWrap = false;
-			htmlRtb.AllowDrop = false;
-//			htmlRtb.ScrollBars = RichTextBoxScrollBars.Both;
-			//htmlRtb.Dock = DockStyle.Fill;
-			
-			htmlRtb.TabIndex = 0;
+        private void createRTB(ref TextEditor htmlRtb)
+        {
+            htmlRtb = new TextEditor();
 
-//			htmlRtb.AcceptsTab = true;
-//			htmlRtb.BulletIndent = 4;
-//			htmlRtb.DetectUrls = false;
+            htmlRtb.AllowDrop = false;
 
-//			htmlRtb.ZoomFactor = 1.0f;
-//
-//			htmlRtb.EnableAutoDragDrop = false;
-//			htmlRtb.HideSelection = true;
+            htmlRtb.TabIndex = 0;
 
-			int lef = 60;// (int)getfontWeight(4, font);
-//			htmlRtb.SelectionTabs = new int[] { lef, lef * 2, lef * 3, lef * 3, lef * 4 };
-			//htmlRtb.TabIndent=4;
-			
+            htmlRtb.AllowDrop = true;
+            htmlRtb.TextChanged += _markdownRtb_TextChanged;
 
-			htmlRtb.AllowDrop = true;
-			//htmlRtb.KeyDown+=new System.Windows.Input.KeyEventHandler(htmlRtb_KeyDown);
-			htmlRtb.TextChanged+= _markdownRtb_TextChanged;
+            htmlRtb.DragEnter += htmlRtb_DragEnter;
+            htmlRtb.Drop += htmlRtb_DragDrop;
+        }
 
-			htmlRtb.DragEnter += new System.Windows.DragEventHandler(htmlRtb_DragEnter);
-			htmlRtb.Drop += new System.Windows.DragEventHandler(htmlRtb_DragDrop);
-			
-			
+        private void htmlRtb_DragDrop(object sender, DragEventArgs e)
+        {
+            var arrayFileName = (Array)e.Data.GetData(DataFormats.FileDrop);
 
-		}
-
-		void htmlRtb_DragDrop(object sender, System.Windows.DragEventArgs e)
-		{
-			Array arrayFileName = (Array)e.Data.GetData(DataFormats.FileDrop);
-
-			string strFileName = arrayFileName.GetValue(0).ToString();
+            string strFileName = arrayFileName.GetValue(0).ToString();
 
 
-			string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
-			_thisForm.openfiles(data);
+            var data = (string[])e.Data.GetData(DataFormats.FileDrop);
+            _thisForm.openfiles(data);
+        }
 
-		}
+        private void htmlRtb_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
 
-		void htmlRtb_DragEnter(object sender, System.Windows.DragEventArgs e)
-		{
+        public TextEditor GetTextBox()
+        {
+            return _markdownRtb;
+        }
 
-			if (e.Data.GetDataPresent(DataFormats.FileDrop))
-			{
-				e.Effects = System.Windows.DragDropEffects.Link;
-			}
-			else
-			{
-				e.Effects = System.Windows.DragDropEffects.None;
-			}
+        private void _markdownRtb_TextChanged(object sender, EventArgs e)
+        {
+            invokeScript("loadMarkdown", Utils.ConvertTextToHTML(_markdownRtb.Text));
+        }
 
-		}
+        public string GetMarkdown()
+        {
+            return _markdownRtb.Text;
+        }
 
-		void htmlRtb_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			TextEditor rtb = ((TextEditor)sender);
-			if (e.KeyStates == Keyboard.GetKeyStates(Key.V) && Keyboard.Modifiers == ModifierKeys.Control)
-			{
-				rtb.Paste();
-				e.Handled = true;
-				return;
-			}
 
-			if (e.KeyStates == Keyboard.GetKeyStates(Key.Tab))
-				return;
+        public void invokeScript(string scriptName, string html)
+        {
 
-			if (e.KeyStates == Keyboard.GetKeyStates(Key.LeftShift))
-			{
-				//如果特择了多行，则每行前加入一个\t
-				string text = rtb.SelectedText;
+            try
+            {
+                window = this._previewBrowser.ExecuteJavascriptWithResult("window");
+                if (window == null)
+                {
+                    return;
+                }
+                window.Invoke(scriptName, new JSValue[] { html });
+            }
+            catch (Exception)
+            {
 
-				int st = rtb.SelectionStart;
-				int st1 = rtb.Text.LastIndexOf("\n", st);
-				st1 = st1 > -1 ? st1 : 0;
-				int olen = rtb.SelectionLength;
-				int len = st - st1 + rtb.SelectionLength;
-				rtb.SelectionStart = st1;
-				rtb.SelectionLength = len;
-				text = rtb.SelectedText;
+            }
+        }
 
-				text = text.Replace("\n\t", "\n");
 
-				rtb.SelectedText = text;
-				rtb.SelectionStart = st + 1;
-				len=olen + text.Length - len - 1;
-				if(len>0)
-					rtb.SelectionLength = len;
-			}
-			else
-			{
-				//如果特择了多行，则每行前加入一个\t
-				string text = rtb.SelectedText;
-				if (text.IndexOf("\n") != -1)
-				{
-					int st = rtb.SelectionStart;
-					if (st > 0)
-					{
-						int st1 = rtb.Text.LastIndexOf("\n", st);
-						st1 = st1 > -1 ? st1 : 0;
-						int olen = rtb.SelectionLength;
-						int len = st - st1 + rtb.SelectionLength;
-						rtb.SelectionStart = st1;
-						rtb.SelectionLength = len;
-						text = rtb.SelectedText;
-						//text = rtb.Text.Substring(st1, len );
+        public bool Openfile(string file)
+        {
+            string text = Utils.AppendValidHTMLTags(Utils.ConvertTextToHTML(_markdownRtb.Text), file, true);
 
-						text = text.Replace("\n", "\n\t");
-						rtb.SelectedText = text;
-						rtb.SelectionStart = st + 1;
-						rtb.SelectionLength = olen + text.Length - len - 1;
-					}
-					
-				}
-				else
-				{
-					//rtb.SelectedText = "    ";
-					return;
-				}
-			}
+            _previewBrowser.LoadHTML(text);
+            if (string.IsNullOrEmpty(file))
+            {
+                return true;
+            }
 
-			e.Handled = true;
-		}
+            _file = file;
+            if (!File.Exists(file))
+                return true;
+            try
+            {
+                _isOpen = true;
+                var sr = new StreamReader(file, Encoding.UTF8);
+                _markdownRtb.Text = sr.ReadToEnd();
+                sr.Close();
+                sr.Dispose();
 
-		public TextEditor GetTextBox()
-		{
-			return _markdownRtb;
-		}
 
-		void _markdownRtb_TextChanged(object sender, EventArgs e)
-		{
+                _isOpen = false;
 
-			//_previewBrowser.DocumentText=Utils.ConvertTextToHTML(_markdownRtb.Text);
-			invokeScript("loadMarkdown", Utils.ConvertTextToHTML(_markdownRtb.Text));
-		}
-		
-		public string GetMarkdown()
-		{
-			return _markdownRtb.Text;
-		}
-		
-		
-		
-		public void invokeScript(string scriptName, string html)
-		{
-			
-			try
-			{
-				this._previewBrowser.Document.InvokeScript(scriptName, new string[] { html });
-			}
-			catch (COMException)
-			{
-				string text = Utils.AppendValidHTMLTags(html, "", true);
-				this._previewBrowser.DocumentText=text;
-			}
-			
-		}
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-		
-		
+        public void Save(string file)
+        {
+            _file = file;
+            Save();
+        }
 
-		public bool Openfile(string file)
-		{
-					string text = Utils.AppendValidHTMLTags(Utils.ConvertTextToHTML(_markdownRtb.Text), file, true);
-			
-			_previewBrowser.DocumentText=text;
-			if (string.IsNullOrEmpty(file))
-			{
-				
-				return true;
-			}
+        public void Save()
+        {
+            if (string.IsNullOrEmpty(_file))
+                return;
 
-			_file = file;
-			if (!File.Exists(file))
-				return true;
-			try
-			{
-				_isOpen = true;
-				StreamReader sr = new StreamReader(file, Encoding.UTF8);
-				this._markdownRtb.Text = sr.ReadToEnd();
-				sr.Close();
-				sr.Dispose();
-				
+            var sw = new StreamWriter(_file, false, Encoding.UTF8);
+            sw.Write(_markdownRtb.Text);
+            //this._markdownRtb.SaveFile(sw, RichTextBoxStreamType.PlainText);
+            sw.Close();
+            sw.Dispose();
+            alreadyUpdate = false;
 
-				_isOpen = false;
+            var fileInfo = new FileInfo(FileName);
 
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
-		}
+            _markdownPage.Text = fileInfo.Name;
+            _markdownPage.ToolTipText = FileName;
+        }
 
-		public void Save(string file)
-		{
-			this._file = file;
-			Save();
-		}
+        public void SetStyle(Color bg, Color fore, Font font, bool wordWrap, int tabWidth)
+        {
+            _isOpen = true;
+            TextEditor rtb = GetTextBox();
 
-		public void Save()
-		{
-			if (string.IsNullOrEmpty(_file))
-				return;
 
-			StreamWriter sw = new StreamWriter(_file,false, Encoding.UTF8);
-			sw.Write(this._markdownRtb.Text);
-			//this._markdownRtb.SaveFile(sw, RichTextBoxStreamType.PlainText);
-			sw.Close();
-			sw.Dispose();
-			alreadyUpdate = false;
 
-			FileInfo fileInfo = new FileInfo(FileName);
+            if (rtb.WordWrap != wordWrap)
+                rtb.WordWrap = wordWrap;
 
-			_markdownPage.Text = fileInfo.Name;
-			_markdownPage.ToolTipText = FileName;
-		}
+            _isOpen = false;
+        }
 
-		public void SetStyle(Color bg, Color fore, Font font, bool wordWrap,int tabWidth)
-		{
-			_isOpen = true;
-			TextEditor rtb = GetTextBox();
 
-//			if (rtb.BackColor != bg)
-//				rtb.BackColor = bg;
-//			if (rtb.ForeColor != fore)
-//				rtb.ForeColor = fore;
-//			if (rtb.Font != font)
-//				rtb.Font = font;
-			
-			if (rtb.WordWrap != wordWrap)
-				rtb.WordWrap = wordWrap;
-			
-			_isOpen = false;
-		}
-
-		private float getfontWeight(int width,Font font)
-		{
-			Graphics g = _thisForm.CreateGraphics();
-			SizeF sizeF = g.MeasureString("A",font );
-			return sizeF.Width * width;
-		}
-	}
+    }
 }

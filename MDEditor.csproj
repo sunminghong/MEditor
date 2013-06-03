@@ -32,8 +32,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Awesomium.Core, Version=1.7.1.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Awesomium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Controls, Version=1.7.1.0, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Awesomium.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Forms, Version=1.7.1.0, Culture=neutral, PublicKeyToken=9bd24830fbe304a0, processorArchitecture=x86" />
     <Reference Include="ICSharpCode.AvalonEdit, Version=4.2.1.8805, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -98,8 +108,6 @@
     </Compile>
     <Compile Include="MarkdownEditor.cs" />
     <Compile Include="MarkdownEditorManager.cs" />
-    <Compile Include="MarkdownSharp\Escapes.cs" />
-    <Compile Include="MarkdownSharp\Markdown.cs" />
     <Compile Include="MRUManager.cs" />
     <Compile Include="Processers\EMark.cs" />
     <Compile Include="Processers\IProcesser.cs" />
@@ -111,6 +119,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Sundownlib\Sundown.cs" />
+    <Compile Include="TestForm\TestSundown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm\TestSundown.Designer.cs">
+      <DependentUpon>TestSundown.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="frmMain.resx">
@@ -127,6 +142,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TestForm\TestSundown.resx">
+      <DependentUpon>TestSundown.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <Compile Include="FileTypeRegister.cs" />
     <Compile Include="frmReplace.cs">
@@ -148,7 +166,20 @@
     <Content Include="icos\ico_preview.png" />
     <Content Include="icos\ico_saveall.png" />
     <Content Include="icos\logo.ico" />
+    <Content Include="libs\Awesomium.Core.dll" />
+    <Content Include="libs\Awesomium.Windows.Controls.dll" />
     <Content Include="libs\ICSharpCode.AvalonEdit.dll" />
+    <Content Include="libs\SundownLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="template\jquery-2.0.2.min.js" />
+    <Resource Include="template\styles\default.css" />
+    <Resource Include="template\highlight.pack.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="template\styles\monokai.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="frmCss.resx">
       <DependentUpon>frmCss.cs</DependentUpon>
       <SubType>Designer</SubType>

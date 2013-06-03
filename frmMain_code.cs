@@ -1,40 +1,42 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
-using MarkdownSharp;
 using MEditor.Properties;
 using MRU;
 
+
 namespace MEditor
 {
-    public partial class frmMain : Form, IMRUClient
+    public partial class FrmMain : Form, IMRUClient
     {
         private static string _myExtName = ".md";
-        private string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
-        private MarkdownEditorManager meditorManager=null;
-        FileMonitor _filemonitor = null;
+        private readonly SortedList<string, bool> _monitorList = new SortedList<string, bool>();
+        private readonly Regex _regexExtHtml = new Regex(@"\.htm|\.xml", RegexOptions.Compiled);
+        private readonly Regex _regexExtMarkdowns = new Regex(@"\.md|\.markdown", RegexOptions.Compiled);
+        private readonly string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
 
 
-        private Color _bgColor = Color.FromArgb(0x4a, 0x52, 0x5a);//20,0x20,0x20;
-        private Color _foreColor = Color.FromArgb(0xff, 0xff, 0xff); //0xf2,0xf0,0xdf
-        private Font _font = new Font("微软雅黑",12);
+        private Color _bgColor = Color.FromArgb(0x4a, 0x52, 0x5a); //20,0x20,0x20;
 
         private string _extfileother = "";
-        private Regex _regexExtMarkdowns = new Regex(@"\.md|\.markdown", RegexOptions.Compiled);
-        private Regex _regexExtOthertext = new Regex(@"\.txt|\.js|\.htm|\.xml|\.as|\.log|\.php|\.cs", RegexOptions.Compiled);
-        private Regex _regexExtHtml = new Regex(@"\.htm|\.xml", RegexOptions.Compiled);
+        private FileMonitor _filemonitor;
+        private Font _font = new Font("微软雅黑", 12);
+        private Color _foreColor = Color.FromArgb(0xff, 0xff, 0xff); //0xf2,0xf0,0xdf
+
+        private Regex _regexExtOthertext = new Regex(@"\.txt|\.js|\.htm|\.xml|\.as|\.log|\.php|\.cs",
+                                                     RegexOptions.Compiled);
+
+        private bool isLeft = true;
+        private MarkdownEditorManager meditorManager;
 
         #region defaultCss
+
         private string _defcss = @"
 body,td,th {font-family:""微软雅黑"", Verdana, ""Bitstream Vera Sans"", sans-serif; }
 body {
@@ -227,7 +229,25 @@ border-collapse: separate;border-spacing: 0;
 }
 th,td{padding:5px;border: 1px solid #CCC;}
 ";
+
         #endregion
+
+        /// <summary>
+        ///     Gets a value indicating if the operating system is a Windows Vista or a newer one.
+        /// </summary>
+        public static bool IsWindowsVistaOrNewer
+        {
+            get
+            {
+                return (Environment.OSVersion.Platform == PlatformID.Win32NT) &&
+                       (Environment.OSVersion.Version.Major >= 6);
+            }
+        }
+
+        public void OpenMRUFile(string fileName)
+        {
+            openfile(fileName);
+        }
 
         public void ReadCss()
         {
@@ -238,18 +258,13 @@ th,td{padding:5px;border: 1px solid #CCC;}
             _extfileother = Settings.Default.extfile;
 
             _regexExtOthertext = new Regex(_regexExtOthertext.Replace(".", @"\."), RegexOptions.Compiled);
-            
+
             meditorManager.SetFont(_font);
             meditorManager.SetForeColor(_foreColor);
-            meditorManager.SetBackColor(_bgColor );
+            meditorManager.SetBackColor(_bgColor);
             meditorManager.SetCss(_defcss);
 
             //MessageBox.Show(Settings.Default.appconfig.ToString());
-        }
-
-        public void OpenMRUFile(string fileName)
-        {
-            openfile(fileName);
         }
 
         public void openfiles(string[] fileNames)
@@ -265,27 +280,25 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 Add(fileName);
             }
             else
-                mruManager.Remove(fileName);       // when Open File operation failed
+                mruManager.Remove(fileName); // when Open File operation failed
         }
 
-        private SortedList<string, bool> _monitorList = new SortedList<string, bool>();
         public void Add(string fullpath)
         {
-            string dir = System.IO.Path.GetDirectoryName(fullpath);
+            string dir = Path.GetDirectoryName(fullpath);
             if (_monitorList.ContainsKey(dir))
             {
                 return;
             }
             _monitorList.Add(dir, true);
-           _filemonitor.Add(dir, "*.md");
+            _filemonitor.Add(dir, "*.md");
         }
 
-        delegate bool dirupdated(string filename);
-        void fsw_Changed(object sender, System.IO.FileSystemEventArgs e)
+        private void fsw_Changed(object sender, FileSystemEventArgs e)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new dirupdated(meditorManager.RefrushOpen), e.Name);                
+                Invoke(new dirupdated(meditorManager.RefrushOpen), e.Name);
                 return;
             }
             meditorManager.RefrushOpen(e.Name);
@@ -293,8 +306,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         private void openfile()
         {
-            OpenFileDialog fileone = new OpenFileDialog();
-            fileone.Filter = myExtName ;
+            var fileone = new OpenFileDialog();
+            fileone.Filter = myExtName;
             fileone.FilterIndex = 1;
             if (fileone.ShowDialog() == DialogResult.OK)
             {
@@ -305,67 +318,41 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 catch (Exception ex)
                 {
                     MessageBox.Show("出现了错误：" + ex.Message);
-                    mruManager.Remove(fileone.FileName);       // when Open File operation failed
+                    mruManager.Remove(fileone.FileName); // when Open File operation failed
                 }
             }
         }
 
-        private void PreviewHtml()
-        {
-            this.toolStripStatusLabel1.Text = " 正在转换。。。。 ";
 
-            MarkdownEditor meditor = meditorManager.SetStyle();
-            if (meditor == null)
-                return;
-            bool bhtml = filetypeConvert(meditor);
-
-            tabBrowser.Text = meditor.MarkdownPage.Text;
-            this.toolStripStatusLabel1.Text = "当前文档：" + meditor.FileName;
-
-            if (isLeft)
-            {
-                if (bhtml && splitContainer1.Panel2Collapsed)
-                    splitContainer1.Panel2Collapsed = false;
-            }
-            else
-            {
-                if (bhtml && splitContainer1.Panel1Collapsed)
-                    splitContainer1.Panel1Collapsed = false;
-            }
-
-            //tabControl1.Focus();
-            meditor.GetTextBox().Focus();
-        }
 
         private bool filetypeConvert(MarkdownEditor meditor)
         {
-                string marktext = meditor.GetMarkdown();
-                if (string.IsNullOrEmpty(marktext))
-                {
-                    return false ;
-                }
+            string marktext = meditor.GetMarkdown();
+            if (string.IsNullOrEmpty(marktext))
+            {
+                return false;
+            }
 
             string ext = Path.GetExtension(meditor.FileName);
             if (_regexExtMarkdowns.IsMatch(ext))
             {
-            string html="";
-                Markdown mark = new Markdown();
-                html = mark.Transform(marktext);
+                string html = "";
+                html = Utils.ConvertTextToHTML(marktext);
                 rtbHtml.Text = html;
-                webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
+                webControl1.LoadHTML(meditorManager.GetHTMLStyle(html));
                 return true;
             }
 
             if (_regexExtHtml.IsMatch(ext))
             {
-                webBrowser1.DocumentText = marktext;
-                rtbHtml.Text = marktext;                
+                webControl1.LoadHTML(marktext);
+                rtbHtml.Text = marktext;
                 return true;
             }
 
             if (_regexExtOthertext.IsMatch(ext))
             {
-                webBrowser1.DocumentText = meditorManager.GetHTMLStyle("<pre><code>"+marktext+"</code></pre>");
+                webControl1.LoadHTML(meditorManager.GetHTMLStyle("<pre><code>" + marktext + "</code></pre>"));
                 rtbHtml.Text = marktext;
                 return true;
             }
@@ -374,7 +361,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         public void SelectForeColor()
         {
-            ColorDialog color = new ColorDialog();
+            var color = new ColorDialog();
             if (color.ShowDialog() == DialogResult.OK)
             {
                 _foreColor = color.Color;
@@ -386,19 +373,19 @@ th,td{padding:5px;border: 1px solid #CCC;}
             }
         }
 
-        public  void SetOldStyle()
+        public void SetOldStyle()
         {
-            _bgColor = Color.FromArgb(0xff, 0xff, 0xff);//20,0x20,0x20;
+            _bgColor = Color.FromArgb(0xff, 0xff, 0xff); //20,0x20,0x20;
             _foreColor = Color.FromArgb(0x00, 0x00, 0x00); //0xf2,0xf0,0xdf
-            _font = new Font("微软雅黑",12);
+            _font = new Font("微软雅黑", 12);
 
             setstyle();
             //SaveSettings();
         }
 
-        public  void SetBlackWhiteStyle()
+        public void SetBlackWhiteStyle()
         {
-            _bgColor = Color.FromArgb(0x4a, 0x52, 0x5a);//20,0x20,0x20;
+            _bgColor = Color.FromArgb(0x4a, 0x52, 0x5a); //20,0x20,0x20;
             _foreColor = Color.FromArgb(0xff, 0xff, 0xff); //0xf2,0xf0,0xdf
             _font = new Font("微软雅黑", 12);
             setstyle();
@@ -416,21 +403,22 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         private string convertColor(Color co)
         {
-            return  co.R.ToString() +","+ co.G.ToString() +","+ co.B.ToString();
+            return co.R.ToString() + "," + co.G.ToString() + "," + co.B.ToString();
         }
+
         public void SaveSettings()
         {
             string appconfig = Settings.Default.appconfig;
 
-            appconfig=appconfig.Replace("{font}", _font.ToString());
+            appconfig = appconfig.Replace("{font}", _font.ToString());
             appconfig = appconfig.Replace("{color}", convertColor(_foreColor));
             appconfig = appconfig.Replace("{bgcolor}", convertColor(_bgColor));
             appconfig = appconfig.Replace("{css}", _defcss);
             appconfig = appconfig.Replace("{extfile}", _extfileother);
 
             string conffile = Application.UserAppDataPath;
-            conffile = Application.ExecutablePath+".config";
-            using (StreamWriter sw = new StreamWriter(conffile, false, Encoding.UTF8))
+            conffile = Application.ExecutablePath + ".config";
+            using (var sw = new StreamWriter(conffile, false, Encoding.UTF8))
             {
                 sw.Write(appconfig);
                 sw.Close();
@@ -439,7 +427,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         public void SelectBackColor()
         {
-            ColorDialog color = new ColorDialog();
+            var color = new ColorDialog();
             if (color.ShowDialog() == DialogResult.OK)
             {
                 _bgColor = color.Color;
@@ -450,9 +438,10 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 //Settings.Default.Save();
             }
         }
+
         public void SelectFont()
         {
-            FontDialog font = new FontDialog();
+            var font = new FontDialog();
             if (font.ShowDialog() == DialogResult.OK)
             {
                 _font = font.Font;
@@ -468,9 +457,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
         {
             _defcss = css;
             meditorManager.SetCss(_defcss);
-            PreviewHtml();
-            //Settings.Default.css = _defcss;
-            //Settings.Default.Save();
+
         }
 
         public void SetExt(string ext)
@@ -481,28 +468,27 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         private void editCss()
         {
-            frmCss fcss = new frmCss(_defcss,this);
+            var fcss = new frmCss(_defcss, this);
             fcss.ShowDialog();
         }
 
         private void showSyntax(string url)
         {
-            toolStripStatusLabel1.Text ="正在打开" +url+"..." ;
-            System.Diagnostics.Process.Start(url);
+            toolStripStatusLabel1.Text = "正在打开" + url + "...";
+            Process.Start(url);
             //webBrowser1.Navigate(url);
             //webBrowser1.DocumentText = html;
-           
+
             if (splitContainer1.Panel2Collapsed)
                 splitContainer1.Panel2Collapsed = false;
         }
 
-        private bool isLeft = true;
         private void SwithFlaout()
         {
             if (isLeft)
             {
-                this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-                this.splitContainer1.Panel1.Controls.Add(this.tabControl2);
+                splitContainer1.Panel2.Controls.Add(tabControl1);
+                splitContainer1.Panel1.Controls.Add(tabControl2);
                 if (splitContainer1.Panel2Collapsed)
                 {
                     splitContainer1.Panel2Collapsed = false;
@@ -511,8 +497,8 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 isLeft = false;
                 return;
             }
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
-            this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
+            splitContainer1.Panel1.Controls.Add(tabControl1);
+            splitContainer1.Panel2.Controls.Add(tabControl2);
             if (splitContainer1.Panel1Collapsed)
             {
                 splitContainer1.Panel1Collapsed = false;
@@ -523,30 +509,23 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         private void UnRegExtfile()
         {
-           bool rel= FileTypeRegister.UnRegister(_myExtName);
+            bool rel = FileTypeRegister.UnRegister(_myExtName);
 
-           if (!rel && IsWindowsVistaOrNewer)
-           {
-               MessageBox.Show("您是在windows7 下运行的此程序，如果执行完扩展名关联但没有成功，请您以“管理员权限方式再打开此程序再关联一次”！");
-           }
+            if (!rel && IsWindowsVistaOrNewer)
+            {
+                MessageBox.Show("您是在windows7 下运行的此程序，如果执行完扩展名关联但没有成功，请您以“管理员权限方式再打开此程序再关联一次”！");
+            }
+        }
 
-        }
-        /// <summary>
-        /// Gets a value indicating if the operating system is a Windows Vista or a newer one.
-        /// </summary>
-        public static bool IsWindowsVistaOrNewer
-        {
-            get { return (Environment.OSVersion.Platform == PlatformID.Win32NT) && (Environment.OSVersion.Version.Major >= 6); }
-        }
         private void regExtFile()
         {
-
             Assembly asm = Assembly.GetExecutingAssembly();
             string resourceName = "MEditor.logo.ico";
             Stream stream = asm.GetManifestResourceStream(resourceName);
-            string icofile = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\markdown.ico";
-            FileStream fs = new FileStream(icofile, FileMode.Create, FileAccess.Write);
-            byte[] bs = new byte[stream.Length];
+            string icofile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
+                             "\\markdown.ico";
+            var fs = new FileStream(icofile, FileMode.Create, FileAccess.Write);
+            var bs = new byte[stream.Length];
             stream.Read(bs, 0, (int)stream.Length);
             fs.Write(bs, 0, bs.Length);
             fs.Flush();
@@ -554,7 +533,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             fs.Dispose();
 
             //注册关联的文件扩展名
-            FileTypeRegInfo fr = new FileTypeRegInfo();
+            var fr = new FileTypeRegInfo();
             fr.Description = "markdown文档格式";
             fr.ExePath = Application.ExecutablePath;
             fr.ExtendName = _myExtName;
@@ -563,10 +542,11 @@ th,td{padding:5px;border: 1px solid #CCC;}
             bool rel = true;
             if (FileTypeRegister.CheckIfRegistered(fr.ExtendName))
             {
-                rel=FileTypeRegister.UpdateRegInfo(fr);
+                rel = FileTypeRegister.UpdateRegInfo(fr);
             }
-            else{
-                rel=FileTypeRegister.Register(fr);
+            else
+            {
+                rel = FileTypeRegister.Register(fr);
             }
 
             if (!rel && IsWindowsVistaOrNewer)
@@ -574,6 +554,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 MessageBox.Show("您是在windows7 下运行的此程序，如果执行完扩展名关联但没有成功，请您以“管理员权限方式再打开此程序再关联一次”！");
             }
         }
+
+        private delegate bool dirupdated(string filename);
     }
 }
-

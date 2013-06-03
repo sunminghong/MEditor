@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using MEditor.Properties;
 
@@ -11,20 +6,21 @@ namespace MEditor
 {
     public partial class frmCss : Form
     {
+        private readonly FrmMain _fm;
         private string _css = "";
-        private frmMain _fm = null;
 
-        public string Css
-        {
-            get { return _css; }
-            set { _css = value; }
-        }
-        public frmCss(string css,frmMain fm)
+        public frmCss(string css, FrmMain fm)
         {
             InitializeComponent();
             _css = css;
             _fm = fm;
             txtCss.AppendText(css);
+        }
+
+        public string Css
+        {
+            get { return _css; }
+            set { _css = value; }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -33,9 +29,9 @@ namespace MEditor
             _fm.SetCss(txtCss.Text);
             _fm.SetExt(txtExt.Text);
             _fm.SaveSettings();
-            
+
             Close();
-         }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -61,8 +57,8 @@ namespace MEditor
         private void button6_Click(object sender, EventArgs e)
         {
             Settings.Default.Reset();
-             _css = Settings.Default.cssWhite;
-            txtCss.Text  = _css;
+            _css = Settings.Default.cssWhite;
+            txtCss.Text = _css;
             _fm.SetOldStyle();
             //_fm.ReadCss();
         }
@@ -70,8 +66,8 @@ namespace MEditor
         private void button7_Click(object sender, EventArgs e)
         {
             Settings.Default.Reset();
-             _css = Settings.Default.css;
-            txtCss.Text  = _css;
+            _css = Settings.Default.css;
+            txtCss.Text = _css;
             _fm.SetBlackWhiteStyle();
             //_fm.ReadCss();
         }
@@ -80,6 +76,5 @@ namespace MEditor
         {
             txtExt.Text = Settings.Default.extfile;
         }
-
     }
 }
