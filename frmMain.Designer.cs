@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms.Integration;
 namespace MEditor
 {
-	partial class frmMain: MRU.IMRUClient
+	partial class FrmMain: MRU.IMRUClient
 	{
 		/// <summary>
 		/// 必需的设计器变量。
@@ -30,7 +30,7 @@ namespace MEditor
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.字体OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.字体颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +64,10 @@ namespace MEditor
             this.字体颜色toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.字体toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.加粗toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.倾斜toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.下划线toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.markdown语法介绍精简版ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markdown语法介绍ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markdown语法介绍二ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,10 +77,6 @@ namespace MEditor
             this.关于MEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mEditor网站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.检查最新版ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.倾斜toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.下划线toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.自动转行ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.背景颜色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,7 +102,7 @@ namespace MEditor
             this.打开所在文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabBrowser = new System.Windows.Forms.TabPage();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webControl1 = new Awesomium.Windows.Forms.WebControl(this.components);
             this.tabHtml = new System.Windows.Forms.TabPage();
             this.rtbHtml = new System.Windows.Forms.RichTextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -432,6 +432,41 @@ namespace MEditor
             this.加粗toolStripButton7.Text = "加粗";
             this.加粗toolStripButton7.Click += new System.EventHandler(this.加粗toolStripButton7_Click);
             // 
+            // 倾斜toolStripButton8
+            // 
+            this.倾斜toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.倾斜toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("倾斜toolStripButton8.Image")));
+            this.倾斜toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.倾斜toolStripButton8.Name = "倾斜toolStripButton8";
+            this.倾斜toolStripButton8.Size = new System.Drawing.Size(23, 22);
+            this.倾斜toolStripButton8.Text = "倾斜";
+            this.倾斜toolStripButton8.Click += new System.EventHandler(this.倾斜toolStripButton8_Click);
+            // 
+            // 下划线toolStripButton9
+            // 
+            this.下划线toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.下划线toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("下划线toolStripButton9.Image")));
+            this.下划线toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.下划线toolStripButton9.Name = "下划线toolStripButton9";
+            this.下划线toolStripButton9.Size = new System.Drawing.Size(23, 22);
+            this.下划线toolStripButton9.Text = "下划线";
+            this.下划线toolStripButton9.Click += new System.EventHandler(this.下划线toolStripButton9_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(76, 22);
+            this.toolStripButton1.Text = "html预览";
+            this.toolStripButton1.ToolTipText = "快捷键 F5";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // markdown语法介绍精简版ToolStripMenuItem
             // 
             this.markdown语法介绍精简版ToolStripMenuItem.Name = "markdown语法介绍精简版ToolStripMenuItem";
@@ -492,41 +527,6 @@ namespace MEditor
             this.检查最新版ToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.检查最新版ToolStripMenuItem.Text = "检查最新版";
             this.检查最新版ToolStripMenuItem.Click += new System.EventHandler(this.检查最新版ToolStripMenuItem_Click);
-            // 
-            // 倾斜toolStripButton8
-            // 
-            this.倾斜toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.倾斜toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("倾斜toolStripButton8.Image")));
-            this.倾斜toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.倾斜toolStripButton8.Name = "倾斜toolStripButton8";
-            this.倾斜toolStripButton8.Size = new System.Drawing.Size(23, 22);
-            this.倾斜toolStripButton8.Text = "倾斜";
-            this.倾斜toolStripButton8.Click += new System.EventHandler(this.倾斜toolStripButton8_Click);
-            // 
-            // 下划线toolStripButton9
-            // 
-            this.下划线toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.下划线toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("下划线toolStripButton9.Image")));
-            this.下划线toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.下划线toolStripButton9.Name = "下划线toolStripButton9";
-            this.下划线toolStripButton9.Size = new System.Drawing.Size(23, 22);
-            this.下划线toolStripButton9.Text = "下划线";
-            this.下划线toolStripButton9.Click += new System.EventHandler(this.下划线toolStripButton9_Click);
-            // 
-            // toolStripSeparator10
-            // 
-            this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(76, 22);
-            this.toolStripButton1.Text = "html预览";
-            this.toolStripButton1.ToolTipText = "快捷键 F5";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -728,10 +728,11 @@ namespace MEditor
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(331, 435);
             this.tabControl2.TabIndex = 1;
+            this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
             // 
             // tabBrowser
             // 
-            this.tabBrowser.Controls.Add(this.webBrowser1);
+            this.tabBrowser.Controls.Add(this.webControl1);
             this.tabBrowser.Location = new System.Drawing.Point(4, 22);
             this.tabBrowser.Name = "tabBrowser";
             this.tabBrowser.Size = new System.Drawing.Size(323, 409);
@@ -739,16 +740,13 @@ namespace MEditor
             this.tabBrowser.Text = "预览";
             this.tabBrowser.UseVisualStyleBackColor = true;
             // 
-            // webBrowser1
+            // webControl1
             // 
-            this.webBrowser1.CausesValidation = false;
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(323, 409);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
+            this.webControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webControl1.Location = new System.Drawing.Point(0, 0);
+            this.webControl1.NavigationInfo = Awesomium.Core.NavigationInfo.Normal;
+            this.webControl1.Size = new System.Drawing.Size(323, 409);
+            this.webControl1.TabIndex = 0;
             // 
             // tabHtml
             // 
@@ -769,6 +767,7 @@ namespace MEditor
             this.rtbHtml.EnableAutoDragDrop = true;
             this.rtbHtml.Location = new System.Drawing.Point(3, 3);
             this.rtbHtml.Name = "rtbHtml";
+            this.rtbHtml.ReadOnly = true;
             this.rtbHtml.Size = new System.Drawing.Size(317, 403);
             this.rtbHtml.TabIndex = 0;
             this.rtbHtml.Text = "";
@@ -890,7 +889,7 @@ namespace MEditor
             this.推出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.推出ToolStripMenuItem.Text = "推出";
             // 
-            // frmMain
+            // FrmMain
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -904,7 +903,7 @@ namespace MEditor
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(500, 300);
-            this.Name = "frmMain";
+            this.Name = "FrmMain";
             this.Text = "码德编辑器";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
@@ -962,9 +961,7 @@ namespace MEditor
 		private System.Windows.Forms.ToolStripButton 字体toolStripButton10;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
 		private System.Windows.Forms.ToolStripButton 字体颜色toolStripButton11;
-		private System.Windows.Forms.SplitContainer splitContainer1;
-		private System.Windows.Forms.WebBrowser webBrowser1;
-		private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.ToolStripMenuItem 最近打开的文件ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
 		private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
@@ -1017,6 +1014,8 @@ namespace MEditor
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 测试ToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private Awesomium.Windows.Forms.WebControl webControl1;
 
 	}
 }

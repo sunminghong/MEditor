@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Awesomium.Core;
+using Awesomium.Core.Data;
 using ICSharpCode.AvalonEdit;
 using MEditor.Processers;
 using MRU;
 
 namespace MEditor
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
         //private PrintDocument printDocument = new PrintDocument();
 
         private MRUManager mruManager;
+        private WebSession session;
 
-
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
+            string dataPath = String.Format("{0}{1}Cache", Path.GetDirectoryName(Application.ExecutablePath), Path.DirectorySeparatorChar);
+
+            session = WebCore.Sessions[dataPath] ?? WebCore.CreateWebSession(dataPath, WebPreferences.Default);
+            session.AddDataSource("local", new ResourceDataSource(ResourceType.Packed));
+            this.webControl1.WebSession = session;
+
         }
 
         private void 新建NToolStripButton_Click(object sender, EventArgs e)
@@ -62,31 +71,7 @@ namespace MEditor
                 meditorManager.GetTextBox().Cut();
         }
 
-        private void 剪切TToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (HaveSelection())
-                meditorManager.GetTextBox().Cut();
-        }
-
-        private void 剪切ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (HaveSelection())
-                meditorManager.GetTextBox().Cut();
-        }
-
         private void 复制CToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (HaveSelection())
-                meditorManager.GetTextBox().Copy();
-        }
-
-        private void 复制CToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (HaveSelection())
-                meditorManager.GetTextBox().Copy();
-        }
-
-        private void 复制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (HaveSelection())
                 meditorManager.GetTextBox().Copy();
@@ -97,27 +82,7 @@ namespace MEditor
             meditorManager.GetTextBox().Paste();
         }
 
-        private void 粘贴PToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().Paste();
-        }
-
-        private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().Paste();
-        }
-
         private void 撤销toolStripButton5_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().Undo();
-        }
-
-        private void 撤消UToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().Undo();
-        }
-
-        private void 撤销ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             meditorManager.GetTextBox().Undo();
         }
@@ -127,25 +92,10 @@ namespace MEditor
             meditorManager.GetTextBox().Redo();
         }
 
-        private void 重复RToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().Redo();
-        }
-
-        private void 全选AToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().SelectAll();
-        }
-
-        private void 全选AToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            meditorManager.GetTextBox().SelectAll();
-        }
-
         private void 时间日期F5ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TextEditor rtb = meditorManager.GetTextBox();
-            string dat = DateTime.Now.ToString();
+            string dat = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             rtb.Document.Insert(rtb.CaretOffset, dat);
         }
 
@@ -175,7 +125,6 @@ namespace MEditor
 
         private void 打印预览VToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PreviewHtml();
             ////页面设置对话框
             //PageSetupDialog psd = new PageSetupDialog();
 
@@ -221,7 +170,7 @@ namespace MEditor
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var data = (string[]) e.Data.GetData(DataFormats.FileDrop);
+                var data = (string[])e.Data.GetData(DataFormats.FileDrop);
                 openfiles(data); //, RichTextBoxStreamType.PlainText);
             }
         }
@@ -233,7 +182,6 @@ namespace MEditor
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            PreviewHtml();
         }
 
         private void 关闭所有ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -248,8 +196,14 @@ namespace MEditor
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
+            MarkdownEditor markdownEditor = this.meditorManager.GetCurrEditor();
+            if (markdownEditor!=null)
+            {
+                string markdown = markdownEditor.GetMarkdown();
+                this.webControl1.Text = Utils.AppendValidHTMLTags(markdown);
+            }
+
             TabSelectRec.Rec(e.TabPageIndex);
-            PreviewHtml();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -272,16 +226,9 @@ namespace MEditor
             meditorManager.openDir();
         }
 
-        private void markdown格式ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void 自动转行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (自动转行ToolStripMenuItem.Checked)
-                meditorManager.SetWordWrap(true);
-            else
-                meditorManager.SetWordWrap(false);
+            meditorManager.SetWordWrap(自动转行ToolStripMenuItem.Checked);
         }
 
         private void 背景颜色ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -312,11 +259,9 @@ namespace MEditor
             mruManager.MaxDisplayNameLength = 40;
 
             //定义编辑管理器
-            meditorManager = new MarkdownEditorManager(this, tabControl1, mruManager, webBrowser1);
+            meditorManager = new MarkdownEditorManager(this, tabControl1, mruManager, webControl1);
             ReadCss();
-            //webBrowser1.Navigate("about:blank");
             meditorManager.SetStyle(rtbHtml);
-            //webBrowser1.DocumentText = meditorManager.GetHTMLStyle("");
 
             _filemonitor = new FileMonitor(fsw_Changed);
             string command = Environment.CommandLine; //获取进程命令行参数
@@ -345,7 +290,7 @@ namespace MEditor
             rtbHtml.EnableAutoDragDrop = false;
             rtbHtml.AllowDrop = true;
 
-//			rtbHtml.KeyDown += rtbHtml_KeyDown;
+            //			rtbHtml.KeyDown += rtbHtml_KeyDown;
             rtbHtml.DragDrop += frmMain_DragDrop;
             rtbHtml.DragEnter += rtbHtml_DragEnter;
 
@@ -355,16 +300,11 @@ namespace MEditor
         }
 
 
-        private void tabControl1_GotFocus(object sender, EventArgs e)
-        {
-            SendKeys.Send("{tab}");
-        }
-
         private void tabControl1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                var tabc = (TabControl) sender;
+                var tabc = (TabControl)sender;
 
                 for (int i = 0; i < tabc.TabCount; i++)
                 {
@@ -379,14 +319,7 @@ namespace MEditor
 
         private void rtbHtml_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Link;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Link : DragDropEffects.None;
         }
 
         private void 界面布局左右互换ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -429,13 +362,11 @@ namespace MEditor
         private void 替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MarkdownEditor me = meditorManager.GetCurrEditor();
-            if (me == null) return;
         }
 
         private void 查找替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MarkdownEditor me = meditorManager.GetCurrEditor();
-            if (me == null) return;
         }
 
         private void splitContainer1_DoubleClick(object sender, EventArgs e)
@@ -481,31 +412,6 @@ namespace MEditor
                 e.Cancel = true;
         }
 
-        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            string url = e.Url.ToString();
-            if (url == "about:blank") return;
-
-            if (url.StartsWith("http://") || url.StartsWith("https://"))
-            {
-                return;
-            }
-
-            //if (url.EndsWith(".md"))
-            //{
-            url = url.Remove(0, 6);
-            MarkdownEditor me = meditorManager.GetCurrEditor();
-            if (me == null) return;
-            url = Path.Combine(Path.GetDirectoryName(me.FileName), url);
-
-            if (_regexExtMarkdowns.IsMatch(url) || _regexExtOthertext.IsMatch(url))
-            {
-                e.Cancel = true;
-                openfile(url);
-            }
-            //webBrowser1.Navigate(url);
-            //}
-        }
 
         #region MEditor links
 
@@ -576,56 +482,40 @@ namespace MEditor
         private void 加粗toolStripButton7_Click(object sender, EventArgs e)
         {
             ProcesserFactory.Processe(meditorManager.GetTextBox(), EMark.bold);
-            PreviewHtml();
         }
 
         private void 倾斜toolStripButton8_Click(object sender, EventArgs e)
         {
-//			Font newFont = new Font(meditorManager.GetTextBox().SelectionFont, meditorManager.GetTextBox().SelectionFont.Italic ?
-//			                        meditorManager.GetTextBox().SelectionFont.Style & ~FontStyle.Italic : meditorManager.GetTextBox().SelectionFont.Style | FontStyle.Italic);
-//			meditorManager.GetTextBox().SelectionFont = newFont;
+            //			Font newFont = new Font(meditorManager.GetTextBox().SelectionFont, meditorManager.GetTextBox().SelectionFont.Italic ?
+            //			                        meditorManager.GetTextBox().SelectionFont.Style & ~FontStyle.Italic : meditorManager.GetTextBox().SelectionFont.Style | FontStyle.Italic);
+            //			meditorManager.GetTextBox().SelectionFont = newFont;
         }
 
         private void 下划线toolStripButton9_Click(object sender, EventArgs e)
         {
-//			Font newFont = new Font(meditorManager.GetTextBox().SelectionFont, meditorManager.GetTextBox().SelectionFont.Underline ?
-//			                        meditorManager.GetTextBox().SelectionFont.Style & ~FontStyle.Underline : meditorManager.GetTextBox().SelectionFont.Style | FontStyle.Underline);
-//			meditorManager.GetTextBox().SelectionFont = newFont;
+            //			Font newFont = new Font(meditorManager.GetTextBox().SelectionFont, meditorManager.GetTextBox().SelectionFont.Underline ?
+            //			                        meditorManager.GetTextBox().SelectionFont.Style & ~FontStyle.Underline : meditorManager.GetTextBox().SelectionFont.Style | FontStyle.Underline);
+            //			meditorManager.GetTextBox().SelectionFont = newFont;
         }
 
-        private void 左对齐toolStripButton3_Click(object sender, EventArgs e)
-        {
-//			meditorManager.GetTextBox().SelectionBullet = true;
-//
-//
-//			meditorManager.GetTextBox().SelectionIndent = 0;
-//			meditorManager.GetTextBox().SelectionHangingIndent = 0;
-//			meditorManager.GetTextBox().SelectionRightIndent = 0;
-        }
-
-        private void 右对齐toolStripButton1_Click(object sender, EventArgs e)
-        {
-//			meditorManager.GetTextBox().SelectionIndent = 0;
-//			meditorManager.GetTextBox().SelectionHangingIndent = 0;
-//			meditorManager.GetTextBox().SelectionRightIndent =0;
-        }
-
-        private void 居中toolStripButton2_Click(object sender, EventArgs e)
-        {
-//			meditorManager.GetTextBox().SelectionIndent = 8;
-//			meditorManager.GetTextBox().SelectionHangingIndent = 3;
-//			meditorManager.GetTextBox().SelectionRightIndent = 12;
-        }
-
-        private void 两端对齐toolStripButton4_Click(object sender, EventArgs e)
-        {
-//			meditorManager.GetTextBox().SelectionIndent = 0;
-//			meditorManager.GetTextBox().SelectionHangingIndent = 3;
-//			meditorManager.GetTextBox().SelectionRightIndent = 0;
-        }
 
         #endregion
 
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TextEditor textEditor = meditorManager.GetTextBox();
+            string text = Utils.ConvertTextToHTML(textEditor.Text);
+            this.rtbHtml.Text = text;
+
+        }
+        /// <summary>
+        /// 获取源代码
+        /// </summary>
+        /// <returns></returns>
+        private string GrabSources()
+        {
+            return webControl1.ExecuteJavascriptWithResult("document.getElementsByTagName('html')[0].innerHTML");
+        }
         #region 打印控制还没有开放
 
         ////打印控制开始

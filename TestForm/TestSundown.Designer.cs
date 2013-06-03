@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webControl1 = new Awesomium.Windows.Forms.WebControl(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -42,20 +43,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // webBrowser1
+            // webControl1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(12, 12);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(700, 344);
-            this.webBrowser1.TabIndex = 1;
+            this.webControl1.Location = new System.Drawing.Point(12, 12);
+            this.webControl1.Size = new System.Drawing.Size(696, 353);
+            this.webControl1.TabIndex = 1;
             // 
             // TestSundown
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 419);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.webControl1);
             this.Controls.Add(this.button1);
             this.Name = "TestSundown";
             this.Text = "TestSundown";
@@ -66,6 +65,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private Awesomium.Windows.Forms.WebControl webControl1;
     }
 }

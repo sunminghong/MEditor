@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Awesomium.Windows.Forms;
 using ICSharpCode.AvalonEdit;
 using MRU;
 
@@ -20,9 +21,9 @@ namespace MEditor
         private static Color FOREColor = SystemColors.WindowText;
         private static Font FONT = new Font("微软雅黑", 12);
         private readonly SortedList<int, MarkdownEditor> _editors = new SortedList<int, MarkdownEditor>();
-        private readonly WebBrowser _previewBrowser;
+        private readonly WebControl _previewBrowser;
         private readonly TabControl _tabparent;
-        private readonly frmMain _thisForm;
+        private readonly FrmMain _thisForm;
         private readonly SortedList<string, bool> _thisModify = new SortedList<string, bool>();
         private readonly MRUManager mruManager;
         private readonly string myExtName = "Markdown文件|*" + _myExtName + "|所有文件|*.*";
@@ -237,7 +238,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
 
         #endregion
 
-        public MarkdownEditorManager(frmMain thisform, TabControl tabparent, MRUManager mru, WebBrowser preview)
+        public MarkdownEditorManager(FrmMain thisform, TabControl tabparent, MRUManager mru, WebControl preview)
         {
             _tabparent = tabparent;
             _thisForm = thisform;
@@ -468,7 +469,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             if (ind > -1 && ind < _tabparent.TabCount)
                 _tabparent.SelectedIndex = ind;
 
-            _editors.Remove((int) meditor.MarkdownPage.Tag);
+            _editors.Remove((int)meditor.MarkdownPage.Tag);
             _tabparent.TabPages.Remove(meditor.MarkdownPage);
 
             return true;

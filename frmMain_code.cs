@@ -13,7 +13,7 @@ using MRU;
 
 namespace MEditor
 {
-    public partial class frmMain : Form, IMRUClient
+    public partial class FrmMain : Form, IMRUClient
     {
         private static string _myExtName = ".md";
         private readonly SortedList<string, bool> _monitorList = new SortedList<string, bool>();
@@ -323,32 +323,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
             }
         }
 
-        private void PreviewHtml()
-        {
-            toolStripStatusLabel1.Text = " 正在转换。。。。 ";
 
-            MarkdownEditor meditor = meditorManager.SetStyle();
-            if (meditor == null)
-                return;
-            bool bhtml = filetypeConvert(meditor);
-
-            tabBrowser.Text = meditor.MarkdownPage.Text;
-            toolStripStatusLabel1.Text = "当前文档：" + meditor.FileName;
-
-            if (isLeft)
-            {
-                if (bhtml && splitContainer1.Panel2Collapsed)
-                    splitContainer1.Panel2Collapsed = false;
-            }
-            else
-            {
-                if (bhtml && splitContainer1.Panel1Collapsed)
-                    splitContainer1.Panel1Collapsed = false;
-            }
-
-            //tabControl1.Focus();
-            meditor.GetTextBox().Focus();
-        }
 
         private bool filetypeConvert(MarkdownEditor meditor)
         {
@@ -364,20 +339,20 @@ th,td{padding:5px;border: 1px solid #CCC;}
                 string html = "";
                 html = Utils.ConvertTextToHTML(marktext);
                 rtbHtml.Text = html;
-                webBrowser1.DocumentText = meditorManager.GetHTMLStyle(html);
+                webControl1.LoadHTML(meditorManager.GetHTMLStyle(html));
                 return true;
             }
 
             if (_regexExtHtml.IsMatch(ext))
             {
-                webBrowser1.DocumentText = marktext;
+                webControl1.LoadHTML(marktext);
                 rtbHtml.Text = marktext;
                 return true;
             }
 
             if (_regexExtOthertext.IsMatch(ext))
             {
-                webBrowser1.DocumentText = meditorManager.GetHTMLStyle("<pre><code>" + marktext + "</code></pre>");
+                webControl1.LoadHTML(meditorManager.GetHTMLStyle("<pre><code>" + marktext + "</code></pre>"));
                 rtbHtml.Text = marktext;
                 return true;
             }
@@ -482,9 +457,7 @@ th,td{padding:5px;border: 1px solid #CCC;}
         {
             _defcss = css;
             meditorManager.SetCss(_defcss);
-            PreviewHtml();
-            //Settings.Default.css = _defcss;
-            //Settings.Default.Save();
+
         }
 
         public void SetExt(string ext)

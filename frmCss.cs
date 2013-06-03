@@ -6,10 +6,10 @@ namespace MEditor
 {
     public partial class frmCss : Form
     {
-        private readonly frmMain _fm;
+        private readonly FrmMain _fm;
         private string _css = "";
 
-        public frmCss(string css, frmMain fm)
+        public frmCss(string css, FrmMain fm)
         {
             InitializeComponent();
             _css = css;

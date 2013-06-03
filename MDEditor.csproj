@@ -35,6 +35,15 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Awesomium.Core, Version=1.7.1.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Awesomium.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Controls, Version=1.7.1.0, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Awesomium.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Awesomium.Windows.Forms, Version=1.7.1.0, Culture=neutral, PublicKeyToken=9bd24830fbe304a0, processorArchitecture=x86" />
     <Reference Include="ICSharpCode.AvalonEdit, Version=4.2.1.8805, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>libs\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -157,10 +166,20 @@
     <Content Include="icos\ico_preview.png" />
     <Content Include="icos\ico_saveall.png" />
     <Content Include="icos\logo.ico" />
+    <Content Include="libs\Awesomium.Core.dll" />
+    <Content Include="libs\Awesomium.Windows.Controls.dll" />
     <Content Include="libs\ICSharpCode.AvalonEdit.dll" />
     <Content Include="libs\SundownLib.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="template\jquery-2.0.2.min.js" />
+    <Resource Include="template\styles\default.css" />
+    <Resource Include="template\highlight.pack.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="template\styles\monokai.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="frmCss.resx">
       <DependentUpon>frmCss.cs</DependentUpon>
       <SubType>Designer</SubType>

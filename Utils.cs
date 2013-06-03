@@ -10,6 +10,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Linq;
 using System.Text;
 using MEditor.Properties;
 using MEditor.Sundownlib;
@@ -26,7 +27,7 @@ namespace MEditor
         private static readonly Sundownlib.Sundown _sundown = new Sundown();
 
         // Methods
-        public static string AppendValidHTMLTags(string input, string fileName, bool isLivePreview)
+        public static string AppendValidHTMLTags(string input, string fileName = null, bool isLivePreview = true)
         {
             var builder = new StringBuilder();
             if (!isLivePreview)
@@ -34,7 +35,7 @@ namespace MEditor
                 builder.AppendLine(
                     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
             }
-            builder.AppendLine("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">");
+            builder.AppendLine("<html >");
             builder.AppendLine("<head>");
             if (string.IsNullOrEmpty(fileName))
             {
@@ -42,6 +43,12 @@ namespace MEditor
             }
             builder.AppendLine("<title>" + Path.GetFileName(fileName) + "</title>");
             builder.AppendLine("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
+            builder.AppendLine("  <link rel=\"stylesheet\" title=\"Default\" href=\"asset://local/template/styles/default.css\">");
+            builder.AppendLine(
+                "  <link rel=\"alternate stylesheet\" title=\"Monokai\" href=\"asset://local/template/styles/monokai.css\"/>");
+            builder.AppendLine("  <script src=\"asset://local/template/highlight.pack.js\"></script>");
+            builder.AppendLine("  <script src=\"asset://local/template/jquery-2.0.2.min.js\"></script>");
+
             builder.AppendLine("<style type=\"text/css\">");
             if (_settings.HTML_UseCustomStylesheet)
             {
@@ -54,35 +61,40 @@ namespace MEditor
             builder.AppendLine("</style>");
             if (isLivePreview)
             {
-                if (_settings.HTML_EnableRelativeImagePaths && (fileName != "Markdown"))
-                {
-                    builder.AppendLine(@"<base href='file:\\\" + Path.GetDirectoryName(fileName) + @"\'/>");
-                }
+                //if (_settings.HTML_EnableRelativeImagePaths && (fileName != "Markdown"))
+                //{
+                //    builder.AppendLine(@"<base href='asset://" + Path.GetDirectoryName(fileName) + @"\'/>");
+                //}
                 builder.AppendLine(
-                    "<script type=\"text/javascript\">function loadMarkdown(input) { document.body.innerHTML = input; } </script>");
+                    "<script type=\"text/javascript\">function loadMarkdown(input) { document.body.innerHTML = input;$('pre code').each(function(i, e) {hljs.highlightBlock(e)}); } </script>");
                 builder.AppendLine(
                     "<script type=\"text/javascript\">function scroller(input) {window.scrollTo(0, input * (document.body.scrollHeight - document.body.clientHeight)); } </script>");
+                builder.AppendLine("<script>hljs.tabReplace = '    ';  hljs.initHighlightingOnLoad();</script>");
             }
             builder.AppendLine("</head>");
             builder.AppendLine("<body>");
-            builder.AppendLine(input);
+            //            builder.AppendLine(@"<pre><code class='go'>
+            //func main() {
+            //    ch := make(chan int)
+            //    ch &lt;- 1
+            //    x, ok := &lt;- ch
+            //    ok = true
+            //    x = nil
+            //    float_var := 1.0e10
+            //    defer fmt.Println(')
+            //    defer fmt.Println(`exitting now\`)
+            //    var fv1 float64 = 0.75
+            //    go println(len(""hello world!""))
+            //</code></pre>
+            //");
             builder.AppendLine("</body>");
             builder.AppendLine("</html>");
-            builder.Append(
-                "<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->");
             return builder.ToString();
         }
 
         public static bool Contains(this ArrayList input, string stringToCheck, StringComparison comparison)
         {
-            foreach (string str in input)
-            {
-                if (str.IndexOf(stringToCheck, comparison) >= 0)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return input.Cast<string>().Any(str => str.IndexOf(stringToCheck, comparison) >= 0);
         }
 
         public static bool Contains(this string input, string stringToCheck, StringComparison comparison)

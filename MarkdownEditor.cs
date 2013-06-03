@@ -5,27 +5,28 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
-using System.Windows.Input;
+using Awesomium.Core;
+using Awesomium.Windows.Forms;
 using ICSharpCode.AvalonEdit;
 using DragDropEffects = System.Windows.DragDropEffects;
 using DragEventArgs = System.Windows.DragEventArgs;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace MEditor
 {
     public class MarkdownEditor
     {
         private readonly TextEditor _markdownRtb;
-        private readonly WebBrowser _previewBrowser;
-        private readonly frmMain _thisForm;
+        private readonly WebControl _previewBrowser;
+
+        private readonly FrmMain _thisForm;
         private string _file = "";
 
-
+        private JSObject window;
         private bool _isOpen;
         private TabPage _markdownPage;
         private bool alreadyUpdate;
 
-        public MarkdownEditor(frmMain thisform, TabPage page, WebBrowser preview)
+        public MarkdownEditor(FrmMain thisform, TabPage page, WebControl preview)
         {
             _markdownPage = page;
             _thisForm = thisform;
@@ -37,6 +38,7 @@ namespace MEditor
             elementHost.Child = _markdownRtb;
             elementHost.Dock = DockStyle.Fill;
             page.Controls.Add(elementHost);
+
         }
 
         public bool AlreadyUpdate
@@ -60,31 +62,12 @@ namespace MEditor
         private void createRTB(ref TextEditor htmlRtb)
         {
             htmlRtb = new TextEditor();
-            //_htmlRtb.BackColor = bg ;
-            //_htmlRtb.ForeColor =fore;
-//			htmlRtb.WordWrap = false;
+
             htmlRtb.AllowDrop = false;
-//			htmlRtb.ScrollBars = RichTextBoxScrollBars.Both;
-            //htmlRtb.Dock = DockStyle.Fill;
 
             htmlRtb.TabIndex = 0;
 
-//			htmlRtb.AcceptsTab = true;
-//			htmlRtb.BulletIndent = 4;
-//			htmlRtb.DetectUrls = false;
-
-//			htmlRtb.ZoomFactor = 1.0f;
-//
-//			htmlRtb.EnableAutoDragDrop = false;
-//			htmlRtb.HideSelection = true;
-
-            int lef = 60; // (int)getfontWeight(4, font);
-//			htmlRtb.SelectionTabs = new int[] { lef, lef * 2, lef * 3, lef * 3, lef * 4 };
-            //htmlRtb.TabIndent=4;
-
-
             htmlRtb.AllowDrop = true;
-            //htmlRtb.KeyDown+=new System.Windows.Input.KeyEventHandler(htmlRtb_KeyDown);
             htmlRtb.TextChanged += _markdownRtb_TextChanged;
 
             htmlRtb.DragEnter += htmlRtb_DragEnter;
@@ -93,12 +76,12 @@ namespace MEditor
 
         private void htmlRtb_DragDrop(object sender, DragEventArgs e)
         {
-            var arrayFileName = (Array) e.Data.GetData(DataFormats.FileDrop);
+            var arrayFileName = (Array)e.Data.GetData(DataFormats.FileDrop);
 
             string strFileName = arrayFileName.GetValue(0).ToString();
 
 
-            var data = (string[]) e.Data.GetData(DataFormats.FileDrop);
+            var data = (string[])e.Data.GetData(DataFormats.FileDrop);
             _thisForm.openfiles(data);
         }
 
@@ -112,75 +95,6 @@ namespace MEditor
             {
                 e.Effects = DragDropEffects.None;
             }
-        }
-
-        private void htmlRtb_KeyDown(object sender, KeyEventArgs e)
-        {
-            var rtb = ((TextEditor) sender);
-            if (e.KeyStates == Keyboard.GetKeyStates(Key.V) && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                rtb.Paste();
-                e.Handled = true;
-                return;
-            }
-
-            if (e.KeyStates == Keyboard.GetKeyStates(Key.Tab))
-                return;
-
-            if (e.KeyStates == Keyboard.GetKeyStates(Key.LeftShift))
-            {
-                //如果特择了多行，则每行前加入一个\t
-                string text = rtb.SelectedText;
-
-                int st = rtb.SelectionStart;
-                int st1 = rtb.Text.LastIndexOf("\n", st);
-                st1 = st1 > -1 ? st1 : 0;
-                int olen = rtb.SelectionLength;
-                int len = st - st1 + rtb.SelectionLength;
-                rtb.SelectionStart = st1;
-                rtb.SelectionLength = len;
-                text = rtb.SelectedText;
-
-                text = text.Replace("\n\t", "\n");
-
-                rtb.SelectedText = text;
-                rtb.SelectionStart = st + 1;
-                len = olen + text.Length - len - 1;
-                if (len > 0)
-                    rtb.SelectionLength = len;
-            }
-            else
-            {
-                //如果特择了多行，则每行前加入一个\t
-                string text = rtb.SelectedText;
-                if (text.IndexOf("\n") != -1)
-                {
-                    int st = rtb.SelectionStart;
-                    if (st > 0)
-                    {
-                        int st1 = rtb.Text.LastIndexOf("\n", st);
-                        st1 = st1 > -1 ? st1 : 0;
-                        int olen = rtb.SelectionLength;
-                        int len = st - st1 + rtb.SelectionLength;
-                        rtb.SelectionStart = st1;
-                        rtb.SelectionLength = len;
-                        text = rtb.SelectedText;
-                        //text = rtb.Text.Substring(st1, len );
-
-                        text = text.Replace("\n", "\n\t");
-                        rtb.SelectedText = text;
-                        rtb.SelectionStart = st + 1;
-                        rtb.SelectionLength = olen + text.Length - len - 1;
-                    }
-                }
-                else
-                {
-                    //rtb.SelectedText = "    ";
-                    return;
-                }
-            }
-
-            e.Handled = true;
         }
 
         public TextEditor GetTextBox()
@@ -201,14 +115,19 @@ namespace MEditor
 
         public void invokeScript(string scriptName, string html)
         {
+
             try
             {
-                _previewBrowser.Document.InvokeScript(scriptName, new[] {html});
+                window = this._previewBrowser.ExecuteJavascriptWithResult("window");
+                if (window == null)
+                {
+                    return;
+                }
+                window.Invoke(scriptName, new JSValue[] { html });
             }
-            catch (COMException)
+            catch (Exception)
             {
-                string text = Utils.AppendValidHTMLTags(html, "", true);
-                _previewBrowser.DocumentText = text;
+
             }
         }
 
@@ -217,7 +136,7 @@ namespace MEditor
         {
             string text = Utils.AppendValidHTMLTags(Utils.ConvertTextToHTML(_markdownRtb.Text), file, true);
 
-            _previewBrowser.DocumentText = text;
+            _previewBrowser.LoadHTML(text);
             if (string.IsNullOrEmpty(file))
             {
                 return true;
@@ -274,12 +193,7 @@ namespace MEditor
             _isOpen = true;
             TextEditor rtb = GetTextBox();
 
-//			if (rtb.BackColor != bg)
-//				rtb.BackColor = bg;
-//			if (rtb.ForeColor != fore)
-//				rtb.ForeColor = fore;
-//			if (rtb.Font != font)
-//				rtb.Font = font;
+
 
             if (rtb.WordWrap != wordWrap)
                 rtb.WordWrap = wordWrap;
@@ -287,11 +201,6 @@ namespace MEditor
             _isOpen = false;
         }
 
-        private float getfontWeight(int width, Font font)
-        {
-            Graphics g = _thisForm.CreateGraphics();
-            SizeF sizeF = g.MeasureString("A", font);
-            return sizeF.Width*width;
-        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace MEditor.TestForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            webBrowser1.DocumentText = sundown.Render("**llkllll**");
+            this.webControl1.LoadHTML(sundown.Render("**llkllll**"));
         }
     }
 }

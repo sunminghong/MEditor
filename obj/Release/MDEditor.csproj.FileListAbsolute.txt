@@ -41,7 +41,6 @@ G:\GitHub\MEditor\obj\Release\MDEditor.pdb
 G:\GitHub\MEditor\exeoutput\MDEditor.exe
 G:\GitHub\MEditor\exeoutput\MDEditor.pdb
 G:\GitHub\MEditor\exeoutput\ICSharpCode.AvalonEdit.dll
-G:\GitHub\MEditor\obj\Release\MDEditor.csprojResolveAssemblyReference.cache
 G:\GitHub\MEditor\obj\Release\MEditor.frmMain.resources
 G:\GitHub\MEditor\obj\Release\MEditor.Properties.Resources.resources
 G:\GitHub\MEditor\obj\Release\MEditor.frmCss.resources
@@ -50,3 +49,4 @@ G:\GitHub\MEditor\obj\Release\MEditor.frmReplace.resources
 G:\GitHub\MEditor\obj\Release\MDEditor.csproj.GenerateResource.Cache
 G:\GitHub\MEditor\obj\Release\MEditor.TestForm.TestSundown.resources
 G:\GitHub\MEditor\exeoutput\libs\SundownLib.dll
+G:\GitHub\MEditor\obj\Release\MDEditor.g.resources
